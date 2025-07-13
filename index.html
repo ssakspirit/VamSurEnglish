@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>영어 학습 서바이벌 게임</title>
     <style>
         body {
@@ -22,9 +22,11 @@
             box-shadow: 0 0 30px rgba(74, 144, 226, 0.5);
         }
         #gameCanvas {
-            background: #1a1a2e;
+            width: 100vw;
+            height: 100vh;
             display: block;
             border-radius: 7px;
+            background: #1a1a2e;
         }
         #wordDisplay {
             position: absolute;
@@ -1449,6 +1451,14 @@
             isPointerDown = false;
             pointerX = pointerY = null;
         });
+
+        // canvas 크기 반응형 조정
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas(); // 게임 시작 시에도 호출
     </script>
 </body>
 </html>
