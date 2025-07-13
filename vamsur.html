@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>영어 학습 서바이벌 게임</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0c0c0c, #1a1a2e, #16213e);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Courier New', monospace;
+        }
+        #gameContainer {
+            border: 3px solid #4a90e2;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 0 30px rgba(74, 144, 226, 0.5);
+        }
+        #gameCanvas {
+            background: #1a1a2e;
+            display: block;
+            border-radius: 7px;
+        }
+        #wordDisplay {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            padding: 15px 25px;
+            border-radius: 10px;
+            border: 2px solid #ffd700;
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            z-index: 15;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            letter-spacing: 3px;
+        }
+        .missing-letter {
+            color: #ff4444;
+            background: rgba(255, 68, 68, 0.2);
+            padding: 2px 8px;
+            border-radius: 5px;
+            border: 2px dashed #ff4444;
+        }
+        #ui {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #ffffff;
+            font-size: 14px;
+            z-index: 10;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            font-weight: bold;
+        }
+        .ui-item {
+            margin-bottom: 5px;
+            background: rgba(0,0,0,0.7);
+            padding: 3px 8px;
+            border-radius: 4px;
+            border-left: 2px solid #4a90e2;
+            font-size: 12px;
+        }
+        #wordResult {
+            position: fixed !important;
+            left: 50% !important;
+            top: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            background: linear-gradient(145deg, #2a2a3e, #1a1a2e);
+            border: 3px solid #44ff44;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            z-index: 25;
+            display: none;
+            box-shadow: 0 0 40px rgba(68, 255, 68, 0.6);
+            max-width: 400px;
+            line-height: 1.6;
+        }
+        .word-complete {
+            font-size: 28px;
+            color: #44ff44;
+            margin-bottom: 15px;
+        }
+        .word-meaning {
+            font-size: 20px;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+        .word-pronunciation {
+            font-size: 16px;
+            color: #aaaaaa;
+            font-style: italic;
+        }
+        #levelUpModal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(145deg, #2a2a3e, #1a1a2e);
+            border: 3px solid #ffd700;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            z-index: 20;
+            display: none;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
+        }
+        .upgrade-btn {
+            display: block;
+            width: 320px;
+            margin: 12px auto;
+            padding: 12px;
+            background: linear-gradient(145deg, #4a4a6a, #3a3a5a);
+            border: 2px solid #666;
+            color: white;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .upgrade-btn:hover {
+            background: linear-gradient(145deg, #5a5a7a, #4a4a6a);
+            border-color: #ffd700;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+        #gameOver {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(145deg, #3a1a1a, #2a1a1a);
+            border: 3px solid #ff4444;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            z-index: 20;
+            display: none;
+            box-shadow: 0 0 40px rgba(255, 68, 68, 0.6);
+        }
+        #restartBtn {
+            padding: 12px 24px;
+            background: linear-gradient(145deg, #ff4444, #cc3333);
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-top: 20px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        #restartBtn:hover {
+            background: linear-gradient(145deg, #ff6666, #ff4444);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 68, 68, 0.4);
+        }
+        h2 {
+            margin-top: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+        #feedback {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            font-weight: bold;
+            z-index: 25;
+            pointer-events: none;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
+        }
+        .correct {
+            color: #44ff44;
+            animation: correctPulse 1s ease-out;
+        }
+        .incorrect {
+            color: #ff4444;
+            animation: incorrectShake 0.5s ease-out;
+        }
+        @keyframes correctPulse {
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+        }
+        @keyframes incorrectShake {
+            0%, 100% { transform: translate(-50%, -50%); }
+            25% { transform: translate(-45%, -50%); }
+            75% { transform: translate(-55%, -50%); }
+        }
+        .correct-answer {
+            color: #44ff44;
+            font-size: 36px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 8px #222, 0 0 16px #44ff44;
+        }
+        .word-meaning {
+            color: #ffd700;
+            font-size: 18px;
+            margin-top: 6px;
+            font-weight: normal;
+            text-shadow: 1px 1px 4px #222;
+        }
+        .word-box {
+            background: rgba(20, 20, 40, 0.85);
+            border: 2.5px solid #ffd700;
+            border-radius: 14px;
+            box-shadow: 0 4px 24px 0 rgba(0,0,0,0.35);
+            padding: 18px 32px 12px 32px;
+            display: inline-block;
+            min-width: 180px;
+            text-align: center;
+            margin-top: 8px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+        .word-en {
+            font-family: 'Fira Mono', 'Consolas', 'monospace';
+            font-size: 36px;
+            color: #fff;
+            letter-spacing: 4px;
+            text-shadow: 0 2px 8px #222, 0 0 8px #ffd70044;
+            font-weight: bold;
+        }
+        .missing-letter {
+            color: #ff4444;
+            border: none;
+            border-bottom: 2.5px solid #ff4444; /* 점선X, 실선 언더라인만 */
+            background: transparent;
+            margin: 0 2px;
+            font-size: 36px;
+            display: inline-block;
+            vertical-align: baseline;
+            line-height: 1;
+            padding: 0 8px 2px 8px;
+            border-radius: 0;
+            min-width: 24px;
+        }
+        .word-ko {
+            color: #ffe066;
+            font-size: 18px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            margin-left: 18px;
+            vertical-align: middle;
+            text-align: left;
+            border: none;
+            text-shadow: none;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+        
+        <div id="wordDisplay">
+            <span id="currentWord">appl_</span>
+        </div>
+        
+        <div id="ui">
+            <div class="ui-item">❤️ HP: <span id="health">100</span></div>
+            <div class="ui-item">⭐ Lv: <span id="level">1</span></div>
+            <div class="ui-item">✨ XP: <span id="exp">0</span>/<span id="expMax">10</span></div>
+            <div class="ui-item">💀 처치: <span id="kills">0</span></div>
+            <div class="ui-item">📝 단어: <span id="completedWords">0</span></div>
+            <div class="ui-item">⏱️ 시간: <span id="time">0</span>초</div>
+        </div>
+        
+        <div id="feedback"></div>
+        
+        <div id="wordResult">
+            <div class="word-complete" id="wordCompleteText">Loading...</div>
+            <div class="word-meaning" id="wordMeaningText">Loading...</div>
+            <div class="word-pronunciation" id="wordPronunciationText">Loading...</div>
+        </div>
+        
+        <div id="levelUpModal">
+            <h2>🎉 레벨업! 🎉</h2>
+            <p>업그레이드를 선택하세요:</p>
+            <button class="upgrade-btn" onclick="selectUpgrade('attackSpeed')">⚡ 공격 속도 증가 (+20%)</button>
+            <button class="upgrade-btn" onclick="selectUpgrade('moveSpeed')">🏃 이동 속도 증가 (+15%)</button>
+            <button class="upgrade-btn" onclick="selectUpgrade('projectileSize')">💥 투사체 크기 증가 (+25%)</button>
+            <button class="upgrade-btn" onclick="selectUpgrade('health')">❤️ 체력 회복 (+30)</button>
+        </div>
+        
+        <div id="gameOver">
+            <h2>💀 게임 오버! 💀</h2>
+            <p>생존 시간: <span id="finalTime">0</span>초</p>
+            <p>처치한 몬스터: <span id="finalKills">0</span>마리</p>
+            <p>완성한 단어: <span id="finalWords">0</span>개</p>
+            <p>달성 레벨: <span id="finalLevel">1</span></p>
+            <button id="restartBtn" onclick="restartGame()">🔄 다시 시작</button>
+        </div>
+    </div>
+
+    <script>
+        // 터치/마우스 이동 목표 좌표 전역 변수 선언 (가장 상단)
+        let targetX = null;
+        let targetY = null;
+
+        // 마우스/터치 누르고 있는 동안 이동하는 시스템 변수 선언
+        let isPointerDown = false;
+        let pointerX = null, pointerY = null;
+
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // 영어 단어 데이터베이스
+        const wordDatabase = [
+            { word: "apple", display: "appl_", missing: "e", meaning: "사과", pronunciation: "/ˈæp.əl/" },
+            { word: "book", display: "b_ok", missing: "o", meaning: "책", pronunciation: "/bʊk/" },
+            { word: "cat", display: "c_t", missing: "a", meaning: "고양이", pronunciation: "/kæt/" },
+            { word: "dog", display: "_og", missing: "d", meaning: "개", pronunciation: "/dɔːɡ/" },
+            { word: "fish", display: "fi_h", missing: "s", meaning: "물고기", pronunciation: "/fɪʃ/" },
+            { word: "house", display: "hou_e", missing: "s", meaning: "집", pronunciation: "/haʊs/" },
+            { word: "water", display: "wat_r", missing: "e", meaning: "물", pronunciation: "/ˈwɔː.tər/" },
+            { word: "tree", display: "tr_e", missing: "e", meaning: "나무", pronunciation: "/triː/" },
+            { word: "bird", display: "b_rd", missing: "i", meaning: "새", pronunciation: "/bɜːrd/" },
+            { word: "moon", display: "m_on", missing: "o", meaning: "달", pronunciation: "/muːn/" },
+            { word: "star", display: "st_r", missing: "a", meaning: "별", pronunciation: "/stɑːr/" },
+            { word: "flower", display: "flow_r", missing: "e", meaning: "꽃", pronunciation: "/ˈflaʊ.ər/" },
+            { word: "music", display: "mu_ic", missing: "s", meaning: "음악", pronunciation: "/ˈmjuː.zɪk/" },
+            { word: "friend", display: "fri_nd", missing: "e", meaning: "친구", pronunciation: "/frend/" },
+            { word: "happy", display: "hap_y", missing: "p", meaning: "행복한", pronunciation: "/ˈhæp.i/" }
+        ];
+
+        // 현재 단어 상태
+        let currentWordData = wordDatabase[0];
+        let completedWords = 0;
+
+        // 파티클 시스템
+        const particles = [];
+        const bloodParticles = [];
+
+        // 배경 별들
+        const stars = [];
+        for (let i = 0; i < 100; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 2 + 0.5,
+                twinkle: Math.random() * Math.PI * 2,
+                speed: Math.random() * 0.02 + 0.01
+            });
+        }
+
+        // 게임 상태
+        let gameState = {
+            running: true,
+            paused: false,
+            startTime: Date.now(),
+            timeElapsed: 0
+        };
+
+        // 월드 크기 및 카메라 변수 추가
+        const worldWidth = 3000;
+        const worldHeight = 3000;
+        let cameraX = 0;
+        let cameraY = 0;
+
+        // 플레이어 객체에 월드 좌표 추가
+        const player = {
+            worldX: worldWidth / 2,
+            worldY: worldHeight / 2,
+            width: 24,
+            height: 24,
+            speed: 3,
+            health: 100,
+            maxHealth: 100,
+            level: 1,
+            exp: 0,
+            expToNext: 10,
+            kills: 0,
+            attackSpeed: 1000,
+            lastAttack: 0,
+            projectileSize: 6,
+            angle: 0
+        };
+
+        // 입력 상태
+        const keys = {
+            w: false,
+            a: false,
+            s: false,
+            d: false
+        };
+
+        // 게임 오브젝트 배열
+        const monsters = [];
+        const projectiles = [];
+        const floatingLetters = []; // 떠다니는 알파벳들
+
+        // 몬스터 타입 데이터 구조 (외형, 색상, 크기)
+        const monsterTypes = [
+            { name: 'basic', color: '#ff4444', speed: 1, size: 18, health: 1, shape: 'rect' }, // 기본형: 빨간 사각형
+            { name: 'fast', color: '#44ff44', speed: 1.8, size: 14, health: 0.7, shape: 'triangle' }, // 빠른형: 초록 삼각형
+            { name: 'tank', color: '#4444ff', speed: 0.7, size: 26, health: 3, shape: 'circle' }, // 탱커형: 파란 원
+            { name: 'ranged', color: '#ffaa00', speed: 1, size: 16, health: 1, shape: 'star', shootInterval: 2000 }, // 원거리형: 노란 별
+            { name: 'splitter', color: '#ff44aa', speed: 1, size: 18, health: 1, shape: 'rect' }, // 분열형: 분홍 사각형
+            { name: 'exploder', color: '#ff8800', speed: 1.2, size: 16, health: 1, shape: 'circle' }, // 폭발형: 주황 원
+            { name: 'dodger', color: '#00ffff', speed: 1.1, size: 16, health: 1, shape: 'triangle' }, // 회피형: 하늘 삼각형
+        ];
+
+        // 시간 경과에 따라 등장하는 몬스터 타입 결정 함수
+        function getAvailableMonsterTypes(timeElapsed) {
+            if (timeElapsed < 30) return ['basic', 'fast'];
+            if (timeElapsed < 60) return ['basic', 'fast', 'tank', 'splitter'];
+            if (timeElapsed < 90) return ['basic', 'fast', 'tank', 'splitter', 'ranged', 'exploder'];
+            return ['basic', 'fast', 'tank', 'splitter', 'ranged', 'exploder', 'dodger'];
+        }
+
+        // 몬스터 스폰 관련
+        let lastMonsterSpawn = 0;
+        let monsterSpawnRate = 500; // 0.5초마다 몬스터 스폰 (2배 빠르게)
+
+        // 알파벳 스폰 관련
+        let lastLetterSpawn = 0;
+        let letterSpawnRate = 62; // 0.062초마다 알파벳 스폰 (2배 더 빠르게)
+
+        // 월드 행성(별) 배열 추가
+        const planets = [];
+        // 게임 시작 시 행성 여러 개 생성
+        function spawnPlanets() {
+            const planetCount = 5 + Math.floor(Math.random() * 4); // 5~8개
+            for (let i = 0; i < planetCount; i++) {
+                const radius = 40 + Math.random() * 60; // 크기 다양(40~100)
+                const worldX = 200 + Math.random() * (worldWidth - 400);
+                const worldY = 200 + Math.random() * (worldHeight - 400);
+                const color = {r: 120 + Math.random()*80, g: 120 + Math.random()*80, b: 200, a: 1};
+                planets.push({
+                    worldX, worldY, radius, color, timer: 0, exploded: false
+                });
+            }
+        }
+
+        // 알파벳 배열
+        const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+
+        // 키보드 이벤트
+        document.addEventListener('keydown', (e) => {
+            const key = e.key.toLowerCase();
+            if (keys.hasOwnProperty(key)) {
+                keys[key] = true;
+            }
+        });
+
+        document.addEventListener('keyup', (e) => {
+            const key = e.key.toLowerCase();
+            if (keys.hasOwnProperty(key)) {
+                keys[key] = false;
+            }
+        });
+
+        // 새로운 단어 선택 함수
+        function selectNewWord() {
+            currentWordData = wordDatabase[Math.floor(Math.random() * wordDatabase.length)];
+            // '_' 문자 없이, missing-letter만 남기기
+            const display = currentWordData.display.replace('_', '<span class="missing-letter">&nbsp;</span>');
+            document.getElementById('wordDisplay').innerHTML = `
+                <span class="word-en">${display}</span><span class="word-ko">${currentWordData.meaning}</span>
+            `;
+        }
+
+        // 단어 완성 결과 표시 함수
+        function showWordResult(wordData) {
+            console.log('showWordResult called with:', wordData);
+            
+            const wordCompleteElement = document.getElementById('wordCompleteText');
+            const wordMeaningElement = document.getElementById('wordMeaningText');
+            const wordPronunciationElement = document.getElementById('wordPronunciationText');
+            const wordResultElement = document.getElementById('wordResult');
+            
+            console.log('Found elements:', {
+                wordComplete: wordCompleteElement,
+                wordMeaning: wordMeaningElement,
+                wordPronunciation: wordPronunciationElement,
+                wordResult: wordResultElement
+            });
+            
+            if (wordCompleteElement && wordMeaningElement && wordPronunciationElement && wordResultElement) {
+                console.log('All elements found, showing result');
+                
+                wordCompleteElement.textContent = `✨ ${wordData.word.toUpperCase()} ✨`;
+                wordMeaningElement.textContent = `뜻: ${wordData.meaning}`;
+                wordPronunciationElement.textContent = `발음: ${wordData.pronunciation}`;
+                
+                wordResultElement.style.display = 'block';
+                
+                // 단어 음성 읽기
+                if ('speechSynthesis' in window) {
+                    speechSynthesis.cancel();
+                    
+                    setTimeout(() => {
+                        const utterance = new SpeechSynthesisUtterance(wordData.word);
+                        utterance.lang = 'en-US';
+                        utterance.rate = 0.8;
+                        utterance.volume = 1.0;
+                        
+                        utterance.onstart = () => console.log('음성 시작:', wordData.word);
+                        utterance.onend = () => console.log('음성 종료');
+                        utterance.onerror = (event) => console.log('음성 오류:', event.error);
+                        
+                        speechSynthesis.speak(utterance);
+                    }, 200);
+                }
+                
+                setTimeout(() => {
+                    wordResultElement.style.display = 'none';
+                }, 3000);
+            } else {
+                console.log('Elements not found, using fallback');
+                showFeedback(`${wordData.word} (${wordData.meaning})`, true);
+            }
+        }
+
+        // 피드백 표시 함수
+        function showFeedback(text, isCorrect) {
+            const feedback = document.getElementById('feedback');
+            feedback.textContent = text;
+            feedback.className = isCorrect ? 'correct' : 'incorrect';
+            feedback.style.display = 'block';
+            
+            setTimeout(() => {
+                feedback.style.display = 'none';
+            }, 1000);
+        }
+
+        // 파티클 생성 함수
+        function createParticle(x, y, type = 'normal') {
+            const particle = {
+                x: x,
+                y: y,
+                vx: (Math.random() - 0.5) * 4,
+                vy: (Math.random() - 0.5) * 4,
+                life: 1,
+                decay: Math.random() * 0.02 + 0.01,
+                size: Math.random() * 3 + 1,
+                type: type
+            };
+
+            if (type === 'blood') {
+                particle.color = `hsl(${Math.random() * 30}, 100%, ${Math.random() * 30 + 40}%)`;
+                bloodParticles.push(particle);
+            } else if (type === 'correct') {
+                particle.color = `hsl(120, 100%, ${Math.random() * 30 + 50}%)`;
+                particles.push(particle);
+            } else {
+                particle.color = `hsl(${Math.random() * 60 + 180}, 100%, 70%)`;
+                particles.push(particle);
+            }
+        }
+
+        // 몬스터 생성 함수 (타입별로 생성)
+        function createMonster() {
+            const availableTypes = getAvailableMonsterTypes(gameState.timeElapsed);
+            const typeName = availableTypes[Math.floor(Math.random() * availableTypes.length)];
+            const type = monsterTypes.find(t => t.name === typeName);
+
+            // 몬스터 위치 랜덤 생성 (기존 코드 유지)
+            const side = Math.floor(Math.random() * 4);
+            let x, y;
+            switch(side) {
+                case 0: x = Math.random() * canvas.width; y = -30; break;
+                case 1: x = canvas.width + 30; y = Math.random() * canvas.height; break;
+                case 2: x = Math.random() * canvas.width; y = canvas.height + 30; break;
+                case 3: x = -30; y = Math.random() * canvas.height; break;
+            }
+
+            // 몬스터, 알파벳 등 오브젝트 생성 시 worldX, worldY 사용
+            monsters.push({
+                worldX: x, // 기존 x → worldX
+                worldY: y, // 기존 y → worldY
+                width: type.size,
+                height: type.size,
+                speed: type.speed + Math.random() * 0.3,
+                health: type.health,
+                color: type.color,
+                angle: 0,
+                pulse: Math.random() * Math.PI * 2,
+                name: type.name,
+                shape: type.shape,
+                shootInterval: type.shootInterval || null,
+                lastShot: 0,
+                // 특수 몬스터용 속성
+                splitChild: false, // 분열형 자식 여부
+                exploded: false,   // 폭발형 자폭 여부
+                dodgeCooldown: 0   // 회피형 쿨타임
+            });
+        }
+
+        // 떠다니는 알파벳 생성 함수
+        function createFloatingLetter() {
+            // 랜덤 알파벳 선택 (정답 알파벳이 더 자주 나오도록 → 오답 확률 높임)
+            let letter;
+            if (Math.random() < 0.3) { // 30% 확률로 정답
+                letter = currentWordData.missing;
+            } else { // 70% 확률로 랜덤 오답 알파벳
+                // 정답이 아닌 알파벳만 뽑기
+                let wrongs = alphabet.filter(a => a !== currentWordData.missing);
+                letter = wrongs[Math.floor(Math.random() * wrongs.length)];
+            }
+
+            const isCorrect = letter === currentWordData.missing;
+
+            // 화면 위쪽에서 시작해서 아래로 이동 - 모든 알파벳 동일한 색상
+            floatingLetters.push({
+                worldX: Math.random() * (canvas.width - 40) + 20, // 화면 좌표 → 월드 좌표
+                worldY: -30, // 화면 좌표 → 월드 좌표
+                width: 30,
+                height: 30,
+                vx: (Math.random() - 0.5) * 2, // 좌우로 약간 흔들림
+                vy: 1.5 + Math.random() * 1, // 아래로 이동 속도
+                letter: letter,
+                isCorrect: isCorrect,
+                color: '#66aaff', // 모든 알파벳 동일한 파란색
+                pulse: Math.random() * Math.PI * 2,
+                collected: false
+            });
+        }
+
+        // 투사체 생성 함수
+        function createProjectile() {
+            if (monsters.length === 0) return;
+
+            // 가장 가까운 몬스터 찾기
+            let nearestMonster = monsters[0];
+            let minDistance = Infinity;
+
+            monsters.forEach(monster => {
+                const dx = monster.worldX - player.worldX; // worldX 기준
+                const dy = monster.worldY - player.worldY; // worldY 기준
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    nearestMonster = monster;
+                }
+            });
+
+            // 투사체 생성
+            const dx = nearestMonster.worldX - player.worldX; // worldX 기준
+            const dy = nearestMonster.worldY - player.worldY; // worldY 기준
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            projectiles.push({
+                worldX: player.worldX + player.width / 2, // worldX 기준
+                worldY: player.worldY + player.height / 2, // worldY 기준
+                vx: (dx / distance) * 6,
+                vy: (dy / distance) * 6,
+                size: player.projectileSize,
+                color: '#00ff88',
+                trail: [],
+                life: 1
+            });
+        }
+
+        // 충돌 감지 함수
+        function checkCollision(rect1, rect2) {
+            return rect1.worldX < rect2.worldX + rect2.width &&
+                   rect1.worldX + rect1.width > rect2.worldX &&
+                   rect1.worldY < rect2.worldY + rect2.height &&
+                   rect1.worldY + rect1.height > rect2.worldY;
+        }
+
+        // 원과 사각형 충돌 감지
+        function checkCircleRectCollision(circle, rect) {
+            const dx = circle.worldX - Math.max(rect.worldX, Math.min(circle.worldX, rect.worldX + rect.width)); // worldX 기준
+            const dy = circle.worldY - Math.max(rect.worldY, Math.min(circle.worldY, rect.worldY + rect.height)); // worldY 기준
+            return (dx * dx + dy * dy) < (circle.size * circle.size);
+        }
+
+        // 게임 업데이트 함수
+        function update() {
+            if (!gameState.running || gameState.paused) return;
+
+            const currentTime = Date.now();
+            gameState.timeElapsed = Math.floor((currentTime - gameState.startTime) / 1000);
+
+            // 플레이어 이동 및 각도 업데이트
+            let moving = false;
+            if (keys.w && player.worldY > 0) {
+                player.worldY -= player.speed;
+                moving = true;
+            }
+            if (keys.s && player.worldY < worldHeight - player.height) {
+                player.worldY += player.speed;
+                moving = true;
+            }
+            if (keys.a && player.worldX > 0) {
+                player.worldX -= player.speed;
+                moving = true;
+            }
+            if (keys.d && player.worldX < worldWidth - player.width) {
+                player.worldX += player.speed;
+                moving = true;
+            }
+
+            // 터치/마우스 누르고 있는 동안 이동하는 시스템 로직 수정
+            if (isPointerDown && pointerX !== null && pointerY !== null) {
+                const dx = pointerX - (player.worldX + player.width/2);
+                const dy = pointerY - (player.worldY + player.height/2);
+                const dist = Math.sqrt(dx*dx + dy*dy);
+                if (dist > 4) {
+                    player.worldX += (dx / dist) * player.speed;
+                    player.worldY += (dy / dist) * player.speed;
+                    moving = true;
+                }
+            }
+
+            if (moving) {
+                player.angle += 0.2;
+                if (Math.random() < 0.3) {
+                    createParticle(player.worldX + player.width/2, player.worldY + player.height, 'normal');
+                }
+            }
+
+            // 별 깜빡임 업데이트
+            stars.forEach(star => {
+                star.twinkle += star.speed;
+            });
+
+            // 몬스터 스폰
+            if (currentTime - lastMonsterSpawn > monsterSpawnRate) {
+                createMonster();
+                lastMonsterSpawn = currentTime;
+                // 30초마다 스폰 속도 증가, 최소 200ms
+                monsterSpawnRate = Math.max(200, 500 - Math.floor(gameState.timeElapsed / 30) * 75);
+            }
+
+            // 알파벳 스폰
+            if (currentTime - lastLetterSpawn > letterSpawnRate) {
+                createFloatingLetter();
+                lastLetterSpawn = currentTime;
+                // 30초마다 스폰 속도 증가, 최소 30ms
+                letterSpawnRate = Math.max(30, 62 - Math.floor(gameState.timeElapsed / 30) * 12);
+            }
+
+            // 투사체 발사
+            if (currentTime - player.lastAttack > player.attackSpeed) {
+                createProjectile();
+                player.lastAttack = currentTime;
+            }
+
+            // 몬스터 업데이트 (기존과 동일)
+            for (let i = monsters.length - 1; i >= 0; i--) {
+                const monster = monsters[i];
+                const dx = player.worldX - monster.worldX; // worldX 기준
+                const dy = player.worldY - monster.worldY; // worldY 기준
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                // 폭발형: 플레이어 근처에서 자폭
+                if (monster.name === 'exploder' && !monster.exploded && distance < 40) {
+                    // 자폭 파티클 효과
+                    for (let j = 0; j < 18; j++) {
+                        createParticle(monster.worldX + monster.width/2, monster.worldY + monster.height/2, 'blood');
+                    }
+                    // 플레이어 데미지
+                    player.health -= 20;
+                    monster.exploded = true;
+                    monsters.splice(i, 1);
+                    if (player.health <= 0) gameOver();
+                    continue;
+                }
+
+                // 회피형: 투사체 접근 시 순간 이동(쿨타임 2초)
+                if (monster.name === 'dodger') {
+                    if (monster.dodgeCooldown > 0) monster.dodgeCooldown--;
+                    for (const proj of projectiles) {
+                        const pdx = proj.worldX - (monster.worldX + monster.width/2); // worldX 기준
+                        const pdy = proj.worldY - (monster.worldY + monster.height/2); // worldY 기준
+                        const pdist = Math.sqrt(pdx * pdx + pdy * pdy);
+                        if (pdist < 60 && monster.dodgeCooldown === 0) {
+                            // 순간 이동(맵 내 랜덤 위치)
+                            monster.worldX = Math.random() * (worldWidth - monster.width); // worldX 기준
+                            monster.worldY = Math.random() * (worldHeight - monster.height); // worldY 기준
+                            monster.dodgeCooldown = 120; // 2초(60fps 기준)
+                            break;
+                        }
+                    }
+                }
+
+                // 기존 이동/충돌 코드
+                monster.worldX += (dx / distance) * monster.speed; // worldX 기준
+                monster.worldY += (dy / distance) * monster.speed; // worldY 기준
+                monster.angle += 0.1;
+                monster.pulse += 0.15;
+
+                // 플레이어와 몬스터 충돌
+                if (checkCollision(player, monster)) {
+                    player.health -= 10;
+                    // 혈흔 파티클 생성
+                    for (let j = 0; j < 8; j++) {
+                        createParticle(player.worldX + player.width/2, player.worldY + player.height/2, 'blood');
+                    }
+                    monsters.splice(i, 1);
+                    
+                    if (player.health <= 0) {
+                        gameOver();
+                    }
+                }
+
+                // 분열형: 죽을 때 작은 몬스터 여러 마리 생성
+                if (monster.name === 'splitter' && monster.health <= 0 && !monster.splitChild) {
+                    for (let k = 0; k < 2 + Math.floor(Math.random() * 2); k++) {
+                        monsters.push({
+                            worldX: monster.worldX + Math.random() * 20 - 10, // worldX 기준
+                            worldY: monster.worldY + Math.random() * 20 - 10, // worldY 기준
+                            width: 12,
+                            height: 12,
+                            speed: 1.5,
+                            health: 0.5,
+                            color: '#ff99ee',
+                            angle: 0,
+                            pulse: Math.random() * Math.PI * 2,
+                            name: 'basic',
+                            shape: 'rect',
+                            splitChild: true,
+                            exploded: false,
+                            dodgeCooldown: 0
+                        });
+                    }
+                    monsters.splice(i, 1);
+                    continue;
+                }
+
+                // 몬스터 사망 처리 부분에서 파티클 효과를 모든 타입에 공통 적용
+                if (monster.health <= 0) {
+                    // 파티클 효과 (모든 몬스터 공통)
+                    for (let i = 0; i < 12; i++) {
+                        createParticle(monster.worldX + monster.width/2, monster.worldY + monster.height/2, 'blood');
+                    }
+                    monsters.splice(i, 1);
+                    // 몬스터 처치 시 경험치 1로 감소
+                    player.kills++;
+                    player.exp += 1;
+                    if (player.exp >= player.expToNext) levelUp();
+                }
+            }
+
+            // 떠다니는 알파벳 업데이트
+            floatingLetters.forEach(letter => {
+                if (!letter.collected) {
+                    letter.worldX += letter.vx; // worldX 기준
+                    letter.worldY += letter.vy; // worldY 기준
+                    letter.pulse += 0.1;
+
+                    // 플레이어와 알파벳 충돌
+                    if (checkCollision(player, letter)) {
+                        letter.collected = true;
+                        
+                        // 정답 맞출 때 문제 영역에 정답 피드백 표시, 일정 시간 후 다음 문제로 전환
+                        if (letter.isCorrect) {
+                            completedWords++;
+                            showFeedback(`정답!`, true);
+                            // 화면 상단 문제 영역에 정답 표시
+                            const wordDisplay = document.getElementById('wordDisplay');
+                            wordDisplay.innerHTML = `<span class='correct-answer'>정답! ${currentWordData.word.toUpperCase()}</span>`;
+                            // 정답 단어 음성 출력
+                            if ('speechSynthesis' in window) {
+                                speechSynthesis.cancel();
+                                setTimeout(() => {
+                                    const utterance = new SpeechSynthesisUtterance(currentWordData.word);
+                                    utterance.lang = 'en-US';
+                                    utterance.rate = 0.8;
+                                    utterance.volume = 1.0;
+                                    speechSynthesis.speak(utterance);
+                                }, 200);
+                            }
+                            // 성공 파티클
+                            for (let i = 0; i < 15; i++) {
+                                createParticle(player.worldX + player.width/2, player.worldY + player.height/2, 'correct');
+                            }
+                            // 경험치 보상 (레벨 × 10)
+                            player.exp += player.level * 10;
+                            if (player.exp >= player.expToNext) levelUp();
+                            // 모든 알파벳 폭발 (데미지 없이 파티클만)
+                            floatingLetters.forEach(fl => {
+                                for (let j = 0; j < 10; j++) {
+                                    const angle = Math.random() * Math.PI * 2;
+                                    const dist = 10 + Math.random() * 20;
+                                    createParticle(
+                                        fl.worldX + fl.width/2 + Math.cos(angle) * dist,
+                                        fl.worldY + fl.height/2 + Math.sin(angle) * dist,
+                                        'blood'
+                                    );
+                                }
+                                fl.collected = true;
+                            });
+                            // 2초 후 다음 문제로 전환
+                            setTimeout(() => {
+                                selectNewWord();
+                            }, 2000);
+                            return;
+                        } else {
+                            // 틀린 알파벳
+                            player.health -= 15;
+                            showFeedback(`틀렸습니다! ${letter.letter}`, false);
+                            
+                            // 데미지 파티클
+                            for (let i = 0; i < 8; i++) {
+                                createParticle(player.worldX + player.width/2, player.worldY + player.height/2, 'blood');
+                            }
+                            
+                            if (player.health <= 0) {
+                                gameOver();
+                            }
+                        }
+                    }
+
+                    // 화면 밖으로 나간 알파벳 제거
+                    if (letter.worldY > worldHeight + 50) { // worldY 기준
+                        letter.collected = true;
+                    }
+                }
+            });
+
+            // 수집된 알파벳 제거
+            floatingLetters.splice(0, floatingLetters.length, ...floatingLetters.filter(letter => !letter.collected));
+
+            // 투사체 업데이트
+            projectiles.forEach(projectile => {
+                // 트레일 추가
+                projectile.trail.push({x: projectile.worldX, y: projectile.worldY}); // worldX, worldY 기준
+                if (projectile.trail.length > 8) {
+                    projectile.trail.shift();
+                }
+
+                projectile.worldX += projectile.vx; // worldX 기준
+                projectile.worldY += projectile.vy; // worldY 기준
+                projectile.life -= 0.01;
+
+                // 투사체와 몬스터 충돌
+                monsters.forEach(monster => {
+                    if (checkCircleRectCollision(projectile, monster)) {
+                        // 몬스터 처치 파티클
+                        for (let i = 0; i < 12; i++) {
+                            createParticle(monster.worldX + monster.width/2, monster.worldY + monster.height/2, 'blood');
+                        }
+                        
+                        monster.health -= 1; // 몬스터 처치 시 health 감소
+                        if (monster.health <= 0) {
+                            player.kills++;
+                            player.exp += 1;
+                            if (player.exp >= player.expToNext) levelUp();
+                        }
+                        projectiles.splice(projectiles.indexOf(projectile), 1);
+                    }
+                });
+
+                // 화면 밖으로 나가거나 수명이 다한 투사체 제거
+                if (projectile.worldX < -50 || projectile.worldX > worldWidth + 50 || 
+                    projectile.worldY < -50 || projectile.worldY > worldHeight + 50 || 
+                    projectile.life <= 0) {
+                    projectiles.splice(projectiles.indexOf(projectile), 1);
+                }
+            });
+
+            // 파티클 업데이트
+            particles.forEach(particle => {
+                particle.x += particle.vx;
+                particle.y += particle.vy;
+                particle.vx *= 0.98;
+                particle.vy *= 0.98;
+                particle.life -= particle.decay;
+            });
+            
+            bloodParticles.forEach(particle => {
+                particle.x += particle.vx;
+                particle.y += particle.vy;
+                particle.vx *= 0.95;
+                particle.vy *= 0.95;
+                particle.vy += 0.1;
+                particle.life -= particle.decay;
+            });
+
+            // 죽은 파티클 제거
+            particles.splice(0, particles.length, ...particles.filter(p => p.life > 0));
+            bloodParticles.splice(0, bloodParticles.length, ...bloodParticles.filter(p => p.life > 0));
+
+            // 행성 타이머, 색상 변화, 폭발 처리
+            planets.forEach(planet => {
+                if (planet.exploded) return;
+                planet.timer += 1; // 프레임 단위(60프레임=1초)
+                // 20초(1200프레임)까지 점점 붉어짐
+                const t = Math.min(planet.timer / 1200, 1);
+                planet.color.r = 120 + t * 120; // r: 120~240
+                planet.color.g = 120 * (1-t) + 30 * t; // g: 120~30
+                planet.color.b = 200 * (1-t) + 30 * t; // b: 200~30
+                // 폭발
+                if (planet.timer >= 1200) {
+                    planet.exploded = true;
+                    // 폭발 파티클 효과
+                    for (let i = 0; i < 40; i++) {
+                        const angle = Math.random() * Math.PI * 2;
+                        const dist = planet.radius + Math.random() * 40;
+                        createParticle(
+                            planet.worldX + Math.cos(angle) * dist,
+                            planet.worldY + Math.sin(angle) * dist,
+                            'blood'
+                        );
+                    }
+                    // 폭발 반경 내 플레이어/몬스터 대미지
+                    const explosionRadius = planet.radius + 120;
+                    // 플레이어
+                    const pdx = player.worldX + player.width/2 - planet.worldX;
+                    const pdy = player.worldY + player.height/2 - planet.worldY;
+                    if (Math.sqrt(pdx*pdx + pdy*pdy) < explosionRadius) {
+                        player.health -= 40;
+                        if (player.health <= 0) gameOver();
+                    }
+                    // 몬스터
+                    for (let i = monsters.length - 1; i >= 0; i--) {
+                        const m = monsters[i];
+                        const mdx = m.worldX + m.width/2 - planet.worldX;
+                        const mdy = m.worldY + m.height/2 - planet.worldY;
+                        if (Math.sqrt(mdx*mdx + mdy*mdy) < explosionRadius) {
+                            monsters.splice(i, 1);
+                        }
+                    }
+                }
+            });
+
+            // 카메라 목표 위치 계산
+            const targetCameraX = player.worldX - canvas.width / 2;
+            const targetCameraY = player.worldY - canvas.height / 2;
+            // lerp(보간)으로 부드럽게 이동
+            cameraX += (targetCameraX - cameraX) * 0.1;
+            cameraY += (targetCameraY - cameraY) * 0.1;
+            // 맵 경계에서 카메라가 벗어나지 않도록 보정
+            cameraX = Math.max(0, Math.min(cameraX, worldWidth - canvas.width));
+            cameraY = Math.max(0, Math.min(cameraY, worldHeight - canvas.height));
+
+            updateUI();
+        }
+
+        // 렌더링 함수
+        function render() {
+            // 배경 그라디언트
+            const gradient = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 0, canvas.width/2, canvas.height/2, canvas.width);
+            gradient.addColorStop(0, '#1a1a2e');
+            gradient.addColorStop(0.5, '#16213e');
+            gradient.addColorStop(1, '#0f1419');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // 별 그리기
+            stars.forEach(star => {
+                const alpha = (Math.sin(star.twinkle) + 1) / 2;
+                ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.8})`;
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            // 혈흔 파티클 그리기
+            bloodParticles.forEach(particle => {
+                ctx.save();
+                ctx.globalAlpha = particle.life;
+                ctx.fillStyle = particle.color;
+                ctx.beginPath();
+                ctx.arc(particle.x - cameraX, particle.y - cameraY, particle.size, 0, Math.PI * 2); // 카메라 오프셋 적용
+                ctx.fill();
+                ctx.restore();
+            });
+
+            // 플레이어 그리기 (발광 효과)
+            ctx.save();
+            ctx.shadowColor = '#4499ff';
+            ctx.shadowBlur = 15;
+            ctx.fillStyle = '#4499ff';
+            ctx.translate(player.worldX - cameraX, player.worldY - cameraY); // worldX, worldY 기준
+            ctx.rotate(player.angle);
+            ctx.fillRect(-player.width/2, -player.height/2, player.width, player.height);
+            ctx.restore();
+
+            // 플레이어 중심점
+            ctx.fillStyle = '#88ccff';
+            ctx.beginPath();
+            ctx.arc(player.worldX - cameraX, player.worldY - cameraY, 3, 0, Math.PI * 2); // worldX, worldY 기준
+            ctx.fill();
+
+            // 몬스터 그리기 (타입별 외형)
+            monsters.forEach(monster => {
+                const pulse = Math.sin(monster.pulse) * 0.2 + 1;
+                ctx.save();
+                ctx.shadowColor = monster.color;
+                ctx.shadowBlur = 10;
+                ctx.fillStyle = monster.color;
+                ctx.translate(monster.worldX - cameraX, monster.worldY - cameraY); // worldX, worldY 기준
+                ctx.rotate(monster.angle);
+                ctx.scale(pulse, pulse);
+                // 타입별로 도형 다르게 그리기
+                if (monster.shape === 'rect') {
+                    // 사각형
+                    ctx.fillRect(-monster.width/2, -monster.height/2, monster.width, monster.height);
+                } else if (monster.shape === 'circle') {
+                    // 원
+                    ctx.beginPath();
+                    ctx.arc(0, 0, monster.width/2, 0, Math.PI * 2);
+                    ctx.fill();
+                } else if (monster.shape === 'triangle') {
+                    // 삼각형
+                    ctx.beginPath();
+                    ctx.moveTo(0, -monster.width/2);
+                    ctx.lineTo(-monster.width/2, monster.width/2);
+                    ctx.lineTo(monster.width/2, monster.width/2);
+                    ctx.closePath();
+                    ctx.fill();
+                } else if (monster.shape === 'star') {
+                    // 별
+                    drawStar(ctx, 0, 0, monster.width/2, monster.width/4, 5);
+                }
+                ctx.restore();
+            });
+
+            // 떠다니는 알파벳 그리기
+            floatingLetters.forEach(letter => {
+                if (!letter.collected) {
+                    const pulse = Math.sin(letter.pulse) * 0.2 + 1;
+                    
+                    // 알파벳 배경 (원형)
+                    ctx.save();
+                    ctx.shadowColor = letter.color;
+                    ctx.shadowBlur = 15;
+                    ctx.fillStyle = letter.color;
+                    ctx.beginPath();
+                    ctx.arc(letter.worldX - cameraX, letter.worldY - cameraY, (letter.width/2) * pulse, 0, Math.PI * 2); // worldX, worldY 기준
+                    ctx.fill();
+                    ctx.restore();
+
+                    // 알파벳 텍스트
+                    ctx.save();
+                    ctx.fillStyle = 'white';
+                    ctx.font = 'bold 20px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.strokeStyle = 'black';
+                    ctx.lineWidth = 3;
+                    ctx.strokeText(letter.letter.toUpperCase(), letter.worldX - cameraX, letter.worldY - cameraY); // worldX, worldY 기준
+                    ctx.fillText(letter.letter.toUpperCase(), letter.worldX - cameraX, letter.worldY - cameraY); // worldX, worldY 기준
+                    ctx.restore();
+                }
+            });
+
+            // 투사체 트레일 및 투사체 그리기
+            projectiles.forEach(projectile => {
+                // 트레일 그리기
+                if (projectile.trail.length > 1) {
+                    ctx.strokeStyle = `rgba(0, 255, 136, ${projectile.life * 0.3})`;
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.moveTo(projectile.trail[0].x, projectile.trail[0].y);
+                    for (let i = 1; i < projectile.trail.length; i++) {
+                        ctx.lineTo(projectile.trail[i].x, projectile.trail[i].y);
+                    }
+                    ctx.stroke();
+                }
+
+                // 투사체 발광 효과
+                ctx.save();
+                ctx.globalAlpha = projectile.life;
+                ctx.shadowColor = projectile.color;
+                ctx.shadowBlur = 10;
+                ctx.fillStyle = projectile.color;
+                ctx.beginPath();
+                ctx.arc(projectile.worldX - cameraX, projectile.worldY - cameraY, projectile.size, 0, Math.PI * 2); // worldX, worldY 기준
+                ctx.fill();
+                ctx.restore();
+            });
+
+            // 파티클 그리기
+            particles.forEach(particle => {
+                ctx.save();
+                ctx.globalAlpha = particle.life;
+                ctx.fillStyle = particle.color;
+                ctx.beginPath();
+                ctx.arc(particle.x - cameraX, particle.y - cameraY, particle.size, 0, Math.PI * 2); // 카메라 오프셋 적용
+                ctx.fill();
+                ctx.restore();
+            });
+
+            // 행성 그리기
+            planets.forEach(planet => {
+                if (planet.exploded) return;
+                ctx.save();
+                ctx.shadowColor = `rgba(255,0,0,0.5)`;
+                ctx.shadowBlur = 30;
+                ctx.beginPath();
+                ctx.arc(planet.worldX - cameraX, planet.worldY - cameraY, planet.radius, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.fillStyle = `rgba(${planet.color.r|0},${planet.color.g|0},${planet.color.b|0},${planet.color.a})`;
+                ctx.fill();
+                ctx.restore();
+            });
+
+            // 체력바 그리기 (개선된 스타일)
+            const healthBarWidth = 150;
+            const healthBarHeight = 12;
+            const healthPercentage = player.health / player.maxHealth;
+            
+            // HP 라벨
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 12px Arial';
+            ctx.textAlign = 'left';
+            ctx.fillText('HP', 17, canvas.height - 45);
+            
+            // 체력바 배경
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+            ctx.fillRect(15, canvas.height - 40, healthBarWidth + 4, healthBarHeight + 4);
+            
+            // 체력바 테두리
+            ctx.strokeStyle = '#666';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(15, canvas.height - 40, healthBarWidth + 4, healthBarHeight + 4);
+            
+            // 체력바 내부
+            const healthGradient = ctx.createLinearGradient(17, 0, 17 + healthBarWidth, 0);
+            if (healthPercentage > 0.6) {
+                healthGradient.addColorStop(0, '#44ff44');
+                healthGradient.addColorStop(1, '#22cc22');
+            } else if (healthPercentage > 0.3) {
+                healthGradient.addColorStop(0, '#ffaa44');
+                healthGradient.addColorStop(1, '#ff8822');
+            } else {
+                healthGradient.addColorStop(0, '#ff4444');
+                healthGradient.addColorStop(1, '#cc2222');
+            }
+            
+            ctx.fillStyle = healthGradient;
+            ctx.fillRect(17, canvas.height - 38, healthBarWidth * healthPercentage, healthBarHeight);
+
+            // 경험치바 그리기
+            const expBarWidth = 200;
+            const expBarHeight = 8;
+            const expPercentage = player.exp / player.expToNext;
+            
+            // XP 라벨
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 12px Arial';
+            ctx.textAlign = 'right';
+            ctx.fillText('XP', canvas.width - expBarWidth - 17, canvas.height - 30);
+            
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+            ctx.fillRect(canvas.width - expBarWidth - 15, canvas.height - 25, expBarWidth + 4, expBarHeight + 4);
+            
+            ctx.strokeStyle = '#666';
+            ctx.lineWidth = 1;
+            ctx.strokeRect(canvas.width - expBarWidth - 15, canvas.height - 25, expBarWidth + 4, expBarHeight + 4);
+            
+            const expGradient = ctx.createLinearGradient(canvas.width - expBarWidth - 13, 0, canvas.width - 13, 0);
+            expGradient.addColorStop(0, '#4488ff');
+            expGradient.addColorStop(1, '#2266cc');
+            ctx.fillStyle = expGradient;
+            ctx.fillRect(canvas.width - expBarWidth - 13, canvas.height - 23, expBarWidth * expPercentage, expBarHeight);
+        }
+
+        // UI 업데이트 함수
+        function updateUI() {
+            document.getElementById('health').textContent = player.health;
+            document.getElementById('level').textContent = player.level;
+            document.getElementById('exp').textContent = player.exp;
+            document.getElementById('expMax').textContent = player.expToNext;
+            document.getElementById('kills').textContent = player.kills;
+            document.getElementById('completedWords').textContent = completedWords;
+            document.getElementById('time').textContent = gameState.timeElapsed;
+        }
+
+        // 레벨업 함수
+        function levelUp() {
+            player.level++;
+            player.exp = 0;
+            player.expToNext = Math.floor(player.expToNext * 2); // 기존 1.5배 → 2배
+            
+            // 레벨업 파티클 효과
+            for (let i = 0; i < 20; i++) {
+                createParticle(player.worldX + player.width/2, player.worldY + player.height/2, 'correct');
+            }
+            
+            gameState.paused = true;
+            document.getElementById('levelUpModal').style.display = 'block';
+        }
+
+        // 업그레이드 선택 함수
+        function selectUpgrade(type) {
+            switch(type) {
+                case 'attackSpeed':
+                    player.attackSpeed = Math.max(200, player.attackSpeed * 0.8);
+                    break;
+                case 'moveSpeed':
+                    player.speed += 0.5;
+                    break;
+                case 'projectileSize':
+                    player.projectileSize += 1;
+                    break;
+                case 'health':
+                    player.health = Math.min(player.maxHealth, player.health + 30);
+                    break;
+            }
+            
+            document.getElementById('levelUpModal').style.display = 'none';
+            gameState.paused = false;
+        }
+
+        // 게임 오버 함수
+        function gameOver() {
+            gameState.running = false;
+            
+            // 게임 오버 파티클 효과
+            for (let i = 0; i < 30; i++) {
+                createParticle(player.worldX + player.width/2, player.worldY + player.height/2, 'blood');
+            }
+            
+            document.getElementById('finalTime').textContent = gameState.timeElapsed;
+            document.getElementById('finalKills').textContent = player.kills;
+            document.getElementById('finalWords').textContent = completedWords;
+            document.getElementById('finalLevel').textContent = player.level;
+            document.getElementById('gameOver').style.display = 'block';
+        }
+
+        // 게임 재시작 함수
+        function restartGame() {
+            // 게임 상태 초기화
+            gameState.running = true;
+            gameState.paused = false;
+            gameState.startTime = Date.now();
+            gameState.timeElapsed = 0;
+
+            // 플레이어 초기화
+            player.worldX = worldWidth / 2;
+            player.worldY = worldHeight / 2;
+            player.health = 100;
+            player.level = 1;
+            player.exp = 0;
+            player.expToNext = 10;
+            player.kills = 0;
+            player.speed = 3;
+            player.attackSpeed = 1000;
+            player.projectileSize = 6;
+            player.angle = 0;
+
+            // 게임 데이터 초기화
+            completedWords = 0;
+            selectNewWord();
+
+            // 배열 초기화
+            monsters.length = 0;
+            projectiles.length = 0;
+            floatingLetters.length = 0;
+            particles.length = 0;
+            bloodParticles.length = 0;
+            planets.length = 0; // 행성 배열도 초기화
+
+            // UI 초기화
+            document.getElementById('gameOver').style.display = 'none';
+            updateUI();
+            // 게임 시작 시 planets 생성
+            spawnPlanets();
+            // 플레이어, 카메라 초기화
+            resetPlayerAndCamera();
+        }
+
+        // 게임 루프
+        function gameLoop() {
+            update();
+            render();
+            requestAnimationFrame(gameLoop);
+        }
+
+        // 게임 시작
+        selectNewWord();
+        gameLoop();
+
+        // 별 그리기 함수 (원거리형 몬스터용)
+        function drawStar(ctx, x, y, outerRadius, innerRadius, points) {
+            ctx.save();
+            ctx.beginPath();
+            for (let i = 0; i < points * 2; i++) {
+                const angle = (Math.PI / points) * i;
+                const r = i % 2 === 0 ? outerRadius : innerRadius;
+                ctx.lineTo(
+                    x + Math.cos(angle) * r,
+                    y + Math.sin(angle) * r
+                );
+            }
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+        }
+
+        // 터치/마우스 클릭한 위치로 이동하는 시스템 추가
+        // 플레이어, 카메라 초기화 함수 추가
+        function resetPlayerAndCamera() {
+            player.worldX = worldWidth / 2;
+            player.worldY = worldHeight / 2;
+            cameraX = player.worldX - canvas.width / 2;
+            cameraY = player.worldY - canvas.height / 2;
+            // 카메라 경계 보정
+            cameraX = Math.max(0, Math.min(cameraX, worldWidth - canvas.width));
+            cameraY = Math.max(0, Math.min(cameraY, worldHeight - canvas.height));
+        }
+
+        // 터치 이벤트 (모바일)
+        canvas.addEventListener('touchstart', function(e) {
+            isPointerDown = true;
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            pointerX = touch.clientX - rect.left + cameraX;
+            pointerY = touch.clientY - rect.top + cameraY;
+        });
+        canvas.addEventListener('touchmove', function(e) {
+            if (isPointerDown) {
+                const rect = canvas.getBoundingClientRect();
+                const touch = e.touches[0];
+                pointerX = touch.clientX - rect.left + cameraX;
+                pointerY = touch.clientY - rect.top + cameraY;
+            }
+        });
+        window.addEventListener('touchend', function() {
+            isPointerDown = false;
+            pointerX = pointerY = null;
+        });
+        // 마우스 클릭 이벤트 (PC)
+        canvas.addEventListener('mousedown', function(e) {
+            isPointerDown = true;
+            const rect = canvas.getBoundingClientRect();
+            pointerX = e.clientX - rect.left + cameraX;
+            pointerY = e.clientY - rect.top + cameraY;
+        });
+        canvas.addEventListener('mousemove', function(e) {
+            if (isPointerDown) {
+                const rect = canvas.getBoundingClientRect();
+                pointerX = e.clientX - rect.left + cameraX;
+                pointerY = e.clientY - rect.top + cameraY;
+            }
+        });
+        window.addEventListener('mouseup', function() {
+            isPointerDown = false;
+            pointerX = pointerY = null;
+        });
+    </script>
+</body>
+</html>
