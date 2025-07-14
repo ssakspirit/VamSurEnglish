@@ -262,6 +262,82 @@
             text-shadow: none;
             display: inline-block;
         }
+        #menuScreen {
+            position: fixed; left: 0; top: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(135deg, #23243a 0%, #1a1a2e 100%);
+            backdrop-filter: blur(4px);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 1000;
+            box-shadow: 0 0 80px 0 #000a;
+            animation: menuFadeIn 1s;
+        }
+        @keyframes menuFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        #menuScreen h1 {
+            font-size: 3.2rem;
+            color: #ffd700;
+            margin-bottom: 1.2rem;
+            letter-spacing: 2px;
+            text-shadow: 0 0 18px #ffd70088, 0 2px 12px #222;
+            font-family: 'Segoe UI', 'Arial Black', sans-serif;
+        }
+        .author {
+            color: #b0b0ff;
+            margin-bottom: 2.2rem;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            text-shadow: 0 1px 8px #222;
+        }
+        .menu-row {
+            display: flex; gap: 2rem; margin-bottom: 2.5rem;
+            align-items: center;
+        }
+        #startBtn {
+            font-size: 1.5rem;
+            padding: 0.8em 2.5em;
+            border-radius: 12px;
+            border: none;
+            background: linear-gradient(90deg, #ffd700 0%, #ffb300 100%);
+            color: #23243a;
+            font-weight: bold;
+            box-shadow: 0 4px 18px #ffd70033;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+        #startBtn:hover {
+            background: linear-gradient(90deg, #ffe066 0%, #ffd700 100%);
+            transform: translateY(-2px) scale(1.04);
+        }
+        #wordSelect {
+            font-size: 1.2rem;
+            border-radius: 8px;
+            border: 1.5px solid #ffd700;
+            padding: 0.5em 1.2em;
+            background: #23243a;
+            color: #ffd700;
+            box-shadow: 0 2px 8px #ffd70022;
+            outline: none;
+            transition: border 0.2s;
+        }
+        #wordSelect:focus {
+            border: 2px solid #ffe066;
+        }
+        .highscore {
+            color: #ffe066;
+            font-size: 1.25rem;
+            background: rgba(40,40,60,0.7);
+            border-radius: 10px;
+            padding: 0.7em 2em;
+            box-shadow: 0 2px 12px #ffd70022;
+            margin-top: 1.2rem;
+            display: flex; align-items: center; gap: 0.7em;
+        }
+        .highscore:before {
+            content: '🏆';
+            font-size: 1.3em;
+        }
     </style>
 </head>
 <body>
@@ -308,6 +384,16 @@
         </div>
     </div>
 
+    <div id="menuScreen">
+        <h1>VamsurEnglish</h1>
+        <div class="author">제작자: Stevecoding</div>
+        <div class="menu-row">
+            <button id="startBtn">시작</button>
+            <select id="wordSelect"></select>
+        </div>
+        <div class="highscore">최고 점수: <span id="highScoreValue">0</span></div>
+    </div>
+
     <script>
         // 터치/마우스 이동 목표 좌표 전역 변수 선언 (가장 상단)
         let targetX = null;
@@ -320,24 +406,29 @@
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
 
-        // 영어 단어 데이터베이스
-        const wordDatabase = [
-            { word: "apple", display: "appl_", missing: "e", meaning: "사과", pronunciation: "/ˈæp.əl/" },
-            { word: "book", display: "b_ok", missing: "o", meaning: "책", pronunciation: "/bʊk/" },
-            { word: "cat", display: "c_t", missing: "a", meaning: "고양이", pronunciation: "/kæt/" },
-            { word: "dog", display: "_og", missing: "d", meaning: "개", pronunciation: "/dɔːɡ/" },
-            { word: "fish", display: "fi_h", missing: "s", meaning: "물고기", pronunciation: "/fɪʃ/" },
-            { word: "house", display: "hou_e", missing: "s", meaning: "집", pronunciation: "/haʊs/" },
-            { word: "water", display: "wat_r", missing: "e", meaning: "물", pronunciation: "/ˈwɔː.tər/" },
-            { word: "tree", display: "tr_e", missing: "e", meaning: "나무", pronunciation: "/triː/" },
-            { word: "bird", display: "b_rd", missing: "i", meaning: "새", pronunciation: "/bɜːrd/" },
-            { word: "moon", display: "m_on", missing: "o", meaning: "달", pronunciation: "/muːn/" },
-            { word: "star", display: "st_r", missing: "a", meaning: "별", pronunciation: "/stɑːr/" },
-            { word: "flower", display: "flow_r", missing: "e", meaning: "꽃", pronunciation: "/ˈflaʊ.ər/" },
-            { word: "music", display: "mu_ic", missing: "s", meaning: "음악", pronunciation: "/ˈmjuː.zɪk/" },
-            { word: "friend", display: "fri_nd", missing: "e", meaning: "친구", pronunciation: "/frend/" },
-            { word: "happy", display: "hap_y", missing: "p", meaning: "행복한", pronunciation: "/ˈhæp.i/" }
-        ];
+        // 영어 단어 데이터베이스(카테고리별)
+        const wordSets = {
+            '3학년 기본단어': [
+                { word: "apple", display: "appl_", missing: "e", meaning: "사과", pronunciation: "/ˈæp.əl/" },
+                { word: "book", display: "b_ok", missing: "o", meaning: "책", pronunciation: "/bʊk/" },
+                { word: "cat", display: "c_t", missing: "a", meaning: "고양이", pronunciation: "/kæt/" },
+                { word: "dog", display: "_og", missing: "d", meaning: "개", pronunciation: "/dɔːɡ/" },
+                { word: "fish", display: "fi_h", missing: "s", meaning: "물고기", pronunciation: "/fɪʃ/" },
+                { word: "house", display: "hou_e", missing: "s", meaning: "집", pronunciation: "/haʊs/" },
+            ],
+            '4학년 기본단어': [
+                { word: "water", display: "wat_r", missing: "e", meaning: "물", pronunciation: "/ˈwɔː.tər/" },
+                { word: "tree", display: "tr_e", missing: "e", meaning: "나무", pronunciation: "/triː/" },
+                { word: "bird", display: "b_rd", missing: "i", meaning: "새", pronunciation: "/bɜːrd/" },
+                { word: "moon", display: "m_on", missing: "o", meaning: "달", pronunciation: "/muːn/" },
+                { word: "star", display: "st_r", missing: "a", meaning: "별", pronunciation: "/stɑːr/" },
+                { word: "flower", display: "flow_r", missing: "e", meaning: "꽃", pronunciation: "/ˈflaʊ.ər/" },
+            ],
+            // 필요시 더 추가 가능
+        };
+
+        // 현재 사용할 단어 배열(게임에서 사용)
+        let wordDatabase = wordSets['3학년 기본단어'];
 
         // 현재 단어 상태
         let currentWordData = wordDatabase[0];
@@ -430,17 +521,24 @@
 
         // 알파벳 스폰 관련
         let lastLetterSpawn = 0;
-        let letterSpawnRate = 62; // 0.062초마다 알파벳 스폰 (2배 더 빠르게)
+        let letterSpawnRate = 124; // 0.124초마다 알파벳 스폰 (속도 반으로)
 
         // 월드 행성(별) 배열 추가
         const planets = [];
         // 게임 시작 시 행성 여러 개 생성
         function spawnPlanets() {
-            const planetCount = 5 + Math.floor(Math.random() * 4); // 5~8개
+            const planetCount = 10 + Math.floor(Math.random() * 7); // 10~16개
             for (let i = 0; i < planetCount; i++) {
                 const radius = 40 + Math.random() * 60; // 크기 다양(40~100)
-                const worldX = 200 + Math.random() * (worldWidth - 400);
-                const worldY = 200 + Math.random() * (worldHeight - 400);
+                // 플레이어 근처(반경 400~600px 내 랜덤 위치)
+                const minRadius = 400;
+                const maxRadius = 600;
+                const angle = Math.random() * Math.PI * 2;
+                let worldX = player.worldX + Math.cos(angle) * (minRadius + Math.random() * (maxRadius - minRadius));
+                let worldY = player.worldY + Math.sin(angle) * (minRadius + Math.random() * (maxRadius - minRadius));
+                // 월드 경계 체크
+                worldX = Math.max(0, Math.min(worldWidth - radius, worldX));
+                worldY = Math.max(0, Math.min(worldHeight - radius, worldY));
                 const color = {r: 120 + Math.random()*80, g: 120 + Math.random()*80, b: 200, a: 1};
                 planets.push({
                     worldX, worldY, radius, color, timer: 0, exploded: false
@@ -572,14 +670,14 @@
             const type = monsterTypes.find(t => t.name === typeName);
 
             // 몬스터 위치 랜덤 생성 (기존 코드 유지)
-            const side = Math.floor(Math.random() * 4);
-            let x, y;
-            switch(side) {
-                case 0: x = Math.random() * canvas.width; y = -30; break;
-                case 1: x = canvas.width + 30; y = Math.random() * canvas.height; break;
-                case 2: x = Math.random() * canvas.width; y = canvas.height + 30; break;
-                case 3: x = -30; y = Math.random() * canvas.height; break;
-            }
+            const minRadius = 400;
+            const maxRadius = 600;
+            const angle = Math.random() * Math.PI * 2;
+            let x = player.worldX + Math.cos(angle) * (minRadius + Math.random() * (maxRadius - minRadius));
+            let y = player.worldY + Math.sin(angle) * (minRadius + Math.random() * (maxRadius - minRadius));
+            // 월드 경계 체크
+            x = Math.max(0, Math.min(worldWidth - 30, x));
+            y = Math.max(0, Math.min(worldHeight - 30, y));
 
             // 몬스터, 알파벳 등 오브젝트 생성 시 worldX, worldY 사용
             monsters.push({
@@ -618,9 +716,18 @@
             const isCorrect = letter === currentWordData.missing;
 
             // 화면 위쪽에서 시작해서 아래로 이동 - 모든 알파벳 동일한 색상
+            const minRadius = 400;
+            const maxRadius = 600;
+            const angle = Math.random() * Math.PI * 2;
+            let x = player.worldX + Math.cos(angle) * (minRadius + Math.random() * (maxRadius - minRadius));
+            let y = player.worldY + Math.sin(angle) * (minRadius + Math.random() * (maxRadius - minRadius));
+            // 월드 경계 체크
+            x = Math.max(0, Math.min(worldWidth - 40, x));
+            y = Math.max(0, Math.min(worldHeight - 40, y));
+
             floatingLetters.push({
-                worldX: Math.random() * (canvas.width - 40) + 20, // 화면 좌표 → 월드 좌표
-                worldY: -30, // 화면 좌표 → 월드 좌표
+                worldX: x, // 화면 좌표 → 월드 좌표
+                worldY: y, // 화면 좌표 → 월드 좌표
                 width: 30,
                 height: 30,
                 vx: (Math.random() - 0.5) * 2, // 좌우로 약간 흔들림
@@ -745,8 +852,8 @@
             if (currentTime - lastLetterSpawn > letterSpawnRate) {
                 createFloatingLetter();
                 lastLetterSpawn = currentTime;
-                // 30초마다 스폰 속도 증가, 최소 30ms
-                letterSpawnRate = Math.max(30, 62 - Math.floor(gameState.timeElapsed / 30) * 12);
+                // 30초마다 스폰 속도 증가, 최소 120ms
+                letterSpawnRate = Math.max(120, 124 - Math.floor(gameState.timeElapsed / 30) * 24);
             }
 
             // 투사체 발사
@@ -768,11 +875,50 @@
                     for (let j = 0; j < 18; j++) {
                         createParticle(monster.worldX + monster.width/2, monster.worldY + monster.height/2, 'blood');
                     }
-                    // 플레이어 데미지
-                    player.health -= 20;
-                    monster.exploded = true;
+                    // 추가: 모든 몬스터 사망 시 파티클(중복 방지 위해 1회만)
                     monsters.splice(i, 1);
-                    if (player.health <= 0) gameOver();
+                    continue;
+                }
+
+                // 분열형: 죽을 때 작은 몬스터 여러 마리 생성
+                if (monster.name === 'splitter' && monster.health <= 0 && !monster.splitChild) {
+                    for (let k = 0; k < 2 + Math.floor(Math.random() * 2); k++) {
+                        monsters.push({
+                            worldX: monster.worldX + Math.random() * 20 - 10,
+                            worldY: monster.worldY + Math.random() * 20 - 10,
+                            width: 12,
+                            height: 12,
+                            speed: 1.5,
+                            health: 0.5,
+                            color: '#ff99ee',
+                            angle: 0,
+                            pulse: Math.random() * Math.PI * 2,
+                            name: 'basic',
+                            shape: 'rect',
+                            splitChild: true,
+                            exploded: false,
+                            dodgeCooldown: 0
+                        });
+                    }
+                    // 반드시 파티클 생성
+                    for (let j = 0; j < 12; j++) {
+                        createParticle(monster.worldX + monster.width/2, monster.worldY + monster.height/2, 'blood');
+                    }
+                    monsters.splice(i, 1);
+                    continue;
+                }
+
+                // 몬스터 사망 처리 부분에서 파티클 효과를 모든 타입에 공통 적용
+                if (monster.health <= 0) {
+                    // 파티클 효과 (모든 몬스터 공통)
+                    for (let j = 0; j < 12; j++) {
+                        createParticle(monster.worldX + monster.width/2, monster.worldY + monster.height/2, 'blood');
+                    }
+                    monsters.splice(i, 1);
+                    // 몬스터 처치 시 경험치 1로 감소
+                    player.kills++;
+                    player.exp += 1;
+                    if (player.exp >= player.expToNext) levelUp();
                     continue;
                 }
 
@@ -802,6 +948,8 @@
                 // 플레이어와 몬스터 충돌
                 if (checkCollision(player, monster)) {
                     player.health -= 10;
+                    hitSound.currentTime = 0;
+                    hitSound.play();
                     // 혈흔 파티클 생성
                     for (let j = 0; j < 8; j++) {
                         createParticle(player.worldX + player.width/2, player.worldY + player.height/2, 'blood');
@@ -809,6 +957,8 @@
                     monsters.splice(i, 1);
                     
                     if (player.health <= 0) {
+                        deathSound.currentTime = 0;
+                        deathSound.play();
                         gameOver();
                     }
                 }
@@ -908,6 +1058,8 @@
                         } else {
                             // 틀린 알파벳
                             player.health -= 15;
+                            hitSound.currentTime = 0;
+                            hitSound.play();
                             showFeedback(`틀렸습니다! ${letter.letter}`, false);
                             
                             // 데미지 파티클
@@ -916,6 +1068,8 @@
                             }
                             
                             if (player.health <= 0) {
+                                deathSound.currentTime = 0;
+                                deathSound.play();
                                 gameOver();
                             }
                         }
@@ -1020,7 +1174,13 @@
                     const pdy = player.worldY + player.height/2 - planet.worldY;
                     if (Math.sqrt(pdx*pdx + pdy*pdy) < explosionRadius) {
                         player.health -= 40;
-                        if (player.health <= 0) gameOver();
+                        hitSound.currentTime = 0;
+                        hitSound.play();
+                        if (player.health <= 0) {
+                            deathSound.currentTime = 0;
+                            deathSound.play();
+                            gameOver();
+                        }
                     }
                     // 몬스터
                     for (let i = monsters.length - 1; i >= 0; i--) {
@@ -1031,6 +1191,17 @@
                             monsters.splice(i, 1);
                         }
                     }
+                    // 폭발 위치에 새로운 행성 1개 생성
+                    const newRadius = 40 + Math.random() * 60;
+                    const newColor = {r: 120 + Math.random()*80, g: 120 + Math.random()*80, b: 200, a: 1};
+                    planets.push({
+                        worldX: planet.worldX,
+                        worldY: planet.worldY,
+                        radius: newRadius,
+                        color: newColor,
+                        timer: 0,
+                        exploded: false
+                    });
                 }
             });
 
@@ -1045,6 +1216,29 @@
             cameraY = Math.max(0, Math.min(cameraY, worldHeight - canvas.height));
 
             updateUI();
+
+            // 행성과 충돌 시 이동 취소
+            let collided = false;
+            planets.forEach(planet => {
+                if (planet.exploded) return;
+                // 원-사각형 충돌(플레이어는 사각형)
+                const dx = (player.worldX + player.width/2) - planet.worldX;
+                const dy = (player.worldY + player.height/2) - planet.worldY;
+                const dist = Math.sqrt(dx*dx + dy*dy);
+                if (dist < planet.radius + Math.max(player.width, player.height)/2) {
+                    collided = true;
+                }
+            });
+            if (collided) {
+                // 이동 취소(이전 위치로 복원)
+                // 이전 위치 저장 필요: 이동 전 위치를 prevX, prevY로 저장해서 사용
+                player.worldX = prevPlayerX;
+                player.worldY = prevPlayerY;
+            }
+
+            // 플레이어 이동 처리 직후에 아래 코드 추가
+            prevPlayerX = player.worldX;
+            prevPlayerY = player.worldY;
         }
 
         // 렌더링 함수
@@ -1290,6 +1484,10 @@
                 createParticle(player.worldX + player.width/2, player.worldY + player.height/2, 'correct');
             }
             
+            // 레벨업 효과음 재생
+            levelupSound.currentTime = 0;
+            levelupSound.play();
+            
             gameState.paused = true;
             document.getElementById('levelUpModal').style.display = 'block';
         }
@@ -1329,9 +1527,16 @@
             document.getElementById('finalWords').textContent = completedWords;
             document.getElementById('finalLevel').textContent = player.level;
             document.getElementById('gameOver').style.display = 'block';
+
+            // 최고 점수 갱신
+            const hs = parseInt(localStorage.getItem('vamSurHighScore') || '0', 10);
+            if (player.kills > hs) {
+                localStorage.setItem('vamSurHighScore', player.kills);
+            }
+            loadHighScore();
         }
 
-        // 게임 재시작 함수
+        // 게재시작 함수
         function restartGame() {
             // 게임 상태 초기화
             gameState.running = true;
@@ -1371,6 +1576,11 @@
             spawnPlanets();
             // 플레이어, 카메라 초기화
             resetPlayerAndCamera();
+
+            // 메뉴 화면으로 이동
+            menuScreen.style.display = 'flex';
+            gameStarted = false;
+            playMenuBGM(); // 메뉴 BGM 재생
         }
 
         // 게임 루프
@@ -1381,8 +1591,82 @@
         }
 
         // 게임 시작
-        selectNewWord();
-        gameLoop();
+        // 메뉴 화면 요소
+        const menuScreen = document.getElementById('menuScreen');
+        const startBtn = document.getElementById('startBtn');
+        const wordSelect = document.getElementById('wordSelect');
+        const highScoreValue = document.getElementById('highScoreValue');
+
+        // 최고 점수 로드
+        function loadHighScore() {
+            const hs = localStorage.getItem('vamSurHighScore') || 0;
+            highScoreValue.textContent = hs;
+        }
+        loadHighScore();
+
+        // 단어 선택 콤보박스 채우기 (카테고리명)
+        wordSelect.innerHTML = '';
+        Object.keys(wordSets).forEach(setName => {
+            const opt = document.createElement('option');
+            opt.value = setName;
+            opt.textContent = setName;
+            wordSelect.appendChild(opt);
+        });
+
+        // 오디오 객체 선언
+        const hitSound = new Audio('assets/hit.mp3');
+        const deathSound = new Audio('assets/death.mp3');
+        const bgmCuriosity = new Audio('assets/bgm_curiosity.mp3');
+        const bgmTree = new Audio('assets/bgm_tree and birds.mp3');
+        const levelupSound = new Audio('assets/levelup.mp3');
+        levelupSound.volume = 0.8;
+
+        // 루프 설정 및 볼륨 조절
+        bgmCuriosity.loop = true;
+        bgmCuriosity.volume = 0.4;
+        bgmTree.loop = true;
+        bgmTree.volume = 0.5;
+        hitSound.volume = 0.7;
+        deathSound.volume = 0.8;
+
+        // 메뉴 진입 시 배경음 재생 함수
+        function playMenuBGM() {
+            bgmCuriosity.pause();
+            bgmCuriosity.currentTime = 0;
+            bgmTree.currentTime = 0;
+            bgmTree.play();
+        }
+        // 게임 시작 시 배경음 재생 함수(게임 중 브금 제거)
+        function playGameBGM() {
+            bgmTree.pause();
+            bgmTree.currentTime = 0;
+            // bgmCuriosity.pause();
+            // bgmCuriosity.currentTime = 0;
+            // bgmCuriosity.play(); // 게임 중 브금 재생하지 않음
+        }
+
+        // 시작 버튼 클릭 시 메뉴 숨기고 게임 시작
+        startBtn.onclick = () => {
+            menuScreen.style.display = 'none';
+            playGameBGM(); // 게임 BGM 재생
+            // 선택한 단어 모음(카테고리)로 wordDatabase 교체
+            const selectedSet = wordSelect.value;
+            if (selectedSet && wordSets[selectedSet]) {
+                wordDatabase = wordSets[selectedSet];
+            }
+            // 첫 단어 선택
+            currentWordData = wordDatabase[0];
+            selectNewWord();
+            if (!gameStarted) {
+                gameStarted = true;
+                gameLoop(); // 메뉴에서만 게임 루프 시작
+            }
+            // 게임 상태 초기화 등 필요시 추가
+        };
+
+        // 게재시작 함수
+        // selectNewWord(); // 게임 시작 시 첫 단어 설정은 메뉴에서 시작 버튼 클릭 시 처리
+        // gameLoop(); // 게임 루프는 메뉴에서 시작 버튼 클릭 시 실행
 
         // 별 그리기 함수 (원거리형 몬스터용)
         function drawStar(ctx, x, y, outerRadius, innerRadius, points) {
@@ -1459,6 +1743,9 @@
         }
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas(); // 게임 시작 시에도 호출
+
+        let gameStarted = false; // 게임 시작 여부 플래그(전역)
+        let prevPlayerX = player.worldX, prevPlayerY = player.worldY; // 이동 처리 직전 선언
     </script>
 </body>
 </html>
