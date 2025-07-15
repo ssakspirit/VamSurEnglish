@@ -2529,6 +2529,12 @@
                 levelupSound.currentTime = 0;
                 levelupSound.volume = 0.8; // 원래대로 복원
             }).catch(()=>{});
+            deathSound.volume = 0;
+            deathSound.play().then(() => {
+                deathSound.pause();
+                deathSound.currentTime = 0;
+                deathSound.volume = 0.8; // 원래대로 복원
+            }).catch(()=>{});
             
             menuScreen.style.display = 'none';
             playGameBGM();
