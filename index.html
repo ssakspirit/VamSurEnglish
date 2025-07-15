@@ -2771,6 +2771,15 @@
                 console.log('joystickDir:', joystickDir);
             }, 500);
         }
+        // [디버깅] 조이스틱 터치 중일 때 강제로 오른쪽 이동
+        if (IS_MOBILE) {
+            setInterval(() => {
+                if (joystickActive) {
+                    joystickDir.x = 1;
+                    joystickDir.y = 0;
+                }
+            }, 200);
+        }
     </script>
 </body>
 </html>
