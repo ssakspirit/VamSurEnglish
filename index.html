@@ -2694,12 +2694,13 @@
             for (let i = 0; i < e.touches.length; i++) {
                 if (e.touches[i].identifier === joystickTouchId) {
                     const rect = joystick.getBoundingClientRect();
-                    const x = e.touches[i].clientX - rect.left;
-                    const y = e.touches[i].clientY - rect.top;
-                    // 조이스틱 중심에서의 상대 좌표
+                    // 스크롤 보정 포함 좌표 계산
+                    const pageX = e.touches[i].pageX;
+                    const pageY = e.touches[i].pageY;
+                    const x = pageX - rect.left - window.scrollX;
+                    const y = pageY - rect.top - window.scrollY;
                     let dx = x - joystickCenter.x;
                     let dy = y - joystickCenter.y;
-                    // 최대 반지름 48px
                     const dist = Math.sqrt(dx*dx + dy*dy);
                     const maxDist = 48;
                     if (dist > maxDist) {
@@ -2708,9 +2709,10 @@
                     }
                     joystickKnob.style.left = (joystickCenter.x + dx - 20) + 'px';
                     joystickKnob.style.top = (joystickCenter.y + dy - 20) + 'px';
-                    // 방향값 -1~1
                     joystickDir.x = dx / maxDist;
                     joystickDir.y = dy / maxDist;
+                    // 디버깅: 실제 dx, dy, joystickDir 값 출력
+                    // alert(`dx:${dx}, dy:${dy}, jx:${joystickDir.x}, jy:${joystickDir.y}`);
                     break;
                 }
             }
