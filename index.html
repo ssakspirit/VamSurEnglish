@@ -2662,6 +2662,9 @@
             return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         }
 
+        // 모바일 여부를 전역 상수로 한 번만 평가
+        const IS_MOBILE = isMobileDevice();
+
         // 모바일이면 조이스틱 표시
         const joystick = document.getElementById('joystick');
         const joystickBase = document.getElementById('joystick-base');
@@ -2671,7 +2674,7 @@
         let joystickDir = { x: 0, y: 0 };
         let joystickTouchId = null;
 
-        if (isMobileDevice()) {
+        if (IS_MOBILE) {
             joystick.style.display = 'block';
         }
 
@@ -2721,15 +2724,16 @@
         // ... existing code ...
             // 플레이어 이동 및 각도 업데이트
             let moving = false;
-            if (isMobileDevice() && (joystickDir.x !== 0 || joystickDir.y !== 0)) {
-                // 조이스틱 방향으로 이동
+            if (IS_MOBILE && (joystickDir.x !== 0 || joystickDir.y !== 0)) {
+                // 조이스틱 방향으로 이동 (모바일 전용)
                 const dist = Math.sqrt(joystickDir.x * joystickDir.x + joystickDir.y * joystickDir.y);
                 if (dist > 0.1) {
                     player.worldX += joystickDir.x * player.speed;
                     player.worldY += joystickDir.y * player.speed;
                     moving = true;
                 }
-            } else {
+            } else if (!IS_MOBILE) {
+                // PC: 키보드/마우스 이동
                 if (keys.w && player.worldY > 0) {
                     player.worldY -= player.speed;
                     moving = true;
