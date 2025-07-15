@@ -2682,14 +2682,14 @@
             joystick.style.display = 'block';
         }
 
-        // 조이스틱 터치 이벤트
-        joystick.addEventListener('touchstart', function(e) {
+        // 조이스틱 터치 이벤트 핸들러 함수 분리
+        function joystickTouchStart(e) {
             e.preventDefault();
             const touch = e.touches[0];
             joystickActive = true;
             joystickTouchId = touch.identifier;
-        });
-        joystick.addEventListener('touchmove', function(e) {
+        }
+        function joystickTouchMove(e) {
             if (!joystickActive) return;
             for (let i = 0; i < e.touches.length; i++) {
                 if (e.touches[i].identifier === joystickTouchId) {
@@ -2714,6 +2714,11 @@
                     break;
                 }
             }
+        }
+        // joystick, joystick-base, joystick-knob 모두에 이벤트 등록
+        [joystick, joystickBase, joystickKnob].forEach(el => {
+            el.addEventListener('touchstart', joystickTouchStart, { passive: false });
+            el.addEventListener('touchmove', joystickTouchMove, { passive: false });
         });
         window.addEventListener('touchend', function(e) {
             if (!joystickActive) return;
