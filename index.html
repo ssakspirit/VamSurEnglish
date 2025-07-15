@@ -1412,18 +1412,6 @@
             `;
         }
 
-        // TTS(음성 합성) 함수 - 모바일은 setTimeout 없이 바로 실행
-        function speakWord(word) {
-            if ('speechSynthesis' in window) {
-                speechSynthesis.cancel();
-                const utterance = new SpeechSynthesisUtterance(word);
-                utterance.lang = 'en-US';
-                utterance.rate = 0.8;
-                utterance.volume = 1.0;
-                speechSynthesis.speak(utterance);
-            }
-        }
-
         // 단어 완성 결과 표시 함수
         function showWordResult(wordData) {
             // console.log('showWordResult called with:', wordData);
@@ -1445,15 +1433,21 @@
                 
                 wordCompleteElement.textContent = `✨ ${wordData.word.toUpperCase()} ✨`;
                 wordMeaningElement.textContent = `뜻: ${wordData.meaning}`;
+                // 발음 텍스트는 더 이상 표시하지 않음
                 wordPronunciationElement.textContent = '';
                 
                 wordResultElement.style.display = 'block';
                 
                 // 단어 음성 읽기(TTS)
-                if (isMobile) {
-                    speakWord(wordData.word); // 모바일은 바로 실행
-                } else {
-                    setTimeout(() => speakWord(wordData.word), 200); // PC는 약간 딜레이
+                if ('speechSynthesis' in window) {
+                    speechSynthesis.cancel();
+                    setTimeout(() => {
+                        const utterance = new SpeechSynthesisUtterance(wordData.word);
+                        utterance.lang = 'en-US';
+                        utterance.rate = 0.8;
+                        utterance.volume = 1.0;
+                        speechSynthesis.speak(utterance);
+                    }, 200);
                 }
                 
                 setTimeout(() => {
@@ -1884,11 +1878,13 @@
                             // 정답 단어 음성 출력
                             if ('speechSynthesis' in window) {
                                 speechSynthesis.cancel();
-                                if (isMobile) {
-                                    speakWord(currentWordData.word);
-                                } else {
-                                    setTimeout(() => speakWord(currentWordData.word), 200);
-                                }
+                                setTimeout(() => {
+                                    const utterance = new SpeechSynthesisUtterance(currentWordData.word);
+                                    utterance.lang = 'en-US';
+                                    utterance.rate = 0.8;
+                                    utterance.volume = 1.0;
+                                    speechSynthesis.speak(utterance);
+                                }, 200);
                             }
                             // 성공 파티클
                             for (let i = 0; i < 15; i++) {
@@ -2676,6 +2672,9 @@
             return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
         }
 
+        // isMobile 변수는 전역에서 한 번만 선언
+        let isMobile = isTouchDevice();
+
         // 조이스틱 관련 변수
         let joystickActive = false;
         let joystickDir = {x: 0, y: 0};
@@ -2689,7 +2688,6 @@
         const joystickStick = document.getElementById('joystickStick');
 
         // 모바일이면 조이스틱 표시, 기존 조작 무효화
-        let isMobile = isTouchDevice();
         if (isMobile) {
             joystickContainer.style.display = 'block';
         }
@@ -2741,6 +2739,69 @@
             joystickStick.style.top = '40px';
             joystickDir.x = 0;
             joystickDir.y = 0;
+        }
+
+        // 오디오/음성 깨우기(모바일 자동재생 제한 우회)
+        function unlockAudio() {
+            // 효과음 미리 재생(음소거)
+            try {
+                hitSound.play().catch(()=>{}); hitSound.pause(); hitSound.currentTime = 0;
+                deathSound.play().catch(()=>{}); deathSound.pause(); deathSound.currentTime = 0;
+                levelupSound.play().catch(()=>{}); levelupSound.pause(); levelupSound.currentTime = 0;
+            } catch(e) {}
+            // TTS 깨우기
+            if ('speechSynthesis' in window) {
+                try {
+                    const utter = new SpeechSynthesisUtterance('start');
+                    utter.volume = 0;
+                    window.speechSynthesis.speak(utter);
+                    window.speechSynthesis.cancel();
+                } catch(e) {}
+            }
+        }
+
+        // 모바일이면 조이스틱 표시, 기존 조작 무효화
+        let isMobile = isTouchDevice();
+        let audioUnlocked = false; // 오디오 깨우기 플래그
+        if (isMobile) {
+            joystickContainer.style.display = 'block';
+            // 조이스틱 첫 터치 시 오디오 깨우기
+            joystickContainer.addEventListener('touchstart', function(e) {
+                if (!audioUnlocked) { unlockAudio(); audioUnlocked = true; }
+            }, { once: true });
+        }
+
+        // 시작 버튼 클릭 시 오디오 깨우기(PC/모바일 모두)
+        startBtn.addEventListener('click', function() {
+            if (!audioUnlocked) { unlockAudio(); audioUnlocked = true; }
+        }, { once: true });
+
+        // showWordResult 함수에서 TTS setTimeout 없이 바로 실행
+        function showWordResult(wordData) {
+            const wordCompleteElement = document.getElementById('wordCompleteText');
+            const wordMeaningElement = document.getElementById('wordMeaningText');
+            const wordPronunciationElement = document.getElementById('wordPronunciationText');
+            const wordResultElement = document.getElementById('wordResult');
+            if (wordCompleteElement && wordMeaningElement && wordPronunciationElement && wordResultElement) {
+                wordCompleteElement.textContent = `✨ ${wordData.word.toUpperCase()} ✨`;
+                wordMeaningElement.textContent = `뜻: ${wordData.meaning}`;
+                wordPronunciationElement.textContent = '';
+                wordResultElement.style.display = 'block';
+                // 단어 음성 읽기(TTS) - setTimeout 없이 바로 실행
+                if ('speechSynthesis' in window) {
+                    speechSynthesis.cancel();
+                    const utterance = new SpeechSynthesisUtterance(wordData.word);
+                    utterance.lang = 'en-US';
+                    utterance.rate = 0.8;
+                    utterance.volume = 1.0;
+                    speechSynthesis.speak(utterance);
+                }
+                setTimeout(() => {
+                    wordResultElement.style.display = 'none';
+                }, 3000);
+            } else {
+                showFeedback(`${wordData.word} (${wordData.meaning})`, true);
+            }
         }
     </script>
 </body>
