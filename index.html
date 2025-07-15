@@ -2755,6 +2755,13 @@
                 }
             }
 // ... existing code ...
+
+        // [디버깅] 모바일에서 joystickDir 값 콘솔 출력
+        if (IS_MOBILE) {
+            setInterval(() => {
+                console.log('joystickDir:', joystickDir);
+            }, 500);
+        }
     </script>
 </body>
 </html>
