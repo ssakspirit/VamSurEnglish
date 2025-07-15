@@ -2523,6 +2523,12 @@
                 hitSound.currentTime = 0;
                 hitSound.volume = 0.7; // 원래대로 복원
             }).catch(()=>{});
+            levelupSound.volume = 0;
+            levelupSound.play().then(() => {
+                levelupSound.pause();
+                levelupSound.currentTime = 0;
+                levelupSound.volume = 0.8; // 원래대로 복원
+            }).catch(()=>{});
             
             menuScreen.style.display = 'none';
             playGameBGM();
