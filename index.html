@@ -2514,42 +2514,33 @@
             // bgmCuriosity.play(); // 게임 중 브금 재생하지 않음
         }
 
-        // 메뉴 진입/종료 시 조이스틱 표시/숨김 함수
-        function showMenu() {
-            menuScreen.style.display = 'flex';
-            if (isMobile) joystickContainer.style.display = 'none';
-        }
-        function hideMenu() {
-            menuScreen.style.display = 'none';
-            if (isMobile) joystickContainer.style.display = 'block';
-        }
-
         // 시작 버튼 클릭 시 메뉴 숨기고 게임 시작
         startBtn.onclick = () => {
-            hideMenu();
+            menuScreen.style.display = 'none';
             playGameBGM();
+            // [수정] 최초 게임 시작 시에도 행성 배열 초기화 및 생성
             planets.length = 0;
             spawnPlanets();
+            // 플레이어, 카메라 초기화
             resetPlayerAndCamera();
+            // 선택한 단어 모음(카테고리)로 wordDatabase 교체
             const selectedSet = wordSelect.value;
             if (selectedSet && wordSets[selectedSet]) {
                 wordDatabase = wordSets[selectedSet];
             }
+            // 첫 단어 선택
             currentWordData = wordDatabase[0];
             selectNewWord();
             if (!gameStarted) {
                 gameStarted = true;
-                gameLoop();
+                gameLoop(); // 메뉴에서만 게임 루프 시작
             }
+            // 게임 상태 초기화 등 필요시 추가
         };
 
-        // restartGame에서 메뉴 진입 시 showMenu() 사용
-        function restartGame() {
-            // ... 기존 초기화 코드 ...
-            showMenu();
-            gameStarted = false;
-            playMenuBGM();
-        }
+        // 게재시작 함수
+        // selectNewWord(); // 게임 시작 시 첫 단어 설정은 메뉴에서 시작 버튼 클릭 시 처리
+        // gameLoop(); // 게임 루프는 메뉴에서 시작 버튼 클릭 시 실행
 
         // 별 그리기 함수 (원거리형 몬스터용)
         function drawStar(ctx, x, y, outerRadius, innerRadius, points) {
@@ -2681,9 +2672,6 @@
             return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
         }
 
-        // isMobile 변수는 전역에서 한 번만 선언
-        let isMobile = isTouchDevice();
-
         // 조이스틱 관련 변수
         let joystickActive = false;
         let joystickDir = {x: 0, y: 0};
@@ -2697,6 +2685,7 @@
         const joystickStick = document.getElementById('joystickStick');
 
         // 모바일이면 조이스틱 표시, 기존 조작 무효화
+        let isMobile = isTouchDevice();
         if (isMobile) {
             joystickContainer.style.display = 'block';
         }
@@ -2748,69 +2737,6 @@
             joystickStick.style.top = '40px';
             joystickDir.x = 0;
             joystickDir.y = 0;
-        }
-
-        // 오디오/음성 깨우기(모바일 자동재생 제한 우회)
-        function unlockAudio() {
-            // 효과음 미리 재생(음소거)
-            try {
-                hitSound.play().catch(()=>{}); hitSound.pause(); hitSound.currentTime = 0;
-                deathSound.play().catch(()=>{}); deathSound.pause(); deathSound.currentTime = 0;
-                levelupSound.play().catch(()=>{}); levelupSound.pause(); levelupSound.currentTime = 0;
-            } catch(e) {}
-            // TTS 깨우기
-            if ('speechSynthesis' in window) {
-                try {
-                    const utter = new SpeechSynthesisUtterance('start');
-                    utter.volume = 0;
-                    window.speechSynthesis.speak(utter);
-                    window.speechSynthesis.cancel();
-                } catch(e) {}
-            }
-        }
-
-        // 모바일이면 조이스틱 표시, 기존 조작 무효화
-        let isMobile = isTouchDevice();
-        let audioUnlocked = false; // 오디오 깨우기 플래그
-        if (isMobile) {
-            joystickContainer.style.display = 'block';
-            // 조이스틱 첫 터치 시 오디오 깨우기
-            joystickContainer.addEventListener('touchstart', function(e) {
-                if (!audioUnlocked) { unlockAudio(); audioUnlocked = true; }
-            }, { once: true });
-        }
-
-        // 시작 버튼 클릭 시 오디오 깨우기(PC/모바일 모두)
-        startBtn.addEventListener('click', function() {
-            if (!audioUnlocked) { unlockAudio(); audioUnlocked = true; }
-        }, { once: true });
-
-        // showWordResult 함수에서 TTS setTimeout 없이 바로 실행
-        function showWordResult(wordData) {
-            const wordCompleteElement = document.getElementById('wordCompleteText');
-            const wordMeaningElement = document.getElementById('wordMeaningText');
-            const wordPronunciationElement = document.getElementById('wordPronunciationText');
-            const wordResultElement = document.getElementById('wordResult');
-            if (wordCompleteElement && wordMeaningElement && wordPronunciationElement && wordResultElement) {
-                wordCompleteElement.textContent = `✨ ${wordData.word.toUpperCase()} ✨`;
-                wordMeaningElement.textContent = `뜻: ${wordData.meaning}`;
-                wordPronunciationElement.textContent = '';
-                wordResultElement.style.display = 'block';
-                // 단어 음성 읽기(TTS) - setTimeout 없이 바로 실행
-                if ('speechSynthesis' in window) {
-                    speechSynthesis.cancel();
-                    const utterance = new SpeechSynthesisUtterance(wordData.word);
-                    utterance.lang = 'en-US';
-                    utterance.rate = 0.8;
-                    utterance.volume = 1.0;
-                    speechSynthesis.speak(utterance);
-                }
-                setTimeout(() => {
-                    wordResultElement.style.display = 'none';
-                }, 3000);
-            } else {
-                showFeedback(`${wordData.word} (${wordData.meaning})`, true);
-            }
         }
     </script>
 </body>
