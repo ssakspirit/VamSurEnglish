@@ -406,33 +406,53 @@
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
 
-        // 영어 단어 데이터베이스(카테고리별)
-        const wordSets = {
-            '3학년 기본단어': [
-                { word: "apple", display: "appl_", missing: "e", meaning: "사과", pronunciation: "/ˈæp.əl/" },
-                { word: "book", display: "b_ok", missing: "o", meaning: "책", pronunciation: "/bʊk/" },
-                { word: "cat", display: "c_t", missing: "a", meaning: "고양이", pronunciation: "/kæt/" },
-                { word: "dog", display: "_og", missing: "d", meaning: "개", pronunciation: "/dɔːɡ/" },
-                { word: "fish", display: "fi_h", missing: "s", meaning: "물고기", pronunciation: "/fɪʃ/" },
-                { word: "house", display: "hou_e", missing: "s", meaning: "집", pronunciation: "/haʊs/" },
-            ],
-            '4학년 기본단어': [
-                { word: "water", display: "wat_r", missing: "e", meaning: "물", pronunciation: "/ˈwɔː.tər/" },
-                { word: "tree", display: "tr_e", missing: "e", meaning: "나무", pronunciation: "/triː/" },
-                { word: "bird", display: "b_rd", missing: "i", meaning: "새", pronunciation: "/bɜːrd/" },
-                { word: "moon", display: "m_on", missing: "o", meaning: "달", pronunciation: "/muːn/" },
-                { word: "star", display: "st_r", missing: "a", meaning: "별", pronunciation: "/stɑːr/" },
-                { word: "flower", display: "flow_r", missing: "e", meaning: "꽃", pronunciation: "/ˈflaʊ.ər/" },
-            ],
-            // 필요시 더 추가 가능
-        };
+        // 영어 단어 데이터베이스(카테고리별) 제거
+        // const wordSets = { ... };
 
-        // 현재 사용할 단어 배열(게임에서 사용)
-        let wordDatabase = wordSets['3학년 기본단어'];
-
-        // 현재 단어 상태
-        let currentWordData = wordDatabase[0];
+        // wordDatabase, currentWordData, completedWords 등 기존 변수는 유지
+        let wordDatabase = [];
+        let allWords = [];
+        let currentWordData = null;
         let completedWords = 0;
+
+        // 메뉴 화면 요소
+        const menuScreen = document.getElementById('menuScreen');
+        const startBtn = document.getElementById('startBtn');
+        const wordSelect = document.getElementById('wordSelect');
+        const highScoreValue = document.getElementById('highScoreValue');
+
+        // words.json에서 단어 불러오기 및 메뉴 동적 생성
+        fetch('words.json')
+          .then(res => res.json())
+          .then(data => {
+            allWords = data;
+            // level별로 그룹화
+            const levelMap = {};
+            allWords.forEach(word => {
+              if (!levelMap[word.level]) levelMap[word.level] = [];
+              levelMap[word.level].push(word);
+            });
+            // 메뉴 select 옵션 생성
+            wordSelect.innerHTML = '';
+            Object.keys(levelMap).sort((a, b) => a - b).forEach(level => {
+              const opt = document.createElement('option');
+              opt.value = level;
+              opt.textContent = `${level}레벨 단어`;
+              wordSelect.appendChild(opt);
+            });
+            // 기본값: 첫 번째 레벨
+            const firstLevel = Object.keys(levelMap).sort((a, b) => a - b)[0];
+            wordDatabase = levelMap[firstLevel];
+            currentWordData = wordDatabase[0];
+          });
+
+        // 메뉴에서 레벨 선택 시 wordDatabase 변경
+        wordSelect.addEventListener('change', function() {
+          const selectedLevel = this.value;
+          // allWords에서 해당 level만 추출
+          wordDatabase = allWords.filter(w => String(w.level) === String(selectedLevel));
+          currentWordData = wordDatabase[0];
+        });
 
         // 파티클 시스템
         const particles = [];
@@ -1604,70 +1624,6 @@
         }
         loadHighScore();
 
-        // 단어 선택 콤보박스 채우기 (카테고리명)
-        wordSelect.innerHTML = '';
-        Object.keys(wordSets).forEach(setName => {
-            const opt = document.createElement('option');
-            opt.value = setName;
-            opt.textContent = setName;
-            wordSelect.appendChild(opt);
-        });
-
-        // 오디오 객체 선언
-        const hitSound = new Audio('assets/hit.mp3');
-        const deathSound = new Audio('assets/death.mp3');
-        const bgmCuriosity = new Audio('assets/bgm_curiosity.mp3');
-        const bgmTree = new Audio('assets/bgm_tree and birds.mp3');
-        const levelupSound = new Audio('assets/levelup.mp3');
-        levelupSound.volume = 0.8;
-
-        // 루프 설정 및 볼륨 조절
-        bgmCuriosity.loop = true;
-        bgmCuriosity.volume = 0.4;
-        bgmTree.loop = true;
-        bgmTree.volume = 0.5;
-        hitSound.volume = 0.7;
-        deathSound.volume = 0.8;
-
-        // 메뉴 진입 시 배경음 재생 함수
-        function playMenuBGM() {
-            bgmCuriosity.pause();
-            bgmCuriosity.currentTime = 0;
-            bgmTree.currentTime = 0;
-            bgmTree.play();
-        }
-        // 게임 시작 시 배경음 재생 함수(게임 중 브금 제거)
-        function playGameBGM() {
-            bgmTree.pause();
-            bgmTree.currentTime = 0;
-            // bgmCuriosity.pause();
-            // bgmCuriosity.currentTime = 0;
-            // bgmCuriosity.play(); // 게임 중 브금 재생하지 않음
-        }
-
-        // 시작 버튼 클릭 시 메뉴 숨기고 게임 시작
-        startBtn.onclick = () => {
-            menuScreen.style.display = 'none';
-            playGameBGM(); // 게임 BGM 재생
-            // 선택한 단어 모음(카테고리)로 wordDatabase 교체
-            const selectedSet = wordSelect.value;
-            if (selectedSet && wordSets[selectedSet]) {
-                wordDatabase = wordSets[selectedSet];
-            }
-            // 첫 단어 선택
-            currentWordData = wordDatabase[0];
-            selectNewWord();
-            if (!gameStarted) {
-                gameStarted = true;
-                gameLoop(); // 메뉴에서만 게임 루프 시작
-            }
-            // 게임 상태 초기화 등 필요시 추가
-        };
-
-        // 게재시작 함수
-        // selectNewWord(); // 게임 시작 시 첫 단어 설정은 메뉴에서 시작 버튼 클릭 시 처리
-        // gameLoop(); // 게임 루프는 메뉴에서 시작 버튼 클릭 시 실행
-
         // 별 그리기 함수 (원거리형 몬스터용)
         function drawStar(ctx, x, y, outerRadius, innerRadius, points) {
             ctx.save();
@@ -1746,6 +1702,19 @@
 
         let gameStarted = false; // 게임 시작 여부 플래그(전역)
         let prevPlayerX = player.worldX, prevPlayerY = player.worldY; // 이동 처리 직전 선언
+
+        // 시작 버튼 클릭 시 메뉴 숨기고 게임 시작
+        startBtn.onclick = () => {
+            menuScreen.style.display = 'none';
+            playGameBGM();
+            // 선택한 레벨의 단어로 wordDatabase 교체 (이미 위에서 처리됨)
+            // 첫 단어 선택
+            selectNewWord();
+            if (!gameStarted) {
+                gameStarted = true;
+                gameLoop();
+            }
+        };
     </script>
 </body>
 </html>

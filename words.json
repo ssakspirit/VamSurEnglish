@@ -1,0 +1,5532 @@
+[
+  {
+    "level": 1,
+    "word": "about",
+    "display": "ab_ut",
+    "missing": "o",
+    "meaning": "~에 대하여"
+  },
+  {
+    "level": 1,
+    "word": "above",
+    "display": "abo_e",
+    "missing": "v",
+    "meaning": "~위에"
+  },
+  {
+    "level": 1,
+    "word": "across",
+    "display": "ac_oss",
+    "missing": "r",
+    "meaning": "가로질러"
+  },
+  {
+    "level": 1,
+    "word": "act",
+    "display": "ac_",
+    "missing": "t",
+    "meaning": "행동하다"
+  },
+  {
+    "level": 1,
+    "word": "add",
+    "display": "_dd",
+    "missing": "a",
+    "meaning": "더하다"
+  },
+  {
+    "level": 1,
+    "word": "address",
+    "display": "add_ess",
+    "missing": "r",
+    "meaning": "주소"
+  },
+  {
+    "level": 1,
+    "word": "adult",
+    "display": "adul_",
+    "missing": "t",
+    "meaning": "어른"
+  },
+  {
+    "level": 1,
+    "word": "afraid",
+    "display": "afrai_",
+    "missing": "d",
+    "meaning": "두려운"
+  },
+  {
+    "level": 1,
+    "word": "after",
+    "display": "af_er",
+    "missing": "t",
+    "meaning": "~후에"
+  },
+  {
+    "level": 1,
+    "word": "afternoon",
+    "display": "after_oon",
+    "missing": "n",
+    "meaning": "오후"
+  },
+  {
+    "level": 1,
+    "word": "again",
+    "display": "_gain",
+    "missing": "a",
+    "meaning": "다시"
+  },
+  {
+    "level": 1,
+    "word": "against",
+    "display": "_gainst",
+    "missing": "a",
+    "meaning": "~에 반하여"
+  },
+  {
+    "level": 1,
+    "word": "age",
+    "display": "a_e",
+    "missing": "g",
+    "meaning": "나이"
+  },
+  {
+    "level": 1,
+    "word": "ago",
+    "display": "ag_",
+    "missing": "o",
+    "meaning": "~전에"
+  },
+  {
+    "level": 1,
+    "word": "agree",
+    "display": "agr_e",
+    "missing": "e",
+    "meaning": "동의하다"
+  },
+  {
+    "level": 1,
+    "word": "ahead",
+    "display": "_head",
+    "missing": "a",
+    "meaning": "앞에"
+  },
+  {
+    "level": 1,
+    "word": "air",
+    "display": "a_r",
+    "missing": "i",
+    "meaning": "공기"
+  },
+  {
+    "level": 1,
+    "word": "airplane",
+    "display": "_irplane",
+    "missing": "a",
+    "meaning": "비행기"
+  },
+  {
+    "level": 1,
+    "word": "album",
+    "display": "a_bum",
+    "missing": "l",
+    "meaning": "앨범"
+  },
+  {
+    "level": 1,
+    "word": "all",
+    "display": "a_l",
+    "missing": "l",
+    "meaning": "모든"
+  },
+  {
+    "level": 1,
+    "word": "almost",
+    "display": "alm_st",
+    "missing": "o",
+    "meaning": "거의"
+  },
+  {
+    "level": 1,
+    "word": "alone",
+    "display": "alon_",
+    "missing": "e",
+    "meaning": "혼자"
+  },
+  {
+    "level": 1,
+    "word": "along",
+    "display": "al_ng",
+    "missing": "o",
+    "meaning": "~을 따라"
+  },
+  {
+    "level": 1,
+    "word": "already",
+    "display": "al_eady",
+    "missing": "r",
+    "meaning": "이미"
+  },
+  {
+    "level": 1,
+    "word": "alright",
+    "display": "al_ight",
+    "missing": "r",
+    "meaning": "괜찮은"
+  },
+  {
+    "level": 1,
+    "word": "also",
+    "display": "a_so",
+    "missing": "l",
+    "meaning": "또한"
+  },
+  {
+    "level": 1,
+    "word": "always",
+    "display": "alway_",
+    "missing": "s",
+    "meaning": "항상"
+  },
+  {
+    "level": 1,
+    "word": "and",
+    "display": "_nd",
+    "missing": "a",
+    "meaning": "그리고"
+  },
+  {
+    "level": 1,
+    "word": "animal",
+    "display": "a_imal",
+    "missing": "n",
+    "meaning": "동물"
+  },
+  {
+    "level": 1,
+    "word": "another",
+    "display": "anothe_",
+    "missing": "r",
+    "meaning": "또 다른"
+  },
+  {
+    "level": 1,
+    "word": "answer",
+    "display": "answe_",
+    "missing": "r",
+    "meaning": "대답"
+  },
+  {
+    "level": 1,
+    "word": "any",
+    "display": "_ny",
+    "missing": "a",
+    "meaning": "어떤"
+  },
+  {
+    "level": 1,
+    "word": "apartment",
+    "display": "_partment",
+    "missing": "a",
+    "meaning": "아파트"
+  },
+  {
+    "level": 1,
+    "word": "apple",
+    "display": "a_ple",
+    "missing": "p",
+    "meaning": "사과"
+  },
+  {
+    "level": 1,
+    "word": "area",
+    "display": "_rea",
+    "missing": "a",
+    "meaning": "지역"
+  },
+  {
+    "level": 1,
+    "word": "arm",
+    "display": "a_m",
+    "missing": "r",
+    "meaning": "팔"
+  },
+  {
+    "level": 1,
+    "word": "around",
+    "display": "aro_nd",
+    "missing": "u",
+    "meaning": "주변에"
+  },
+  {
+    "level": 1,
+    "word": "arrive",
+    "display": "a_rive",
+    "missing": "r",
+    "meaning": "도착하다"
+  },
+  {
+    "level": 1,
+    "word": "art",
+    "display": "a_t",
+    "missing": "r",
+    "meaning": "미술"
+  },
+  {
+    "level": 2,
+    "word": "as",
+    "display": "_s",
+    "missing": "a",
+    "meaning": "~처럼, ~로서"
+  },
+  {
+    "level": 2,
+    "word": "ask",
+    "display": "as_",
+    "missing": "k",
+    "meaning": "묻다, 질문하다"
+  },
+  {
+    "level": 2,
+    "word": "at",
+    "display": "_t",
+    "missing": "a",
+    "meaning": "~에, ~에서"
+  },
+  {
+    "level": 2,
+    "word": "aunt",
+    "display": "_unt",
+    "missing": "a",
+    "meaning": "이모, 고모, 숙모"
+  },
+  {
+    "level": 2,
+    "word": "autumn",
+    "display": "au_umn",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "away",
+    "display": "a_ay",
+    "missing": "w",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "baby",
+    "display": "bab_",
+    "missing": "y",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "back",
+    "display": "ba_k",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "bad",
+    "display": "ba_",
+    "missing": "d",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "badminton",
+    "display": "bad_inton",
+    "missing": "m",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "bag",
+    "display": "_ag",
+    "missing": "b",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "bake",
+    "display": "_ake",
+    "missing": "b",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "ball",
+    "display": "ba_l",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "banana",
+    "display": "ba_ana",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "bank",
+    "display": "ba_k",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "base",
+    "display": "ba_e",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "baseball",
+    "display": "ba_eball",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "basket",
+    "display": "baske_",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "basketball",
+    "display": "_asketball",
+    "missing": "b",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "bat",
+    "display": "b_t",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "bath",
+    "display": "bat_",
+    "missing": "h",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "be",
+    "display": "_e",
+    "missing": "b",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "beach",
+    "display": "b_ach",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "bear",
+    "display": "bea_",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "beauty",
+    "display": "beaut_",
+    "missing": "y",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "because",
+    "display": "bec_use",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "become",
+    "display": "b_come",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "bed",
+    "display": "b_d",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "bee",
+    "display": "b_e",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "beef",
+    "display": "b_ef",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "before",
+    "display": "b_fore",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "begin",
+    "display": "beg_n",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "behind",
+    "display": "behi_d",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "believe",
+    "display": "belie_e",
+    "missing": "v",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "bell",
+    "display": "be_l",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "below",
+    "display": "be_ow",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "belt",
+    "display": "bel_",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "beside",
+    "display": "_eside",
+    "missing": "b",
+    "meaning": ""
+  },
+  {
+    "level": 2,
+    "word": "between",
+    "display": "b_tween",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "big",
+    "display": "bi_",
+    "missing": "g",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "bike",
+    "display": "bik_",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "bill",
+    "display": "_ill",
+    "missing": "b",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "bird",
+    "display": "_ird",
+    "missing": "b",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "birth",
+    "display": "bir_h",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "biscuit",
+    "display": "bisc_it",
+    "missing": "u",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "black",
+    "display": "blac_",
+    "missing": "k",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "blood",
+    "display": "b_ood",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "blue",
+    "display": "bl_e",
+    "missing": "u",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "board",
+    "display": "_oard",
+    "missing": "b",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "boat",
+    "display": "boa_",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "body",
+    "display": "bo_y",
+    "missing": "d",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "bone",
+    "display": "b_ne",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "book",
+    "display": "b_ok",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "borrow",
+    "display": "_orrow",
+    "missing": "b",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "both",
+    "display": "_oth",
+    "missing": "b",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "bottle",
+    "display": "_ottle",
+    "missing": "b",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "bottom",
+    "display": "b_ttom",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "box",
+    "display": "b_x",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "boy",
+    "display": "bo_",
+    "missing": "y",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "brave",
+    "display": "_rave",
+    "missing": "b",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "bread",
+    "display": "bre_d",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "break",
+    "display": "bre_k",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "breakfast",
+    "display": "bre_kfast",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "bridge",
+    "display": "bri_ge",
+    "missing": "d",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "bright",
+    "display": "b_ight",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "bring",
+    "display": "bri_g",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "brother",
+    "display": "_rother",
+    "missing": "b",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "brown",
+    "display": "_rown",
+    "missing": "b",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "brush",
+    "display": "bru_h",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "build",
+    "display": "bu_ld",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "burn",
+    "display": "_urn",
+    "missing": "b",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "bus",
+    "display": "b_s",
+    "missing": "u",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "business",
+    "display": "bu_iness",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "busy",
+    "display": "bus_",
+    "missing": "y",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "but",
+    "display": "b_t",
+    "missing": "u",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "butter",
+    "display": "butt_r",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "button",
+    "display": "b_tton",
+    "missing": "u",
+    "meaning": ""
+  },
+  {
+    "level": 3,
+    "word": "buy",
+    "display": "_uy",
+    "missing": "b",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "by",
+    "display": "_y",
+    "missing": "b",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "cake",
+    "display": "c_ke",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "call",
+    "display": "c_ll",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "camera",
+    "display": "c_mera",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "camp",
+    "display": "_amp",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "campaign",
+    "display": "c_mpaign",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "can",
+    "display": "_an",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "candy",
+    "display": "_andy",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "cap",
+    "display": "c_p",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "car",
+    "display": "ca_",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "card",
+    "display": "_ard",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "care",
+    "display": "_are",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "carrot",
+    "display": "carr_t",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "carry",
+    "display": "c_rry",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "case",
+    "display": "c_se",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "cash",
+    "display": "c_sh",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "cat",
+    "display": "_at",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "catch",
+    "display": "_atch",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "center",
+    "display": "c_nter",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "certain",
+    "display": "ce_tain",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "chair",
+    "display": "c_air",
+    "missing": "h",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "chance",
+    "display": "c_ance",
+    "missing": "h",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "change",
+    "display": "c_ange",
+    "missing": "h",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "cheap",
+    "display": "chea_",
+    "missing": "p",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "check",
+    "display": "_heck",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "cheese",
+    "display": "chee_e",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "chicken",
+    "display": "ch_cken",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "child",
+    "display": "_hild",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "chocolate",
+    "display": "choco_ate",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "choose",
+    "display": "ch_ose",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "church",
+    "display": "_hurch",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "circle",
+    "display": "circ_e",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "city",
+    "display": "cit_",
+    "missing": "y",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "class",
+    "display": "_lass",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "clean",
+    "display": "cl_an",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "clear",
+    "display": "_lear",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "clever",
+    "display": "cl_ver",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "climb",
+    "display": "cli_b",
+    "missing": "m",
+    "meaning": ""
+  },
+  {
+    "level": 4,
+    "word": "clock",
+    "display": "_lock",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "close",
+    "display": "_lose",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "clothes",
+    "display": "clot_es",
+    "missing": "h",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "cloud",
+    "display": "cl_ud",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "club",
+    "display": "clu_",
+    "missing": "b",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "coat",
+    "display": "coa_",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "coffee",
+    "display": "_offee",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "cold",
+    "display": "_old",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "collect",
+    "display": "c_llect",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "college",
+    "display": "_ollege",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "color",
+    "display": "co_or",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "come",
+    "display": "_ome",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "comic",
+    "display": "_omic",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "company",
+    "display": "compa_y",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "compute",
+    "display": "com_ute",
+    "missing": "p",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "condition",
+    "display": "con_ition",
+    "missing": "d",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "congratulate",
+    "display": "congratulat_",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "control",
+    "display": "co_trol",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "cook",
+    "display": "_ook",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "cookie",
+    "display": "c_okie",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "cool",
+    "display": "c_ol",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "corner",
+    "display": "c_rner",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "cost",
+    "display": "c_st",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "could",
+    "display": "coul_",
+    "missing": "d",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "country",
+    "display": "coun_ry",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "couple",
+    "display": "co_ple",
+    "missing": "u",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "course",
+    "display": "cour_e",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "court",
+    "display": "cour_",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "cousin",
+    "display": "c_usin",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "cover",
+    "display": "c_ver",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "cow",
+    "display": "co_",
+    "missing": "w",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "crayon",
+    "display": "_rayon",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "cream",
+    "display": "_ream",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "cross",
+    "display": "c_oss",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "cry",
+    "display": "c_y",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "culture",
+    "display": "cu_ture",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "cup",
+    "display": "c_p",
+    "missing": "u",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "curtain",
+    "display": "_urtain",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "customer",
+    "display": "cust_mer",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 5,
+    "word": "cut",
+    "display": "c_t",
+    "missing": "u",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "dance",
+    "display": "dan_e",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "danger",
+    "display": "dan_er",
+    "missing": "g",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "dark",
+    "display": "d_rk",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "date",
+    "display": "dat_",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "daughter",
+    "display": "d_ughter",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "day",
+    "display": "d_y",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "dead",
+    "display": "d_ad",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "death",
+    "display": "_eath",
+    "missing": "d",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "decide",
+    "display": "de_ide",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "deep",
+    "display": "dee_",
+    "missing": "p",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "delicious",
+    "display": "del_cious",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "design",
+    "display": "_esign",
+    "missing": "d",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "desk",
+    "display": "des_",
+    "missing": "k",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "dialogue",
+    "display": "dia_ogue",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "die",
+    "display": "di_",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "difficult",
+    "display": "d_fficult",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "dinner",
+    "display": "_inner",
+    "missing": "d",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "discuss",
+    "display": "dis_uss",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "do",
+    "display": "d_",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "doctor",
+    "display": "docto_",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "dog",
+    "display": "d_g",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "doll",
+    "display": "do_l",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "door",
+    "display": "doo_",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "double",
+    "display": "d_uble",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "doughnut",
+    "display": "do_ghnut",
+    "missing": "u",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "down",
+    "display": "_own",
+    "missing": "d",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "draw",
+    "display": "dr_w",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "dream",
+    "display": "drea_",
+    "missing": "m",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "dress",
+    "display": "dr_ss",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "drink",
+    "display": "dr_nk",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "drive",
+    "display": "dr_ve",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "drop",
+    "display": "_rop",
+    "missing": "d",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "drum",
+    "display": "d_um",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "dry",
+    "display": "dr_",
+    "missing": "y",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "duck",
+    "display": "_uck",
+    "missing": "d",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "during",
+    "display": "durin_",
+    "missing": "g",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "ear",
+    "display": "_ar",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "early",
+    "display": "_arly",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 6,
+    "word": "earth",
+    "display": "ear_h",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "east",
+    "display": "e_st",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "eat",
+    "display": "e_t",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "egg",
+    "display": "e_g",
+    "missing": "g",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "eight",
+    "display": "eigh_",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "elephant",
+    "display": "elepha_t",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "eleven",
+    "display": "eleve_",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "end",
+    "display": "en_",
+    "missing": "d",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "energy",
+    "display": "_nergy",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "enough",
+    "display": "e_ough",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "enter",
+    "display": "ente_",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "evening",
+    "display": "eve_ing",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "every",
+    "display": "e_ery",
+    "missing": "v",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "example",
+    "display": "e_ample",
+    "missing": "x",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "exercise",
+    "display": "exerc_se",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "eye",
+    "display": "_ye",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "face",
+    "display": "f_ce",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "fact",
+    "display": "_act",
+    "missing": "f",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "fail",
+    "display": "_ail",
+    "missing": "f",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "fall",
+    "display": "fa_l",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "family",
+    "display": "fam_ly",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "fan",
+    "display": "_an",
+    "missing": "f",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "far",
+    "display": "fa_",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "farm",
+    "display": "far_",
+    "missing": "m",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "fast",
+    "display": "fa_t",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "fat",
+    "display": "fa_",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "father",
+    "display": "fath_r",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "favorite",
+    "display": "favori_e",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "feel",
+    "display": "_eel",
+    "missing": "f",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "festival",
+    "display": "festi_al",
+    "missing": "v",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "field",
+    "display": "fiel_",
+    "missing": "d",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "fight",
+    "display": "fig_t",
+    "missing": "h",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "file",
+    "display": "f_le",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "fill",
+    "display": "_ill",
+    "missing": "f",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "film",
+    "display": "_ilm",
+    "missing": "f",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "find",
+    "display": "fin_",
+    "missing": "d",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "fine",
+    "display": "_ine",
+    "missing": "f",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "finger",
+    "display": "_inger",
+    "missing": "f",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "finish",
+    "display": "fini_h",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 7,
+    "word": "fire",
+    "display": "_ire",
+    "missing": "f",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "first",
+    "display": "f_rst",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "fish",
+    "display": "fis_",
+    "missing": "h",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "five",
+    "display": "fiv_",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "fix",
+    "display": "_ix",
+    "missing": "f",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "floor",
+    "display": "fl_or",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "flower",
+    "display": "_lower",
+    "missing": "f",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "fly",
+    "display": "fl_",
+    "missing": "y",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "focus",
+    "display": "_ocus",
+    "missing": "f",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "food",
+    "display": "f_od",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "fool",
+    "display": "_ool",
+    "missing": "f",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "foot",
+    "display": "foo_",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "football",
+    "display": "footba_l",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "for",
+    "display": "_or",
+    "missing": "f",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "forest",
+    "display": "fores_",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "forget",
+    "display": "fo_get",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "fork",
+    "display": "_ork",
+    "missing": "f",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "form",
+    "display": "f_rm",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "four",
+    "display": "_our",
+    "missing": "f",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "fox",
+    "display": "_ox",
+    "missing": "f",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "free",
+    "display": "_ree",
+    "missing": "f",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "fresh",
+    "display": "fres_",
+    "missing": "h",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "friend",
+    "display": "fr_end",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "from",
+    "display": "_rom",
+    "missing": "f",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "front",
+    "display": "fron_",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "fruit",
+    "display": "fr_it",
+    "missing": "u",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "full",
+    "display": "f_ll",
+    "missing": "u",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "fun",
+    "display": "fu_",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "future",
+    "display": "f_ture",
+    "missing": "u",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "game",
+    "display": "ga_e",
+    "missing": "m",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "garden",
+    "display": "gar_en",
+    "missing": "d",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "gas",
+    "display": "g_s",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "gentleman",
+    "display": "gentlem_n",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "get",
+    "display": "_et",
+    "missing": "g",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "girl",
+    "display": "gir_",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "give",
+    "display": "gi_e",
+    "missing": "v",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "glad",
+    "display": "gla_",
+    "missing": "d",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "glass",
+    "display": "_lass",
+    "missing": "g",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "go",
+    "display": "g_",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 8,
+    "word": "goal",
+    "display": "goa_",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "god",
+    "display": "_od",
+    "missing": "g",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "gold",
+    "display": "gol_",
+    "missing": "d",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "good",
+    "display": "g_od",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "goodbye",
+    "display": "g_odbye",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "grandfather",
+    "display": "grandfat_er",
+    "missing": "h",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "grape",
+    "display": "gr_pe",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "grass",
+    "display": "_rass",
+    "missing": "g",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "gray",
+    "display": "gr_y",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "great",
+    "display": "grea_",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "green",
+    "display": "gr_en",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "ground",
+    "display": "grou_d",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "group",
+    "display": "gr_up",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "grow",
+    "display": "gro_",
+    "missing": "w",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "guess",
+    "display": "gue_s",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "guitar",
+    "display": "_uitar",
+    "missing": "g",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "gum",
+    "display": "_um",
+    "missing": "g",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "guy",
+    "display": "g_y",
+    "missing": "u",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "habit",
+    "display": "ha_it",
+    "missing": "b",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "hair",
+    "display": "h_ir",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "hamburger",
+    "display": "hamburg_r",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "hand",
+    "display": "han_",
+    "missing": "d",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "hang",
+    "display": "h_ng",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "happy",
+    "display": "h_ppy",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "hard",
+    "display": "ha_d",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "hat",
+    "display": "_at",
+    "missing": "h",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "hate",
+    "display": "_ate",
+    "missing": "h",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "have",
+    "display": "hav_",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "he",
+    "display": "_e",
+    "missing": "h",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "head",
+    "display": "h_ad",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "heart",
+    "display": "h_art",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "heat",
+    "display": "_eat",
+    "missing": "h",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "heavy",
+    "display": "h_avy",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "hello",
+    "display": "h_llo",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "helmet",
+    "display": "h_lmet",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "help",
+    "display": "_elp",
+    "missing": "h",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "here",
+    "display": "he_e",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "hero",
+    "display": "_ero",
+    "missing": "h",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "high",
+    "display": "hi_h",
+    "missing": "g",
+    "meaning": ""
+  },
+  {
+    "level": 9,
+    "word": "hike",
+    "display": "_ike",
+    "missing": "h",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "hill",
+    "display": "hi_l",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "history",
+    "display": "_istory",
+    "missing": "h",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "hit",
+    "display": "h_t",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "hobby",
+    "display": "ho_by",
+    "missing": "b",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "hold",
+    "display": "hol_",
+    "missing": "d",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "holiday",
+    "display": "h_liday",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "home",
+    "display": "_ome",
+    "missing": "h",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "homework",
+    "display": "hom_work",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "honest",
+    "display": "h_nest",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "hope",
+    "display": "ho_e",
+    "missing": "p",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "horse",
+    "display": "ho_se",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "hospital",
+    "display": "hospita_",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "hot",
+    "display": "_ot",
+    "missing": "h",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "hour",
+    "display": "_our",
+    "missing": "h",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "house",
+    "display": "hou_e",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "how",
+    "display": "h_w",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "however",
+    "display": "h_wever",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "human",
+    "display": "hu_an",
+    "missing": "m",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "hundred",
+    "display": "_undred",
+    "missing": "h",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "hunt",
+    "display": "hu_t",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "hurry",
+    "display": "h_rry",
+    "missing": "u",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "husband",
+    "display": "hus_and",
+    "missing": "b",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "I",
+    "display": "_",
+    "missing": "I",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "ice",
+    "display": "ic_",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "idea",
+    "display": "i_ea",
+    "missing": "d",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "if",
+    "display": "_f",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "image",
+    "display": "imag_",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "in",
+    "display": "_n",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "inside",
+    "display": "_nside",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "internet",
+    "display": "in_ernet",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "into",
+    "display": "i_to",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "introduce",
+    "display": "in_roduce",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "invite",
+    "display": "invit_",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "issue",
+    "display": "i_sue",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "it",
+    "display": "_t",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "jacket",
+    "display": "_acket",
+    "missing": "j",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "jam",
+    "display": "ja_",
+    "missing": "m",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "job",
+    "display": "_ob",
+    "missing": "j",
+    "meaning": ""
+  },
+  {
+    "level": 10,
+    "word": "join",
+    "display": "j_in",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "juice",
+    "display": "ju_ce",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "jump",
+    "display": "_ump",
+    "missing": "j",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "just",
+    "display": "j_st",
+    "missing": "u",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "keep",
+    "display": "_eep",
+    "missing": "k",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "key",
+    "display": "k_y",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "kick",
+    "display": "_ick",
+    "missing": "k",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "kid",
+    "display": "_id",
+    "missing": "k",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "kill",
+    "display": "_ill",
+    "missing": "k",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "kind",
+    "display": "ki_d",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "king",
+    "display": "kin_",
+    "missing": "g",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "kiss",
+    "display": "ki_s",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "kitchen",
+    "display": "kitch_n",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "knife",
+    "display": "_nife",
+    "missing": "k",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "know",
+    "display": "kn_w",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "lady",
+    "display": "_ady",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "lake",
+    "display": "_ake",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "land",
+    "display": "la_d",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "large",
+    "display": "la_ge",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "laser",
+    "display": "l_ser",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "last",
+    "display": "_ast",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "late",
+    "display": "lat_",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "lazy",
+    "display": "laz_",
+    "missing": "y",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "learn",
+    "display": "l_arn",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "left",
+    "display": "l_ft",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "leg",
+    "display": "_eg",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "lesson",
+    "display": "le_son",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "letter",
+    "display": "_etter",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "library",
+    "display": "l_brary",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "lie",
+    "display": "_ie",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "life",
+    "display": "lif_",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "light",
+    "display": "ligh_",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "like",
+    "display": "li_e",
+    "missing": "k",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "line",
+    "display": "_ine",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "lion",
+    "display": "li_n",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "lip",
+    "display": "l_p",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "listen",
+    "display": "l_sten",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "little",
+    "display": "li_tle",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "live",
+    "display": "_ive",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 11,
+    "word": "long",
+    "display": "_ong",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "look",
+    "display": "_ook",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "love",
+    "display": "lov_",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "low",
+    "display": "_ow",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "luck",
+    "display": "lu_k",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "lunch",
+    "display": "l_nch",
+    "missing": "u",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "mad",
+    "display": "_ad",
+    "missing": "m",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "mail",
+    "display": "ma_l",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "make",
+    "display": "ma_e",
+    "missing": "k",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "man",
+    "display": "m_n",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "many",
+    "display": "_any",
+    "missing": "m",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "map",
+    "display": "m_p",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "marathon",
+    "display": "ma_athon",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "market",
+    "display": "m_rket",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "marry",
+    "display": "m_rry",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "mathematics",
+    "display": "_athematics",
+    "missing": "m",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "may",
+    "display": "ma_",
+    "missing": "y",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "meat",
+    "display": "me_t",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "medal",
+    "display": "meda_",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "meet",
+    "display": "m_et",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "member",
+    "display": "m_mber",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "memory",
+    "display": "_emory",
+    "missing": "m",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "middle",
+    "display": "midd_e",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "might",
+    "display": "m_ght",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "milk",
+    "display": "_ilk",
+    "missing": "m",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "mind",
+    "display": "mi_d",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "miss",
+    "display": "mi_s",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "model",
+    "display": "mode_",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "money",
+    "display": "mon_y",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "monkey",
+    "display": "mon_ey",
+    "missing": "k",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "month",
+    "display": "mon_h",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "moon",
+    "display": "_oon",
+    "missing": "m",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "morning",
+    "display": "mornin_",
+    "missing": "g",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "mother",
+    "display": "_other",
+    "missing": "m",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "mountain",
+    "display": "mounta_n",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "mouse",
+    "display": "_ouse",
+    "missing": "m",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "mouth",
+    "display": "m_uth",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "move",
+    "display": "mov_",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "movie",
+    "display": "_ovie",
+    "missing": "m",
+    "meaning": ""
+  },
+  {
+    "level": 12,
+    "word": "much",
+    "display": "_uch",
+    "missing": "m",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "music",
+    "display": "m_sic",
+    "missing": "u",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "must",
+    "display": "mu_t",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "name",
+    "display": "_ame",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "nation",
+    "display": "_ation",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "nature",
+    "display": "na_ure",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "near",
+    "display": "ne_r",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "neck",
+    "display": "nec_",
+    "missing": "k",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "need",
+    "display": "_eed",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "never",
+    "display": "n_ver",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "new",
+    "display": "_ew",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "news",
+    "display": "n_ws",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "newspaper",
+    "display": "news_aper",
+    "missing": "p",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "next",
+    "display": "ne_t",
+    "missing": "x",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "nice",
+    "display": "_ice",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "night",
+    "display": "n_ght",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "nine",
+    "display": "n_ne",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "no",
+    "display": "_o",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "north",
+    "display": "nort_",
+    "missing": "h",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "nose",
+    "display": "no_e",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "not",
+    "display": "no_",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "note",
+    "display": "no_e",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "notebook",
+    "display": "no_ebook",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "nothing",
+    "display": "nothin_",
+    "missing": "g",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "now",
+    "display": "_ow",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "number",
+    "display": "nu_ber",
+    "missing": "m",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "nurse",
+    "display": "n_rse",
+    "missing": "u",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "of",
+    "display": "_f",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "off",
+    "display": "o_f",
+    "missing": "f",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "office",
+    "display": "_ffice",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "often",
+    "display": "o_ten",
+    "missing": "f",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "oil",
+    "display": "_il",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "okay",
+    "display": "ok_y",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "old",
+    "display": "_ld",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "on",
+    "display": "o_",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "one",
+    "display": "o_e",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "only",
+    "display": "onl_",
+    "missing": "y",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "open",
+    "display": "ope_",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "or",
+    "display": "_r",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 13,
+    "word": "orange",
+    "display": "oran_e",
+    "missing": "g",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "out",
+    "display": "_ut",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "over",
+    "display": "ove_",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "page",
+    "display": "p_ge",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "paint",
+    "display": "pa_nt",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "pants",
+    "display": "_ants",
+    "missing": "p",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "paper",
+    "display": "_aper",
+    "missing": "p",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "parent",
+    "display": "p_rent",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "park",
+    "display": "_ark",
+    "missing": "p",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "part",
+    "display": "pa_t",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "partner",
+    "display": "p_rtner",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "party",
+    "display": "pa_ty",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "pass",
+    "display": "pa_s",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "pay",
+    "display": "_ay",
+    "missing": "p",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "pen",
+    "display": "pe_",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "pencil",
+    "display": "pen_il",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "people",
+    "display": "pe_ple",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "piano",
+    "display": "pia_o",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "pick",
+    "display": "_ick",
+    "missing": "p",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "picture",
+    "display": "pictu_e",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "pig",
+    "display": "p_g",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "pilot",
+    "display": "p_lot",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "pink",
+    "display": "pi_k",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "pizza",
+    "display": "pi_za",
+    "missing": "z",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "place",
+    "display": "pl_ce",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "plan",
+    "display": "pla_",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "plastic",
+    "display": "pl_stic",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "play",
+    "display": "pl_y",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "please",
+    "display": "ple_se",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "point",
+    "display": "poin_",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "police",
+    "display": "polic_",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "poor",
+    "display": "poo_",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "potato",
+    "display": "po_ato",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "power",
+    "display": "p_wer",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "present",
+    "display": "_resent",
+    "missing": "p",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "pretty",
+    "display": "_retty",
+    "missing": "p",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "prince",
+    "display": "prin_e",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "print",
+    "display": "_rint",
+    "missing": "p",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "problem",
+    "display": "pr_blem",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 14,
+    "word": "program",
+    "display": "_rogram",
+    "missing": "p",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "project",
+    "display": "p_oject",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "puppy",
+    "display": "_uppy",
+    "missing": "p",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "push",
+    "display": "p_sh",
+    "missing": "u",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "put",
+    "display": "_ut",
+    "missing": "p",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "queen",
+    "display": "qu_en",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "question",
+    "display": "qu_stion",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "quick",
+    "display": "quic_",
+    "missing": "k",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "quiet",
+    "display": "_uiet",
+    "missing": "q",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "quiz",
+    "display": "_uiz",
+    "missing": "q",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "rabbit",
+    "display": "r_bbit",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "race",
+    "display": "rac_",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "radio",
+    "display": "ra_io",
+    "missing": "d",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "rain",
+    "display": "_ain",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "read",
+    "display": "r_ad",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "ready",
+    "display": "re_dy",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "recreation",
+    "display": "r_creation",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "red",
+    "display": "r_d",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "remember",
+    "display": "re_ember",
+    "missing": "m",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "restaurant",
+    "display": "r_staurant",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "restroom",
+    "display": "restroo_",
+    "missing": "m",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "return",
+    "display": "_eturn",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "ribbon",
+    "display": "ribb_n",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "rich",
+    "display": "_ich",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "right",
+    "display": "_ight",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "ring",
+    "display": "rin_",
+    "missing": "g",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "river",
+    "display": "ri_er",
+    "missing": "v",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "road",
+    "display": "_oad",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "robot",
+    "display": "r_bot",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "rock",
+    "display": "_ock",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "room",
+    "display": "_oom",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "rose",
+    "display": "r_se",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "run",
+    "display": "_un",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "sad",
+    "display": "s_d",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "safe",
+    "display": "saf_",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "salad",
+    "display": "sa_ad",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "sale",
+    "display": "_ale",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "salt",
+    "display": "sal_",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "same",
+    "display": "_ame",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 15,
+    "word": "sand",
+    "display": "sa_d",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "sandwich",
+    "display": "sa_dwich",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "save",
+    "display": "sa_e",
+    "missing": "v",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "say",
+    "display": "s_y",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "school",
+    "display": "s_hool",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "science",
+    "display": "s_ience",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "scissors",
+    "display": "scisso_s",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "score",
+    "display": "sc_re",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "sea",
+    "display": "s_a",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "season",
+    "display": "seas_n",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "second",
+    "display": "secon_",
+    "missing": "d",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "see",
+    "display": "s_e",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "sell",
+    "display": "se_l",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "send",
+    "display": "_end",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "service",
+    "display": "servi_e",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "set",
+    "display": "_et",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "seven",
+    "display": "_even",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "she",
+    "display": "sh_",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "ship",
+    "display": "s_ip",
+    "missing": "h",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "shirt",
+    "display": "s_irt",
+    "missing": "h",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "shoe",
+    "display": "sh_e",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "shop",
+    "display": "_hop",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "short",
+    "display": "shor_",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "should",
+    "display": "shou_d",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "show",
+    "display": "s_ow",
+    "missing": "h",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "shy",
+    "display": "s_y",
+    "missing": "h",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "sick",
+    "display": "si_k",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "side",
+    "display": "si_e",
+    "missing": "d",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "sing",
+    "display": "sin_",
+    "missing": "g",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "sister",
+    "display": "sis_er",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "sit",
+    "display": "s_t",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "six",
+    "display": "si_",
+    "missing": "x",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "size",
+    "display": "_ize",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "skate",
+    "display": "_kate",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "ski",
+    "display": "s_i",
+    "missing": "k",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "skin",
+    "display": "ski_",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "skirt",
+    "display": "skir_",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "sky",
+    "display": "sk_",
+    "missing": "y",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "sleep",
+    "display": "sl_ep",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 16,
+    "word": "slow",
+    "display": "s_ow",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "small",
+    "display": "_mall",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "smell",
+    "display": "sme_l",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "smile",
+    "display": "_mile",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "snow",
+    "display": "s_ow",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "so",
+    "display": "_o",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "soccer",
+    "display": "s_ccer",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "sock",
+    "display": "s_ck",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "soft",
+    "display": "_oft",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "software",
+    "display": "softwar_",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "some",
+    "display": "s_me",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "son",
+    "display": "s_n",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "song",
+    "display": "so_g",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "sorry",
+    "display": "s_rry",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "sound",
+    "display": "sou_d",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "soup",
+    "display": "so_p",
+    "missing": "u",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "south",
+    "display": "sout_",
+    "missing": "h",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "space",
+    "display": "_pace",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "spaghetti",
+    "display": "spagh_tti",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "speak",
+    "display": "s_eak",
+    "missing": "p",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "speed",
+    "display": "sp_ed",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "spoon",
+    "display": "sp_on",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "sport",
+    "display": "spor_",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "spring",
+    "display": "sp_ing",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "staff",
+    "display": "sta_f",
+    "missing": "f",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "stand",
+    "display": "st_nd",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "star",
+    "display": "s_ar",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "start",
+    "display": "s_art",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "stay",
+    "display": "st_y",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "steak",
+    "display": "s_eak",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "stone",
+    "display": "_tone",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "stop",
+    "display": "st_p",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "store",
+    "display": "_tore",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "story",
+    "display": "sto_y",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "street",
+    "display": "s_reet",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "strong",
+    "display": "_trong",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "study",
+    "display": "st_dy",
+    "missing": "u",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "style",
+    "display": "sty_e",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "subway",
+    "display": "_ubway",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 17,
+    "word": "sugar",
+    "display": "su_ar",
+    "missing": "g",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "summer",
+    "display": "su_mer",
+    "missing": "m",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "sun",
+    "display": "su_",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "sure",
+    "display": "_ure",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "swim",
+    "display": "s_im",
+    "missing": "w",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "table",
+    "display": "tabl_",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "tail",
+    "display": "tai_",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "take",
+    "display": "ta_e",
+    "missing": "k",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "talk",
+    "display": "ta_k",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "tall",
+    "display": "t_ll",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "tape",
+    "display": "t_pe",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "taste",
+    "display": "_aste",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "taxi",
+    "display": "tax_",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "teach",
+    "display": "te_ch",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "team",
+    "display": "tea_",
+    "missing": "m",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "telephone",
+    "display": "te_ephone",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "television",
+    "display": "t_levision",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "tell",
+    "display": "t_ll",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "ten",
+    "display": "_en",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "tennis",
+    "display": "te_nis",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "tent",
+    "display": "t_nt",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "test",
+    "display": "t_st",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "textbook",
+    "display": "_extbook",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "than",
+    "display": "tha_",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "thank",
+    "display": "t_ank",
+    "missing": "h",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "that",
+    "display": "t_at",
+    "missing": "h",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "the",
+    "display": "th_",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "there",
+    "display": "_here",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "they",
+    "display": "th_y",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "thing",
+    "display": "thin_",
+    "missing": "g",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "think",
+    "display": "thi_k",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "third",
+    "display": "th_rd",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "thirst",
+    "display": "thir_t",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "thirteen",
+    "display": "th_rteen",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "thirty",
+    "display": "thi_ty",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "this",
+    "display": "th_s",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "three",
+    "display": "t_ree",
+    "missing": "h",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "ticket",
+    "display": "tic_et",
+    "missing": "k",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "tiger",
+    "display": "t_ger",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 18,
+    "word": "time",
+    "display": "t_me",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "tire",
+    "display": "tir_",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "to",
+    "display": "t_",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "today",
+    "display": "to_ay",
+    "missing": "d",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "together",
+    "display": "to_ether",
+    "missing": "g",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "tomato",
+    "display": "_omato",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "tomorrow",
+    "display": "tomo_row",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "tonight",
+    "display": "tonig_t",
+    "missing": "h",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "too",
+    "display": "t_o",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "tooth",
+    "display": "_ooth",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "top",
+    "display": "_op",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "touch",
+    "display": "t_uch",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "town",
+    "display": "tow_",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "toy",
+    "display": "to_",
+    "missing": "y",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "track",
+    "display": "_rack",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "train",
+    "display": "tr_in",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "travel",
+    "display": "_ravel",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "tree",
+    "display": "_ree",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "trip",
+    "display": "tr_p",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "truck",
+    "display": "tr_ck",
+    "missing": "u",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "true",
+    "display": "_rue",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "try",
+    "display": "t_y",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "turn",
+    "display": "tu_n",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "twelve",
+    "display": "tw_lve",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "twenty",
+    "display": "twe_ty",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "twenty-first",
+    "display": "twenty-f_rst",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "twenty-second",
+    "display": "t_enty-second",
+    "missing": "w",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "twenty-third",
+    "display": "twenty_third",
+    "missing": "-",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "twice",
+    "display": "twi_e",
+    "missing": "c",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "two",
+    "display": "t_o",
+    "missing": "w",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "type",
+    "display": "ty_e",
+    "missing": "p",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "ugly",
+    "display": "_gly",
+    "missing": "u",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "umbrella",
+    "display": "umbre_la",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "uncle",
+    "display": "u_cle",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "under",
+    "display": "u_der",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "understand",
+    "display": "un_erstand",
+    "missing": "d",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "up",
+    "display": "_p",
+    "missing": "u",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "use",
+    "display": "_se",
+    "missing": "u",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "vegetable",
+    "display": "v_getable",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 19,
+    "word": "very",
+    "display": "ve_y",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "video",
+    "display": "vi_eo",
+    "missing": "d",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "violin",
+    "display": "_iolin",
+    "missing": "v",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "visit",
+    "display": "visi_",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "voice",
+    "display": "_oice",
+    "missing": "v",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "wait",
+    "display": "wai_",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "wake",
+    "display": "wa_e",
+    "missing": "k",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "walk",
+    "display": "_alk",
+    "missing": "w",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "wall",
+    "display": "w_ll",
+    "missing": "a",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "want",
+    "display": "wan_",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "war",
+    "display": "_ar",
+    "missing": "w",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "warm",
+    "display": "_arm",
+    "missing": "w",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "wash",
+    "display": "wa_h",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "watch",
+    "display": "_atch",
+    "missing": "w",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "water",
+    "display": "wate_",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "watermelon",
+    "display": "watermel_n",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "way",
+    "display": "_ay",
+    "missing": "w",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "we",
+    "display": "w_",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "wear",
+    "display": "w_ar",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "weather",
+    "display": "weathe_",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "website",
+    "display": "_ebsite",
+    "missing": "w",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "wedding",
+    "display": "we_ding",
+    "missing": "d",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "week",
+    "display": "wee_",
+    "missing": "k",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "weekend",
+    "display": "weeken_",
+    "missing": "d",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "weight",
+    "display": "we_ght",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "welcome",
+    "display": "w_lcome",
+    "missing": "e",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "well",
+    "display": "we_l",
+    "missing": "l",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "west",
+    "display": "we_t",
+    "missing": "s",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "wet",
+    "display": "_et",
+    "missing": "w",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "what",
+    "display": "wha_",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "when",
+    "display": "_hen",
+    "missing": "w",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "where",
+    "display": "whe_e",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "white",
+    "display": "whi_e",
+    "missing": "t",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "who",
+    "display": "_ho",
+    "missing": "w",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "why",
+    "display": "_hy",
+    "missing": "w",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "wife",
+    "display": "wi_e",
+    "missing": "f",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "will",
+    "display": "_ill",
+    "missing": "w",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "win",
+    "display": "_in",
+    "missing": "w",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "wind",
+    "display": "w_nd",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "window",
+    "display": "wi_dow",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "wine",
+    "display": "wi_e",
+    "missing": "n",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "winter",
+    "display": "winte_",
+    "missing": "r",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "wish",
+    "display": "w_sh",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "with",
+    "display": "w_th",
+    "missing": "i",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "woman",
+    "display": "_oman",
+    "missing": "w",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "wood",
+    "display": "w_od",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "word",
+    "display": "_ord",
+    "missing": "w",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "work",
+    "display": "w_rk",
+    "missing": "o",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "world",
+    "display": "_orld",
+    "missing": "w",
+    "meaning": ""
+  },
+  {
+    "level": 20,
+    "word": "worry",
+    "display": "w_rry",
+    "missing": "o",
+    "meaning": ""
+  }
+]
