@@ -2514,33 +2514,42 @@
             // bgmCuriosity.play(); // 게임 중 브금 재생하지 않음
         }
 
+        // 메뉴 진입/종료 시 조이스틱 표시/숨김 함수
+        function showMenu() {
+            menuScreen.style.display = 'flex';
+            if (isMobile) joystickContainer.style.display = 'none';
+        }
+        function hideMenu() {
+            menuScreen.style.display = 'none';
+            if (isMobile) joystickContainer.style.display = 'block';
+        }
+
         // 시작 버튼 클릭 시 메뉴 숨기고 게임 시작
         startBtn.onclick = () => {
-            menuScreen.style.display = 'none';
+            hideMenu();
             playGameBGM();
-            // [수정] 최초 게임 시작 시에도 행성 배열 초기화 및 생성
             planets.length = 0;
             spawnPlanets();
-            // 플레이어, 카메라 초기화
             resetPlayerAndCamera();
-            // 선택한 단어 모음(카테고리)로 wordDatabase 교체
             const selectedSet = wordSelect.value;
             if (selectedSet && wordSets[selectedSet]) {
                 wordDatabase = wordSets[selectedSet];
             }
-            // 첫 단어 선택
             currentWordData = wordDatabase[0];
             selectNewWord();
             if (!gameStarted) {
                 gameStarted = true;
-                gameLoop(); // 메뉴에서만 게임 루프 시작
+                gameLoop();
             }
-            // 게임 상태 초기화 등 필요시 추가
         };
 
-        // 게재시작 함수
-        // selectNewWord(); // 게임 시작 시 첫 단어 설정은 메뉴에서 시작 버튼 클릭 시 처리
-        // gameLoop(); // 게임 루프는 메뉴에서 시작 버튼 클릭 시 실행
+        // restartGame에서 메뉴 진입 시 showMenu() 사용
+        function restartGame() {
+            // ... 기존 초기화 코드 ...
+            showMenu();
+            gameStarted = false;
+            playMenuBGM();
+        }
 
         // 별 그리기 함수 (원거리형 몬스터용)
         function drawStar(ctx, x, y, outerRadius, innerRadius, points) {
