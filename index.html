@@ -1512,13 +1512,24 @@
             x = Math.max(0, Math.min(worldWidth - 40, x));
             y = Math.max(0, Math.min(worldHeight - 40, y));
 
+            // --- 이동 방향을 플레이어 방향(생성 시점)으로 고정 ---
+            const dx = (player.worldX + player.width/2) - x;
+            const dy = (player.worldY + player.height/2) - y;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            // 기본 속도(거리와 무관하게 일정하게)
+            const baseSpeed = 2.0; // 속도 조절 가능
+            // 좌우로 살짝 흔들림(기존과 동일)
+            const shake = (Math.random() - 0.5) * 2;
+            const vx = (dx / dist) * baseSpeed + shake * 0.3;
+            const vy = (dy / dist) * baseSpeed;
+
             floatingLetters.push({
                 worldX: x, // 화면 좌표 → 월드 좌표
                 worldY: y, // 화면 좌표 → 월드 좌표
                 width: 30,
                 height: 30,
-                vx: (Math.random() - 0.5) * 2, // 좌우로 약간 흔들림
-                vy: 1.5 + Math.random() * 1, // 아래로 이동 속도
+                vx: vx, // 플레이어 방향 + 좌우 흔들림
+                vy: vy, // 플레이어 방향
                 letter: letter,
                 isCorrect: isCorrect,
                 color: '#66aaff', // 모든 알파벳 동일한 파란색
