@@ -2533,6 +2533,15 @@
             deathSound.currentTime = 0;
             deathSound.volume = 0.8;
             deathSound.play().catch(()=>{});
+            // 모바일 TTS 정책 우회: 더미 TTS 한 번 실행
+            if ('speechSynthesis' in window) {
+                const dummy = new SpeechSynthesisUtterance('.')
+                dummy.volume = 0;
+                dummy.rate = 1;
+                dummy.pitch = 1;
+                dummy.lang = 'en-US';
+                window.speechSynthesis.speak(dummy);
+            }
             
             menuScreen.style.display = 'none';
             playGameBGM();
