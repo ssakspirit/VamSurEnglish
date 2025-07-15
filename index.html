@@ -2563,6 +2563,7 @@
 
         // 터치 이벤트 (모바일)
         canvas.addEventListener('touchstart', function(e) {
+            if (IS_MOBILE) return; // 모바일에서는 조이스틱만 사용
             isPointerDown = true;
             const rect = canvas.getBoundingClientRect();
             const touch = e.touches[0];
@@ -2570,6 +2571,7 @@
             pointerY = touch.clientY - rect.top + cameraY;
         });
         canvas.addEventListener('touchmove', function(e) {
+            if (IS_MOBILE) return;
             if (isPointerDown) {
                 const rect = canvas.getBoundingClientRect();
                 const touch = e.touches[0];
@@ -2578,6 +2580,7 @@
             }
         });
         window.addEventListener('touchend', function() {
+            if (IS_MOBILE) return;
             isPointerDown = false;
             pointerX = pointerY = null;
         });
