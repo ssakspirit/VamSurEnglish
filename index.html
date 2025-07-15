@@ -2447,7 +2447,7 @@
             menuScreen.style.display = 'flex';
             gameStarted = false; // 게임 루프 중복 방지
             // 게임 루프를 강제로 멈추기 위해 아무것도 하지 않음 (requestAnimationFrame 미호출)
-            playMenuBGM(); // 메뉴 BGM 재생
+            playMenuBGM(); // 메뉴 BGM 재생(실제 재생 없음)
         }
 
         // 게임 루프
@@ -2485,30 +2485,30 @@
         // 오디오 객체 선언
         const hitSound = new Audio('assets/hit.mp3');
         const deathSound = new Audio('assets/death.mp3');
-        const bgmCuriosity = new Audio('assets/bgm_curiosity.mp3');
-        const bgmTree = new Audio('assets/bgm_tree and birds.mp3');
+        // const bgmCuriosity = new Audio('assets/bgm_curiosity.mp3'); // 메뉴 BGM 제거
+        // const bgmTree = new Audio('assets/bgm_tree and birds.mp3'); // 메뉴 BGM 제거
         const levelupSound = new Audio('assets/levelup.mp3');
         levelupSound.volume = 0.8;
 
         // 루프 설정 및 볼륨 조절
-        bgmCuriosity.loop = true;
-        bgmCuriosity.volume = 0.4;
-        bgmTree.loop = true;
-        bgmTree.volume = 0.5;
+        // bgmCuriosity.loop = true;
+        // bgmCuriosity.volume = 0.4;
+        // bgmTree.loop = true;
+        // bgmTree.volume = 0.5;
         hitSound.volume = 0.7;
         deathSound.volume = 0.8;
 
         // 메뉴 진입 시 배경음 재생 함수
         function playMenuBGM() {
-            bgmCuriosity.pause();
-            bgmCuriosity.currentTime = 0;
-            bgmTree.currentTime = 0;
-            bgmTree.play();
+            // bgmCuriosity.pause();
+            // bgmCuriosity.currentTime = 0;
+            // bgmTree.currentTime = 0;
+            // bgmTree.play(); // 메뉴 BGM 제거
         }
         // 게임 시작 시 배경음 재생 함수(게임 중 브금 제거)
         function playGameBGM() {
-            bgmTree.pause();
-            bgmTree.currentTime = 0;
+            // bgmTree.pause();
+            // bgmTree.currentTime = 0;
             // bgmCuriosity.pause();
             // bgmCuriosity.currentTime = 0;
             // bgmCuriosity.play(); // 게임 중 브금 재생하지 않음
@@ -2516,6 +2516,14 @@
 
         // 시작 버튼 클릭 시 메뉴 숨기고 게임 시작
         startBtn.onclick = () => {
+            // 모바일 오디오 정책 우회: 효과음을 아주 짧게 재생 후 정지
+            hitSound.volume = 0;
+            hitSound.play().then(() => {
+                hitSound.pause();
+                hitSound.currentTime = 0;
+                hitSound.volume = 0.7; // 원래대로 복원
+            }).catch(()=>{});
+            
             menuScreen.style.display = 'none';
             playGameBGM();
             // [수정] 최초 게임 시작 시에도 행성 배열 초기화 및 생성
