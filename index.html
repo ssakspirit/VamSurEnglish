@@ -2320,7 +2320,8 @@
 
         // UI 업데이트 함수
         function updateUI() {
-            document.getElementById('health').textContent = player.health;
+            // HP 옆에 플레이어 좌표 표시(디버깅용)
+            document.getElementById('health').textContent = player.health + ` (X:${Math.round(player.worldX)}, Y:${Math.round(player.worldY)})`;
             document.getElementById('level').textContent = player.level;
             document.getElementById('exp').textContent = player.exp;
             document.getElementById('expMax').textContent = player.expToNext;
