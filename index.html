@@ -2715,11 +2715,14 @@
                 }
             }
         }
-        // joystick, joystick-base, joystick-knob 모두에 이벤트 등록
+        // joystick, joystick-base, joystick-knob 모두에 touchstart만 등록
         [joystick, joystickBase, joystickKnob].forEach(el => {
             el.addEventListener('touchstart', joystickTouchStart, { passive: false });
-            el.addEventListener('touchmove', joystickTouchMove, { passive: false });
         });
+        // touchmove는 window에 등록하여 joystickActive일 때만 동작
+        window.addEventListener('touchmove', function(e) {
+            if (joystickActive) joystickTouchMove(e);
+        }, { passive: false });
         window.addEventListener('touchend', function(e) {
             if (!joystickActive) return;
             joystickActive = false;
