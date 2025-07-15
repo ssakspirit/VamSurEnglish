@@ -1345,7 +1345,7 @@
 
         // 알파벳 스폰 관련
         let lastLetterSpawn = 0;
-        let letterSpawnRate = 124; // 0.124초마다 알파벳 스폰 (속도 반으로)
+        let letterSpawnRate = 124 * 2; // 0.248초마다 알파벳 스폰 (기존의 2배 간격, 즉 절반만 스폰)
 
         // 월드 행성(별) 배열 추가
         const planets = [];
@@ -1534,9 +1534,9 @@
         function createFloatingLetter() {
             // 랜덤 알파벳 선택 (정답 알파벳이 더 자주 나오도록 → 오답 확률 높임)
             let letter;
-            if (Math.random() < 0.15) { // 15% 확률로 정답 (기존 30%)
+            if (Math.random() < 0.3) { // 30% 확률로 정답
                 letter = currentWordData.missing;
-            } else { // 85% 확률로 랜덤 오답 알파벳
+            } else { // 70% 확률로 랜덤 오답 알파벳
                 // 정답이 아닌 알파벳만 뽑기
                 let wrongs = alphabet.filter(a => a !== currentWordData.missing);
                 letter = wrongs[Math.floor(Math.random() * wrongs.length)];
@@ -1705,7 +1705,7 @@
                 createFloatingLetter();
                 lastLetterSpawn = currentTime;
                 // 30초마다 스폰 속도 증가, 최소 120ms
-                letterSpawnRate = Math.max(120, 124 - Math.floor(gameState.timeElapsed / 30) * 24);
+                letterSpawnRate = Math.max(240, (124 - Math.floor(gameState.timeElapsed / 30) * 24) * 2); // 최소 240ms, 절반만 스폰
             }
 
             // 투사체 발사
