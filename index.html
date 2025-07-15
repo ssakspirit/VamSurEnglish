@@ -338,33 +338,31 @@
             content: '🏆';
             font-size: 1.3em;
         }
-        /* 모바일용 가상 조이스틱 */
-        #joystick {
+        /* 모바일 조이스틱 UI */
+        #joystickContainer {
             position: fixed;
             right: 30px;
             bottom: 30px;
             width: 120px;
             height: 120px;
             z-index: 2000;
+            display: none; /* 기본은 숨김, 모바일에서만 표시 */
             touch-action: none;
-            user-select: none;
-            display: none;
         }
-        #joystick-base {
+        #joystickBase {
             position: absolute;
             left: 0; top: 0;
             width: 120px; height: 120px;
-            background: rgba(200,200,255,0.2);
-            border: 2.5px solid #88aaff;
+            background: rgba(80,80,120,0.25);
             border-radius: 50%;
         }
-        #joystick-knob {
+        #joystickStick {
             position: absolute;
             left: 40px; top: 40px;
             width: 40px; height: 40px;
-            background: #88aaff;
+            background: rgba(255,255,255,0.7);
             border-radius: 50%;
-            box-shadow: 0 2px 8px #88aaff88;
+            box-shadow: 0 2px 8px #2228;
             transition: left 0.05s, top 0.05s;
         }
     </style>
@@ -412,6 +410,11 @@
             <button id="restartBtn" onclick="restartGame()">🔄 다시 시작</button>
         </div>
     </div>
+    <!-- 모바일 조이스틱 UI -->
+    <div id="joystickContainer">
+        <div id="joystickBase"></div>
+        <div id="joystickStick"></div>
+    </div>
 
     <div id="menuScreen">
         <h1>VamsurEnglish</h1>
@@ -421,11 +424,6 @@
             <select id="wordSelect"></select>
         </div>
         <div class="highscore">최고 점수: <span id="highScoreValue">0</span></div>
-    </div>
-
-    <div id="joystick" style="display:none;">
-      <div id="joystick-base"></div>
-      <div id="joystick-knob"></div>
     </div>
 
     <script>
@@ -1251,7 +1249,7 @@
                 { word: "success", display: "_uccess", missing: "s", meaning: "성공" },
                 { word: "excellence", display: "excellenc_", missing: "e", meaning: "우수성" }
             ]
-            };
+        };
 
         // 현재 사용할 단어 배열(게임에서 사용)
         let wordDatabase = wordSets['1단계'];
@@ -1365,12 +1363,12 @@
                 let overlapped;
                 do {
                     radius = 40 + Math.random() * 60;
-                    const angle = Math.random() * Math.PI * 2;
+                const angle = Math.random() * Math.PI * 2;
                     worldX = player.worldX + Math.cos(angle) * (minRadius + Math.random() * (maxRadius - minRadius));
                     worldY = player.worldY + Math.sin(angle) * (minRadius + Math.random() * (maxRadius - minRadius));
-                    // 월드 경계 체크
-                    worldX = Math.max(0, Math.min(worldWidth - radius, worldX));
-                    worldY = Math.max(0, Math.min(worldHeight - radius, worldY));
+                // 월드 경계 체크
+                worldX = Math.max(0, Math.min(worldWidth - radius, worldX));
+                worldY = Math.max(0, Math.min(worldHeight - radius, worldY));
                     // 이미 생성된 행성과 겹치는지 검사
                     overlapped = planets.some(p =>
                         Math.hypot(p.worldX - worldX, p.worldY - worldY) < (p.radius + radius + minGap)
@@ -1643,34 +1641,46 @@
             const currentTime = Date.now();
             gameState.timeElapsed = Math.floor((currentTime - gameState.startTime) / 1000);
 
-            // 플레이어 이동 및 각도 업데이트
+            // 모바일: 조이스틱으로만 이동
             let moving = false;
-            if (keys.w && player.worldY > 0) {
-                player.worldY -= player.speed;
-                moving = true;
-            }
-            if (keys.s && player.worldY < worldHeight - player.height) {
-                player.worldY += player.speed;
-                moving = true;
-            }
-            if (keys.a && player.worldX > 0) {
-                player.worldX -= player.speed;
-                moving = true;
-            }
-            if (keys.d && player.worldX < worldWidth - player.width) {
-                player.worldX += player.speed;
-                moving = true;
-            }
-
-            // 터치/마우스 누르고 있는 동안 이동하는 시스템 로직 수정
-            if (isPointerDown && pointerX !== null && pointerY !== null) {
-                const dx = pointerX - (player.worldX + player.width/2);
-                const dy = pointerY - (player.worldY + player.height/2);
-                const dist = Math.sqrt(dx*dx + dy*dy);
-                if (dist > 4) {
-                    player.worldX += (dx / dist) * player.speed;
-                    player.worldY += (dy / dist) * player.speed;
+            if (isMobile) {
+                if (joystickActive && (joystickDir.x !== 0 || joystickDir.y !== 0)) {
+                    // 방향 벡터 정규화
+                    const dist = Math.sqrt(joystickDir.x*joystickDir.x + joystickDir.y*joystickDir.y);
+                    if (dist > 0) {
+                        player.worldX += (joystickDir.x / dist) * player.speed;
+                        player.worldY += (joystickDir.y / dist) * player.speed;
+                        moving = true;
+                    }
+                }
+            } else {
+                // PC: 기존 WASD/마우스/터치 이동
+                if (keys.w && player.worldY > 0) {
+                    player.worldY -= player.speed;
                     moving = true;
+                }
+                if (keys.s && player.worldY < worldHeight - player.height) {
+                    player.worldY += player.speed;
+                    moving = true;
+                }
+                if (keys.a && player.worldX > 0) {
+                    player.worldX -= player.speed;
+                    moving = true;
+                }
+                if (keys.d && player.worldX < worldWidth - player.width) {
+                    player.worldX += player.speed;
+                    moving = true;
+                }
+                // 터치/마우스 이동도 PC에서만 허용
+                if (isPointerDown && pointerX !== null && pointerY !== null) {
+                    const dx = pointerX - (player.worldX + player.width/2);
+                    const dy = pointerY - (player.worldY + player.height/2);
+                    const dist = Math.sqrt(dx*dx + dy*dy);
+                    if (dist > 4) {
+                        player.worldX += (dx / dist) * player.speed;
+                        player.worldY += (dy / dist) * player.speed;
+                        moving = true;
+                    }
                 }
             }
 
@@ -2320,8 +2330,7 @@
 
         // UI 업데이트 함수
         function updateUI() {
-            // HP 옆에 플레이어 좌표, IS_MOBILE, 업데이트 표시(디버깅용)
-            document.getElementById('health').textContent = player.health + ` (X:${Math.round(player.worldX)}, Y:${Math.round(player.worldY)}) [IS_MOBILE:${IS_MOBILE}] [업데이트!]`;
+            document.getElementById('health').textContent = player.health;
             document.getElementById('level').textContent = player.level;
             document.getElementById('exp').textContent = player.exp;
             document.getElementById('expMax').textContent = player.expToNext;
@@ -2564,7 +2573,6 @@
 
         // 터치 이벤트 (모바일)
         canvas.addEventListener('touchstart', function(e) {
-            if (IS_MOBILE) return; // 모바일에서는 조이스틱만 사용
             isPointerDown = true;
             const rect = canvas.getBoundingClientRect();
             const touch = e.touches[0];
@@ -2572,7 +2580,6 @@
             pointerY = touch.clientY - rect.top + cameraY;
         });
         canvas.addEventListener('touchmove', function(e) {
-            if (IS_MOBILE) return;
             if (isPointerDown) {
                 const rect = canvas.getBoundingClientRect();
                 const touch = e.touches[0];
@@ -2581,7 +2588,6 @@
             }
         });
         window.addEventListener('touchend', function() {
-            if (IS_MOBILE) return;
             isPointerDown = false;
             pointerX = pointerY = null;
         });
@@ -2661,126 +2667,76 @@
             planetSpawnInterval = 120 + Math.floor(Math.random() * 120);
         }
 
-        // 모바일 기기 감지 함수
-        function isMobileDevice() {
-            return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        // 모바일/터치 기기 감지 함수
+        function isTouchDevice() {
+            return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
         }
 
-        // 모바일 여부를 전역 상수로 한 번만 평가
-        const IS_MOBILE = isMobileDevice();
-
-        // 모바일이면 조이스틱 표시
-        const joystick = document.getElementById('joystick');
-        const joystickBase = document.getElementById('joystick-base');
-        const joystickKnob = document.getElementById('joystick-knob');
+        // 조이스틱 관련 변수
         let joystickActive = false;
-        let joystickCenter = { x: 60, y: 60 };
-        let joystickDir = { x: 0, y: 0 };
-        let joystickTouchId = null;
+        let joystickDir = {x: 0, y: 0};
+        let joystickCenter = {x: 0, y: 0};
+        let joystickRadius = 60; // base 반지름
+        let stickRadius = 20;    // stick 반지름
 
-        if (IS_MOBILE) {
-            joystick.style.display = 'block';
+        // 조이스틱 UI 요소
+        const joystickContainer = document.getElementById('joystickContainer');
+        const joystickBase = document.getElementById('joystickBase');
+        const joystickStick = document.getElementById('joystickStick');
+
+        // 모바일이면 조이스틱 표시, 기존 조작 무효화
+        let isMobile = isTouchDevice();
+        if (isMobile) {
+            joystickContainer.style.display = 'block';
         }
 
-        // 조이스틱 터치 이벤트 핸들러 함수 분리
-        function joystickTouchStart(e) {
-            e.preventDefault();
-            const touch = e.touches[0];
-            joystickActive = true;
-            joystickTouchId = touch.identifier;
+        // 조이스틱 이벤트 처리(모바일에서만)
+        if (isMobile) {
+            joystickContainer.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                joystickActive = true;
+                const rect = joystickBase.getBoundingClientRect();
+                joystickCenter.x = rect.left + rect.width/2;
+                joystickCenter.y = rect.top + rect.height/2;
+                // 터치 위치로 스틱 이동
+                const touch = e.touches[0];
+                moveJoystick(touch.clientX, touch.clientY);
+            });
+            joystickContainer.addEventListener('touchmove', function(e) {
+                e.preventDefault();
+                if (!joystickActive) return;
+                const touch = e.touches[0];
+                moveJoystick(touch.clientX, touch.clientY);
+            });
+            window.addEventListener('touchend', function(e) {
+                joystickActive = false;
+                resetJoystick();
+            });
         }
-        function joystickTouchMove(e) {
-            if (!joystickActive) return;
-            for (let i = 0; i < e.touches.length; i++) {
-                if (e.touches[i].identifier === joystickTouchId) {
-                    const rect = joystick.getBoundingClientRect();
-                    // 스크롤 보정 포함 좌표 계산
-                    const pageX = e.touches[i].pageX;
-                    const pageY = e.touches[i].pageY;
-                    const x = pageX - rect.left - window.scrollX;
-                    const y = pageY - rect.top - window.scrollY;
-                    let dx = x - joystickCenter.x;
-                    let dy = y - joystickCenter.y;
-                    const dist = Math.sqrt(dx*dx + dy*dy);
-                    const maxDist = 48;
-                    if (dist > maxDist) {
-                        dx = dx / dist * maxDist;
-                        dy = dy / dist * maxDist;
-                    }
-                    joystickKnob.style.left = (joystickCenter.x + dx - 20) + 'px';
-                    joystickKnob.style.top = (joystickCenter.y + dy - 20) + 'px';
-                    // 반드시 window.joystickDir만 갱신
-                    window.joystickDir.x = dx / maxDist;
-                    window.joystickDir.y = dy / maxDist;
-                    break;
-                }
+
+        // 조이스틱 스틱 이동 함수
+        function moveJoystick(clientX, clientY) {
+            const dx = clientX - joystickCenter.x;
+            const dy = clientY - joystickCenter.y;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            let nx = dx, ny = dy;
+            if (dist > joystickRadius - stickRadius) {
+                // 원 밖으로 나가지 않게 제한
+                nx = (dx / dist) * (joystickRadius - stickRadius);
+                ny = (dy / dist) * (joystickRadius - stickRadius);
             }
+            joystickStick.style.left = (40 + nx) + 'px';
+            joystickStick.style.top = (40 + ny) + 'px';
+            // 방향 벡터 -1~1로 정규화
+            joystickDir.x = nx / (joystickRadius - stickRadius);
+            joystickDir.y = ny / (joystickRadius - stickRadius);
         }
-        // joystick, joystick-base, joystick-knob 모두에 touchstart만 등록
-        [joystick, joystickBase, joystickKnob].forEach(el => {
-            el.addEventListener('touchstart', joystickTouchStart, { passive: false });
-        });
-        // touchmove는 window에 등록하여 joystickActive일 때만 동작
-        window.addEventListener('touchmove', function(e) {
-            if (joystickActive) joystickTouchMove(e);
-        }, { passive: false });
-        window.addEventListener('touchend', function(e) {
-            if (!joystickActive) return;
-            joystickActive = false;
-            joystickKnob.style.left = '40px';
-            joystickKnob.style.top = '40px';
-            // 반드시 window.joystickDir만 갱신
-            window.joystickDir.x = 0;
-            window.joystickDir.y = 0;
-        });
-
-        // update 함수 내 플레이어 이동에 조이스틱 방향 적용(모바일에서만)
-        // ... existing code ...
-            // 플레이어 이동 및 각도 업데이트
-            let moving = false;
-            if (IS_MOBILE && (window.joystickDir.x !== 0 || window.joystickDir.y !== 0)) {
-                // 조이스틱 방향으로 이동 (모바일 전용)
-                const dist = Math.sqrt(window.joystickDir.x * window.joystickDir.x + window.joystickDir.y * window.joystickDir.y);
-                if (dist > 0.1) {
-                    player.worldX += window.joystickDir.x * player.speed;
-                    player.worldY += window.joystickDir.y * player.speed;
-                    moving = true;
-                }
-            } else if (!IS_MOBILE) {
-                // PC: 키보드/마우스 이동
-                if (keys.w && player.worldY > 0) {
-                    player.worldY -= player.speed;
-                    moving = true;
-                }
-                if (keys.s && player.worldY < worldHeight - player.height) {
-                    player.worldY += player.speed;
-                    moving = true;
-                }
-                if (keys.a && player.worldX > 0) {
-                    player.worldX -= player.speed;
-                    moving = true;
-                }
-                if (keys.d && player.worldX < worldWidth - player.width) {
-                    player.worldX += player.speed;
-                    moving = true;
-                }
-            }
-// ... existing code ...
-
-        // [디버깅] 모바일에서 joystickDir 값 콘솔 출력
-        if (IS_MOBILE) {
-            setInterval(() => {
-                console.log('joystickDir:', window.joystickDir);
-            }, 500);
-        }
-        // [디버깅] 조이스틱 터치 중일 때 강제로 오른쪽 이동
-        if (IS_MOBILE) {
-            setInterval(() => {
-                if (joystickActive) {
-                    window.joystickDir.x = 1;
-                    window.joystickDir.y = 0;
-                }
-            }, 200);
+        // 조이스틱 스틱 원위치
+        function resetJoystick() {
+            joystickStick.style.left = '40px';
+            joystickStick.style.top = '40px';
+            joystickDir.x = 0;
+            joystickDir.y = 0;
         }
     </script>
 </body>
