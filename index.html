@@ -1353,7 +1353,7 @@
         // 게임 시작 시 행성 여러 개 생성
         function spawnPlanets() {
             // [디버깅] spawnPlanets 함수 호출 여부 확인
-            console.log('[디버깅] spawnPlanets 호출됨');
+            //console.log('[디버깅] spawnPlanets 호출됨');
             const planetCount = 10 + Math.floor(Math.random() * 7); // 10~16개
             const minRadius = 800; // 생성 반경 2배로 확대
             const maxRadius = 1200;
@@ -1381,7 +1381,7 @@
                     worldX, worldY, radius, color, timer: 0, exploded: false
                 });
                 // [디버깅] 행성 추가 직후 planets 개수 출력
-                console.log('[디버깅] 행성 추가됨, 현재 개수:', planets.length);
+                //console.log('[디버깅] 행성 추가됨, 현재 개수:', planets.length);
             }
         }
 
@@ -2009,7 +2009,7 @@
                 planet.color.b = 200 * (1-t) + 30 * t;
                 // NaN 방지: r, g, b가 NaN이면 기본값으로 대체
                 if (isNaN(planet.color.r) || isNaN(planet.color.g) || isNaN(planet.color.b)) {
-                    console.log('[디버깅] 행성 색상 NaN 발생:', planet);
+                    //console.log('[디버깅] 행성 색상 NaN 발생:', planet);
                     planet.color.r = 120;
                     planet.color.g = 120;
                     planet.color.b = 200;
@@ -2101,7 +2101,7 @@
         // 렌더링 함수
         function render() {
             // [디버깅] 행성 개수와 exploded 상태 콘솔 출력
-            console.log('행성 개수:', planets.length, planets.map(p => p.exploded));
+            //console.log('행성 개수:', planets.length, planets.map(p => p.exploded));
             // 배경 그라디언트
             const gradient = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 0, canvas.width/2, canvas.height/2, canvas.width);
             gradient.addColorStop(0, '#1a1a2e');
