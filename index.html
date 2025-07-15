@@ -2709,10 +2709,9 @@
                     }
                     joystickKnob.style.left = (joystickCenter.x + dx - 20) + 'px';
                     joystickKnob.style.top = (joystickCenter.y + dy - 20) + 'px';
-                    joystickDir.x = dx / maxDist;
-                    joystickDir.y = dy / maxDist;
-                    // 디버깅: 실제 dx, dy, joystickDir 값 출력
-                    // alert(`dx:${dx}, dy:${dy}, jx:${joystickDir.x}, jy:${joystickDir.y}`);
+                    // 반드시 window.joystickDir만 갱신
+                    window.joystickDir.x = dx / maxDist;
+                    window.joystickDir.y = dy / maxDist;
                     break;
                 }
             }
@@ -2730,20 +2729,21 @@
             joystickActive = false;
             joystickKnob.style.left = '40px';
             joystickKnob.style.top = '40px';
-            joystickDir.x = 0;
-            joystickDir.y = 0;
+            // 반드시 window.joystickDir만 갱신
+            window.joystickDir.x = 0;
+            window.joystickDir.y = 0;
         });
 
         // update 함수 내 플레이어 이동에 조이스틱 방향 적용(모바일에서만)
         // ... existing code ...
             // 플레이어 이동 및 각도 업데이트
             let moving = false;
-            if (IS_MOBILE && (joystickDir.x !== 0 || joystickDir.y !== 0)) {
+            if (IS_MOBILE && (window.joystickDir.x !== 0 || window.joystickDir.y !== 0)) {
                 // 조이스틱 방향으로 이동 (모바일 전용)
-                const dist = Math.sqrt(joystickDir.x * joystickDir.x + joystickDir.y * joystickDir.y);
+                const dist = Math.sqrt(window.joystickDir.x * window.joystickDir.x + window.joystickDir.y * window.joystickDir.y);
                 if (dist > 0.1) {
-                    player.worldX += joystickDir.x * player.speed;
-                    player.worldY += joystickDir.y * player.speed;
+                    player.worldX += window.joystickDir.x * player.speed;
+                    player.worldY += window.joystickDir.y * player.speed;
                     moving = true;
                 }
             } else if (!IS_MOBILE) {
@@ -2770,15 +2770,15 @@
         // [디버깅] 모바일에서 joystickDir 값 콘솔 출력
         if (IS_MOBILE) {
             setInterval(() => {
-                console.log('joystickDir:', joystickDir);
+                console.log('joystickDir:', window.joystickDir);
             }, 500);
         }
         // [디버깅] 조이스틱 터치 중일 때 강제로 오른쪽 이동
         if (IS_MOBILE) {
             setInterval(() => {
                 if (joystickActive) {
-                    joystickDir.x = 1;
-                    joystickDir.y = 0;
+                    window.joystickDir.x = 1;
+                    window.joystickDir.y = 0;
                 }
             }, 200);
         }
