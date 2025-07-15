@@ -1442,11 +1442,7 @@
                 if ('speechSynthesis' in window) {
                     speechSynthesis.cancel();
                     setTimeout(() => {
-                        const utterance = new SpeechSynthesisUtterance(wordData.word);
-                        utterance.lang = 'en-US';
-                        utterance.rate = 0.8;
-                        utterance.volume = 1.0;
-                        speechSynthesis.speak(utterance);
+                        speakEnglish(wordData.word);
                     }, 200);
                 }
                 
@@ -1879,11 +1875,7 @@
                             if ('speechSynthesis' in window) {
                                 speechSynthesis.cancel();
                                 setTimeout(() => {
-                                    const utterance = new SpeechSynthesisUtterance(currentWordData.word);
-                                    utterance.lang = 'en-US';
-                                    utterance.rate = 0.8;
-                                    utterance.volume = 1.0;
-                                    speechSynthesis.speak(utterance);
+                                    speakEnglish(currentWordData.word);
                                 }, 200);
                             }
                             // 성공 파티클
@@ -2764,6 +2756,23 @@
             joystickStick.style.top = '40px';
             joystickDir.x = 0;
             joystickDir.y = 0;
+        }
+
+        // 영어 TTS를 항상 영어 음성으로 읽게 하는 함수
+        function speakEnglish(text) {
+            if ('speechSynthesis' in window) {
+                const utter = new SpeechSynthesisUtterance(text);
+                utter.lang = 'en-US';
+                // 영어 음성(voice)만 골라서 지정
+                const voices = window.speechSynthesis.getVoices();
+                const enVoice = voices.find(v => v.lang && v.lang.startsWith('en'));
+                if (enVoice) {
+                    utter.voice = enVoice;
+                }
+                utter.rate = 0.8;
+                utter.volume = 1.0;
+                window.speechSynthesis.speak(utter);
+            }
         }
     </script>
 </body>
