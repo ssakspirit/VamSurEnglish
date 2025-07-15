@@ -338,6 +338,35 @@
             content: '🏆';
             font-size: 1.3em;
         }
+        /* 모바일용 가상 조이스틱 */
+        #joystick {
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            width: 120px;
+            height: 120px;
+            z-index: 2000;
+            touch-action: none;
+            user-select: none;
+            display: none;
+        }
+        #joystick-base {
+            position: absolute;
+            left: 0; top: 0;
+            width: 120px; height: 120px;
+            background: rgba(200,200,255,0.2);
+            border: 2.5px solid #88aaff;
+            border-radius: 50%;
+        }
+        #joystick-knob {
+            position: absolute;
+            left: 40px; top: 40px;
+            width: 40px; height: 40px;
+            background: #88aaff;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px #88aaff88;
+            transition: left 0.05s, top 0.05s;
+        }
     </style>
 </head>
 <body>
@@ -392,6 +421,11 @@
             <select id="wordSelect"></select>
         </div>
         <div class="highscore">최고 점수: <span id="highScoreValue">0</span></div>
+    </div>
+
+    <div id="joystick" style="display:none;">
+      <div id="joystick-base"></div>
+      <div id="joystick-knob"></div>
     </div>
 
     <script>
@@ -2622,6 +2656,98 @@
             planetSpawnTimer = 0;
             planetSpawnInterval = 120 + Math.floor(Math.random() * 120);
         }
+
+        // 모바일 기기 감지 함수
+        function isMobileDevice() {
+            return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+        // 모바일이면 조이스틱 표시
+        const joystick = document.getElementById('joystick');
+        const joystickBase = document.getElementById('joystick-base');
+        const joystickKnob = document.getElementById('joystick-knob');
+        let joystickActive = false;
+        let joystickCenter = { x: 60, y: 60 };
+        let joystickDir = { x: 0, y: 0 };
+        let joystickTouchId = null;
+
+        if (isMobileDevice()) {
+            joystick.style.display = 'block';
+        }
+
+        // 조이스틱 터치 이벤트
+        joystick.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            joystickActive = true;
+            joystickTouchId = touch.identifier;
+        });
+        joystick.addEventListener('touchmove', function(e) {
+            if (!joystickActive) return;
+            for (let i = 0; i < e.touches.length; i++) {
+                if (e.touches[i].identifier === joystickTouchId) {
+                    const rect = joystick.getBoundingClientRect();
+                    const x = e.touches[i].clientX - rect.left;
+                    const y = e.touches[i].clientY - rect.top;
+                    // 조이스틱 중심에서의 상대 좌표
+                    let dx = x - joystickCenter.x;
+                    let dy = y - joystickCenter.y;
+                    // 최대 반지름 48px
+                    const dist = Math.sqrt(dx*dx + dy*dy);
+                    const maxDist = 48;
+                    if (dist > maxDist) {
+                        dx = dx / dist * maxDist;
+                        dy = dy / dist * maxDist;
+                    }
+                    joystickKnob.style.left = (joystickCenter.x + dx - 20) + 'px';
+                    joystickKnob.style.top = (joystickCenter.y + dy - 20) + 'px';
+                    // 방향값 -1~1
+                    joystickDir.x = dx / maxDist;
+                    joystickDir.y = dy / maxDist;
+                    break;
+                }
+            }
+        });
+        window.addEventListener('touchend', function(e) {
+            if (!joystickActive) return;
+            joystickActive = false;
+            joystickKnob.style.left = '40px';
+            joystickKnob.style.top = '40px';
+            joystickDir.x = 0;
+            joystickDir.y = 0;
+        });
+
+        // update 함수 내 플레이어 이동에 조이스틱 방향 적용(모바일에서만)
+        // ... existing code ...
+            // 플레이어 이동 및 각도 업데이트
+            let moving = false;
+            if (isMobileDevice() && (joystickDir.x !== 0 || joystickDir.y !== 0)) {
+                // 조이스틱 방향으로 이동
+                const dist = Math.sqrt(joystickDir.x * joystickDir.x + joystickDir.y * joystickDir.y);
+                if (dist > 0.1) {
+                    player.worldX += joystickDir.x * player.speed;
+                    player.worldY += joystickDir.y * player.speed;
+                    moving = true;
+                }
+            } else {
+                if (keys.w && player.worldY > 0) {
+                    player.worldY -= player.speed;
+                    moving = true;
+                }
+                if (keys.s && player.worldY < worldHeight - player.height) {
+                    player.worldY += player.speed;
+                    moving = true;
+                }
+                if (keys.a && player.worldX > 0) {
+                    player.worldX -= player.speed;
+                    moving = true;
+                }
+                if (keys.d && player.worldX < worldWidth - player.width) {
+                    player.worldX += player.speed;
+                    moving = true;
+                }
+            }
+// ... existing code ...
     </script>
 </body>
 </html>
