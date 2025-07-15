@@ -2516,25 +2516,13 @@
 
         // 시작 버튼 클릭 시 메뉴 숨기고 게임 시작
         startBtn.onclick = () => {
-            // 모바일 오디오 정책 우회: 효과음을 아주 짧게 재생 후 정지
-            hitSound.volume = 0;
-            hitSound.play().then(() => {
-                hitSound.pause();
-                hitSound.currentTime = 0;
-                hitSound.volume = 0.7; // 원래대로 복원
-            }).catch(()=>{});
-            levelupSound.volume = 0;
-            levelupSound.play().then(() => {
-                levelupSound.pause();
-                levelupSound.currentTime = 0;
-                levelupSound.volume = 0.8; // 원래대로 복원
-            }).catch(()=>{});
-            deathSound.volume = 0;
-            deathSound.play().then(() => {
-                deathSound.pause();
-                deathSound.currentTime = 0;
-                deathSound.volume = 0.8; // 원래대로 복원
-            }).catch(()=>{});
+            // 효과음을 한 번씩 실제로 재생
+            hitSound.currentTime = 0;
+            hitSound.play().catch(()=>{});
+            levelupSound.currentTime = 0;
+            levelupSound.play().catch(()=>{});
+            deathSound.currentTime = 0;
+            deathSound.play().catch(()=>{});
             
             menuScreen.style.display = 'none';
             playGameBGM();
