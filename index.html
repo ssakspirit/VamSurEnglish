@@ -1319,22 +1319,36 @@
         const planets = [];
         // 게임 시작 시 행성 여러 개 생성
         function spawnPlanets() {
+            // [디버깅] spawnPlanets 함수 호출 여부 확인
+            console.log('[디버깅] spawnPlanets 호출됨');
             const planetCount = 10 + Math.floor(Math.random() * 7); // 10~16개
+            const minRadius = 800; // 생성 반경 2배로 확대
+            const maxRadius = 1200;
+            const minGap = 10; // 행성 간 최소 간격
             for (let i = 0; i < planetCount; i++) {
-                const radius = 40 + Math.random() * 60; // 크기 다양(40~100)
-                // 플레이어 근처(반경 400~600px 내 랜덤 위치)
-                const minRadius = 400;
-                const maxRadius = 600;
-                const angle = Math.random() * Math.PI * 2;
-                let worldX = player.worldX + Math.cos(angle) * (minRadius + Math.random() * (maxRadius - minRadius));
-                let worldY = player.worldY + Math.sin(angle) * (minRadius + Math.random() * (maxRadius - minRadius));
-                // 월드 경계 체크
-                worldX = Math.max(0, Math.min(worldWidth - radius, worldX));
-                worldY = Math.max(0, Math.min(worldHeight - radius, worldY));
+                let tryCount = 0;
+                let worldX, worldY, radius;
+                let overlapped;
+                do {
+                    radius = 40 + Math.random() * 60;
+                    const angle = Math.random() * Math.PI * 2;
+                    worldX = player.worldX + Math.cos(angle) * (minRadius + Math.random() * (maxRadius - minRadius));
+                    worldY = player.worldY + Math.sin(angle) * (minRadius + Math.random() * (maxRadius - minRadius));
+                    // 월드 경계 체크
+                    worldX = Math.max(0, Math.min(worldWidth - radius, worldX));
+                    worldY = Math.max(0, Math.min(worldHeight - radius, worldY));
+                    // 이미 생성된 행성과 겹치는지 검사
+                    overlapped = planets.some(p =>
+                        Math.hypot(p.worldX - worldX, p.worldY - worldY) < (p.radius + radius + minGap)
+                    );
+                    tryCount++;
+                } while (overlapped && tryCount < 30);
                 const color = {r: 120 + Math.random()*80, g: 120 + Math.random()*80, b: 200, a: 1};
                 planets.push({
                     worldX, worldY, radius, color, timer: 0, exploded: false
                 });
+                // [디버깅] 행성 추가 직후 planets 개수 출력
+                console.log('[디버깅] 행성 추가됨, 현재 개수:', planets.length);
             }
         }
 
@@ -1946,14 +1960,25 @@
             // 행성 타이머, 색상 변화, 폭발 처리
             planets.forEach(planet => {
                 if (planet.exploded) return;
+                // explodeTime이 없으면 새로 할당(안전장치)
+                if (typeof planet.explodeTime === 'undefined') {
+                    planet.explodeTime = 900 + Math.floor(Math.random() * 900);
+                }
                 planet.timer += 1; // 프레임 단위(60프레임=1초)
-                // 20초(1200프레임)까지 점점 붉어짐
-                const t = Math.min(planet.timer / 1200, 1);
-                planet.color.r = 120 + t * 120; // r: 120~240
-                planet.color.g = 120 * (1-t) + 30 * t; // g: 120~30
-                planet.color.b = 200 * (1-t) + 30 * t; // b: 200~30
+                // 폭발까지 남은 시간에 따라 색상 변화
+                const t = Math.min(planet.timer / planet.explodeTime, 1);
+                planet.color.r = 120 + t * 120;
+                planet.color.g = 120 * (1-t) + 30 * t;
+                planet.color.b = 200 * (1-t) + 30 * t;
+                // NaN 방지: r, g, b가 NaN이면 기본값으로 대체
+                if (isNaN(planet.color.r) || isNaN(planet.color.g) || isNaN(planet.color.b)) {
+                    console.log('[디버깅] 행성 색상 NaN 발생:', planet);
+                    planet.color.r = 120;
+                    planet.color.g = 120;
+                    planet.color.b = 200;
+                }
                 // 폭발
-                if (planet.timer >= 1200) {
+                if (planet.timer >= planet.explodeTime) {
                     planet.exploded = true;
                     // 폭발 파티클 효과
                     for (let i = 0; i < 40; i++) {
@@ -1989,19 +2014,16 @@
                             monsters.splice(i, 1);
                         }
                     }
-                    // 폭발 위치에 새로운 행성 1개 생성
-                    const newRadius = 40 + Math.random() * 60;
-                    const newColor = {r: 120 + Math.random()*80, g: 120 + Math.random()*80, b: 200, a: 1};
-                    planets.push({
-                        worldX: planet.worldX,
-                        worldY: planet.worldY,
-                        radius: newRadius,
-                        color: newColor,
-                        timer: 0,
-                        exploded: false
-                    });
+                    // 폭발 후 새 행성은 일정 시간 후 자동 생성(아래에서 처리)
                 }
             });
+            // 행성 자동 생성(최대 개수 유지, 일정 간격마다)
+            planetSpawnTimer++;
+            if (planets.filter(p => !p.exploded).length < maxPlanetCount && planetSpawnTimer >= planetSpawnInterval) {
+                spawnPlanet();
+                planetSpawnTimer = 0;
+                planetSpawnInterval = 120 + Math.floor(Math.random() * 120); // 2~4초 랜덤
+            }
 
             // 카메라 목표 위치 계산
             const targetCameraX = player.worldX - canvas.width / 2;
@@ -2041,6 +2063,8 @@
 
         // 렌더링 함수
         function render() {
+            // [디버깅] 행성 개수와 exploded 상태 콘솔 출력
+            console.log('행성 개수:', planets.length, planets.map(p => p.exploded));
             // 배경 그라디언트
             const gradient = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 0, canvas.width/2, canvas.height/2, canvas.width);
             gradient.addColorStop(0, '#1a1a2e');
@@ -2377,12 +2401,15 @@
 
             // 메뉴 화면으로 이동
             menuScreen.style.display = 'flex';
-            gameStarted = false;
+            gameStarted = false; // 게임 루프 중복 방지
+            // 게임 루프를 강제로 멈추기 위해 아무것도 하지 않음 (requestAnimationFrame 미호출)
             playMenuBGM(); // 메뉴 BGM 재생
         }
 
         // 게임 루프
         function gameLoop() {
+            // 게임이 종료되면 루프 중단 (메뉴화면에서 게임이 멈추도록)
+            if (!gameState.running) return;
             update();
             render();
             requestAnimationFrame(gameLoop);
@@ -2446,7 +2473,12 @@
         // 시작 버튼 클릭 시 메뉴 숨기고 게임 시작
         startBtn.onclick = () => {
             menuScreen.style.display = 'none';
-            playGameBGM(); // 게임 BGM 재생
+            playGameBGM();
+            // [수정] 최초 게임 시작 시에도 행성 배열 초기화 및 생성
+            planets.length = 0;
+            spawnPlanets();
+            // 플레이어, 카메라 초기화
+            resetPlayerAndCamera();
             // 선택한 단어 모음(카테고리)로 wordDatabase 교체
             const selectedSet = wordSelect.value;
             if (selectedSet && wordSets[selectedSet]) {
@@ -2544,6 +2576,52 @@
 
         let gameStarted = false; // 게임 시작 여부 플래그(전역)
         let prevPlayerX = player.worldX, prevPlayerY = player.worldY; // 이동 처리 직전 선언
+
+        // 행성 1개 생성 함수 (겹치지 않게, 폭발 시간 랜덤)
+        function spawnPlanet() {
+            const minRadius = 800;
+            const maxRadius = 1200;
+            const minGap = 10;
+            let tryCount = 0;
+            let worldX, worldY, radius;
+            let overlapped;
+            do {
+                radius = 40 + Math.random() * 60;
+                const angle = Math.random() * Math.PI * 2;
+                worldX = player.worldX + Math.cos(angle) * (minRadius + Math.random() * (maxRadius - minRadius));
+                worldY = player.worldY + Math.sin(angle) * (minRadius + Math.random() * (maxRadius - minRadius));
+                worldX = Math.max(0, Math.min(worldWidth - radius, worldX));
+                worldY = Math.max(0, Math.min(worldHeight - radius, worldY));
+                overlapped = planets.some(p =>
+                    Math.hypot(p.worldX - worldX, p.worldY - worldY) < (p.radius + radius + minGap)
+                );
+                tryCount++;
+            } while (overlapped && tryCount < 30);
+            const color = {r: 120 + Math.random()*80, g: 120 + Math.random()*80, b: 200, a: 1};
+            // 폭발 시간: 15~30초(900~1800프레임) 랜덤
+            const explodeTime = 900 + Math.floor(Math.random() * 900);
+            planets.push({
+                worldX, worldY, radius, color, timer: 0, exploded: false, explodeTime
+            });
+        }
+
+        // 최대 행성 개수(10~16개 랜덤)
+        let maxPlanetCount = 12;
+        // 행성 자동 생성 타이머 변수
+        let planetSpawnTimer = 0;
+        let planetSpawnInterval = 120; // 2초(60fps 기준)
+
+        // 게임 시작 시 일부만 먼저 생성
+        function initPlanets() {
+            maxPlanetCount = 10 + Math.floor(Math.random() * 7); // 10~16개
+            planets.length = 0;
+            for (let i = 0; i < 4; i++) { // 4개만 먼저 생성
+                spawnPlanet();
+            }
+            // 다음 생성까지 랜덤 대기(2~4초)
+            planetSpawnTimer = 0;
+            planetSpawnInterval = 120 + Math.floor(Math.random() * 120);
+        }
     </script>
 </body>
 </html>
