@@ -2516,23 +2516,22 @@
 
         // 시작 버튼 클릭 시 메뉴 숨기고 게임 시작
         startBtn.onclick = () => {
-            // hitSound, levelupSound는 무음으로 재생(권한만 얻음)
+            // 모바일 오디오 정책 우회: 효과음을 아주 짧게 재생 후 정지 (hit, levelup)
             hitSound.volume = 0;
             hitSound.play().then(() => {
                 hitSound.pause();
                 hitSound.currentTime = 0;
                 hitSound.volume = 0.7; // 원래대로 복원
             }).catch(()=>{});
-
             levelupSound.volume = 0;
             levelupSound.play().then(() => {
                 levelupSound.pause();
                 levelupSound.currentTime = 0;
                 levelupSound.volume = 0.8; // 원래대로 복원
             }).catch(()=>{});
-
-            // deathSound만 실제로 들리게 재생
+            // death 효과음은 실제로 충분히 재생
             deathSound.currentTime = 0;
+            deathSound.volume = 0.8;
             deathSound.play().catch(()=>{});
             
             menuScreen.style.display = 'none';
