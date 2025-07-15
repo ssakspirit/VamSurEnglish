@@ -406,53 +406,825 @@
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
 
-        // 영어 단어 데이터베이스(카테고리별) 제거
-        // const wordSets = { ... };
+        // 영어 단어 데이터베이스(단계별, english_words_complete.json에서 자동 생성)
+        const wordSets = {
+            '1단계': [
+                { word: "a", display: "_", missing: "a", meaning: "하나의" },
+                { word: "I", display: "_", missing: "I", meaning: "나" },
+                { word: "go", display: "_o", missing: "g", meaning: "가다" },
+                { word: "no", display: "n_", missing: "o", meaning: "아니다" },
+                { word: "yes", display: "_es", missing: "y", meaning: "네" },
+                { word: "hi", display: "_i", missing: "h", meaning: "안녕" },
+                { word: "bye", display: "by_", missing: "e", meaning: "안녕" },
+                { word: "one", display: "o_e", missing: "n", meaning: "하나" },
+                { word: "two", display: "_wo", missing: "t", meaning: "숫자 2" },
+                { word: "big", display: "_ig", missing: "b", meaning: "큰" },
+                { word: "cat", display: "_at", missing: "c", meaning: "고양이" },
+                { word: "dog", display: "do_", missing: "g", meaning: "개" },
+                { word: "boy", display: "b_y", missing: "o", meaning: "소년" },
+                { word: "girl", display: "g_rl", missing: "i", meaning: "소녀" },
+                { word: "man", display: "_an", missing: "m", meaning: "사람, 남자" },
+                { word: "day", display: "_ay", missing: "d", meaning: "낮, 하루" },
+                { word: "sun", display: "su_", missing: "n", meaning: "태양" },
+                { word: "eye", display: "_ye", missing: "e", meaning: "눈" },
+                { word: "ear", display: "ea_", missing: "r", meaning: "귀" },
+                { word: "red", display: "r_d", missing: "e", meaning: "빨간색" },
+                { word: "blue", display: "_lue", missing: "b", meaning: "푸른" },
+                { word: "book", display: "boo_", missing: "k", meaning: "책" },
+                { word: "eat", display: "e_t", missing: "a", meaning: "먹다" },
+                { word: "see", display: "_ee", missing: "s", meaning: "보다" },
+                { word: "sit", display: "si_", missing: "t", meaning: "앉다" },
+                { word: "run", display: "_un", missing: "r", meaning: "달리다" },
+                { word: "good", display: "go_d", missing: "o", meaning: "좋은" },
+                { word: "bad", display: "ba_", missing: "d", meaning: "나쁜" },
+                { word: "hot", display: "_ot", missing: "h", meaning: "뜨거운" },
+                { word: "cold", display: "c_ld", missing: "o", meaning: "추운" },
+                { word: "up", display: "u_", missing: "p", meaning: "위에" },
+                { word: "mom", display: "_om", missing: "m", meaning: "어머니" },
+                { word: "dad", display: "d_d", missing: "a", meaning: "아버지" },
+                { word: "baby", display: "bab_", missing: "y", meaning: "아기" },
+                { word: "ball", display: "ba_l", missing: "l", meaning: "공" },
+                { word: "car", display: "_ar", missing: "c", meaning: "자동차" },
+                { word: "come", display: "com_", missing: "e", meaning: "오다" },
+                { word: "here", display: "_ere", missing: "h", meaning: "여기에" },
+                { word: "look", display: "loo_", missing: "k", meaning: "바라보다" },
+                { word: "water", display: "wa_er", missing: "t", meaning: "물" }
+            ],
+            '2단계': [
+                { word: "three", display: "_hree", missing: "t", meaning: "숫자 3" },
+                { word: "four", display: "fo_r", missing: "u", meaning: "숫자 4" },
+                { word: "five", display: "f_ve", missing: "i", meaning: "숫자 5" },
+                { word: "six", display: "si_", missing: "x", meaning: "숫자 6" },
+                { word: "seven", display: "se_en", missing: "v", meaning: "숫자 7" },
+                { word: "eight", display: "eigh_", missing: "t", meaning: "숫자 8" },
+                { word: "nine", display: "_ine", missing: "n", meaning: "숫자 9" },
+                { word: "ten", display: "_en", missing: "t", meaning: "숫자 10" },
+                { word: "hand", display: "h_nd", missing: "a", meaning: "손" },
+                { word: "foot", display: "_oot", missing: "f", meaning: "발" },
+                { word: "head", display: "hea_", missing: "d", meaning: "머리" },
+                { word: "face", display: "_ace", missing: "f", meaning: "얼굴" },
+                { word: "arm", display: "a_m", missing: "r", meaning: "팔" },
+                { word: "leg", display: "_eg", missing: "l", meaning: "다리" },
+                { word: "nose", display: "no_e", missing: "s", meaning: "코" },
+                { word: "hair", display: "_air", missing: "h", meaning: "머리카락" },
+                { word: "mouth", display: "mou_h", missing: "t", meaning: "입" },
+                { word: "green", display: "gre_n", missing: "e", meaning: "녹색" },
+                { word: "yellow", display: "yell_w", missing: "o", meaning: "노란색" },
+                { word: "black", display: "_lack", missing: "b", meaning: "검은, 검은색" },
+                { word: "white", display: "wh_te", missing: "i", meaning: "하얀색" },
+                { word: "house", display: "ho_se", missing: "u", meaning: "집" },
+                { word: "home", display: "_ome", missing: "h", meaning: "집" },
+                { word: "door", display: "d_or", missing: "o", meaning: "문" },
+                { word: "room", display: "roo_", missing: "m", meaning: "방" },
+                { word: "bed", display: "_ed", missing: "b", meaning: "침대" },
+                { word: "table", display: "ta_le", missing: "b", meaning: "식탁, 탁자" },
+                { word: "chair", display: "cha_r", missing: "i", meaning: "의자" },
+                { word: "food", display: "_ood", missing: "f", meaning: "음식" },
+                { word: "milk", display: "mi_k", missing: "l", meaning: "우유" },
+                { word: "bread", display: "bre_d", missing: "a", meaning: "빵" },
+                { word: "apple", display: "_pple", missing: "a", meaning: "사과" },
+                { word: "cake", display: "ca_e", missing: "k", meaning: "케이크" },
+                { word: "egg", display: "e_g", missing: "g", meaning: "알, 달걀" },
+                { word: "fish", display: "_ish", missing: "f", meaning: "고기, 낚시하다" },
+                { word: "cup", display: "cu_", missing: "p", meaning: "컵" },
+                { word: "hat", display: "_at", missing: "h", meaning: "모자" },
+                { word: "shoe", display: "sh_e", missing: "o", meaning: "구두" },
+                { word: "play", display: "p_ay", missing: "l", meaning: "놀다" },
+                { word: "happy", display: "ha_py", missing: "p", meaning: "행복한" }
+            ],
+            '3단계': [
+                { word: "mother", display: "mo_her", missing: "t", meaning: "어머니" },
+                { word: "father", display: "_ather", missing: "f", meaning: "아버지" },
+                { word: "sister", display: "sist_r", missing: "e", meaning: "자매" },
+                { word: "brother", display: "br_ther", missing: "o", meaning: "형제" },
+                { word: "family", display: "fami_y", missing: "l", meaning: "가족" },
+                { word: "friend", display: "_riend", missing: "f", meaning: "친구" },
+                { word: "school", display: "sc_ool", missing: "h", meaning: "학교" },
+                { word: "teacher", display: "teach_r", missing: "e", meaning: "가르치다" },
+                { word: "student", display: "stude_t", missing: "n", meaning: "공부하다" },
+                { word: "class", display: "_lass", missing: "c", meaning: "학급" },
+                { word: "morning", display: "morn_ng", missing: "i", meaning: "아침" },
+                { word: "afternoon", display: "aftern_on", missing: "o", meaning: "오후" },
+                { word: "evening", display: "_vening", missing: "e", meaning: "저녁" },
+                { word: "night", display: "nig_t", missing: "h", meaning: "밤" },
+                { word: "today", display: "to_ay", missing: "d", meaning: "오늘, 현재" },
+                { word: "tomorrow", display: "tom_rrow", missing: "o", meaning: "내일" },
+                { word: "yesterday", display: "yest_rday", missing: "e", meaning: "어제" },
+                { word: "week", display: "_eek", missing: "w", meaning: "한 주" },
+                { word: "time", display: "ti_e", missing: "m", meaning: "시간" },
+                { word: "clock", display: "clo_k", missing: "c", meaning: "시계" },
+                { word: "money", display: "_oney", missing: "m", meaning: "돈" },
+                { word: "work", display: "wor_", missing: "k", meaning: "일부, 부분" },
+                { word: "name", display: "n_me", missing: "a", meaning: "이름" },
+                { word: "age", display: "a_e", missing: "g", meaning: "나이" },
+                { word: "old", display: "_ld", missing: "o", meaning: "늙은" },
+                { word: "young", display: "you_g", missing: "n", meaning: "젊은" },
+                { word: "new", display: "_ew", missing: "n", meaning: "새로운" },
+                { word: "small", display: "sm_ll", missing: "a", meaning: "작은" },
+                { word: "long", display: "l_ng", missing: "o", meaning: "긴" },
+                { word: "short", display: "sh_rt", missing: "o", meaning: "짧은" },
+                { word: "tall", display: "_all", missing: "t", meaning: "키가 큰" },
+                { word: "open", display: "op_n", missing: "e", meaning: "열다" },
+                { word: "close", display: "_lose", missing: "c", meaning: "닫다" },
+                { word: "give", display: "gi_e", missing: "v", meaning: "주다" },
+                { word: "take", display: "ta_e", missing: "k", meaning: "가져가다, 잡다" },
+                { word: "put", display: "_ut", missing: "p", meaning: "놓다" },
+                { word: "get", display: "g_t", missing: "e", meaning: "얻다" },
+                { word: "make", display: "ma_e", missing: "k", meaning: "만들다" },
+                { word: "help", display: "hel_", missing: "p", meaning: "돕다" },
+                { word: "like", display: "_ike", missing: "l", meaning: "좋아하다" }
+            ],
+            '4단계': [
+                { word: "eleven", display: "ele_en", missing: "v", meaning: "숫자 11" },
+                { word: "twelve", display: "_welve", missing: "t", meaning: "숫자 12" },
+                { word: "thirteen", display: "thirt_en", missing: "e", meaning: "숫자 13" },
+                { word: "twenty", display: "twe_ty", missing: "n", meaning: "숫자 20" },
+                { word: "thirty", display: "_hirty", missing: "t", meaning: "숫자 30" },
+                { word: "hundred", display: "hund_ed", missing: "r", meaning: "숫자 100" },
+                { word: "the", display: "_he", missing: "t", meaning: "그" },
+                { word: "and", display: "a_d", missing: "n", meaning: "그리고" },
+                { word: "but", display: "_ut", missing: "b", meaning: "그러나" },
+                { word: "for", display: "fo_", missing: "r", meaning: "~을 위하여, ~동안" },
+                { word: "with", display: "w_th", missing: "i", meaning: "~와 함께" },
+                { word: "have", display: "_ave", missing: "h", meaning: "가지다" },
+                { word: "do", display: "d_", missing: "o", meaning: "하다" },
+                { word: "say", display: "_ay", missing: "s", meaning: "말하다" },
+                { word: "can", display: "ca_", missing: "n", meaning: "할 수 있다" },
+                { word: "will", display: "_ill", missing: "w", meaning: "~할 것이다" },
+                { word: "may", display: "ma_", missing: "y", meaning: "~해도 좋다, 계절 5월" },
+                { word: "would", display: "woul_", missing: "d", meaning: "will의 과거형" },
+                { word: "could", display: "_ould", missing: "c", meaning: "can의 과거형" },
+                { word: "should", display: "sho_ld", missing: "u", meaning: "~해야 한다" },
+                { word: "must", display: "m_st", missing: "u", meaning: "~해야 한다" },
+                { word: "walk", display: "wal_", missing: "k", meaning: "걷다" },
+                { word: "talk", display: "_alk", missing: "t", meaning: "말하다" },
+                { word: "read", display: "re_d", missing: "a", meaning: "읽다" },
+                { word: "write", display: "wri_e", missing: "t", meaning: "쓰다" },
+                { word: "listen", display: "lis_en", missing: "t", meaning: "듣다" },
+                { word: "watch", display: "_atch", missing: "w", meaning: "보다" },
+                { word: "sleep", display: "sle_p", missing: "e", meaning: "잠자다" },
+                { word: "wake", display: "wa_e", missing: "k", meaning: "잠이 깨다" },
+                { word: "stand", display: "_tand", missing: "s", meaning: "서다" },
+                { word: "love", display: "lo_e", missing: "v", meaning: "사랑" },
+                { word: "know", display: "kn_w", missing: "o", meaning: "알다" },
+                { word: "think", display: "_hink", missing: "t", meaning: "생각하다" },
+                { word: "feel", display: "fe_l", missing: "e", meaning: "느끼다" },
+                { word: "want", display: "wan_", missing: "t", meaning: "원하다" },
+                { word: "need", display: "_eed", missing: "n", meaning: "필요하다" },
+                { word: "nice", display: "ni_e", missing: "c", meaning: "좋은" },
+                { word: "fine", display: "_ine", missing: "f", meaning: "좋은, 맑은" },
+                { word: "great", display: "gre_t", missing: "a", meaning: "큰" },
+                { word: "beautiful", display: "beauti_ul", missing: "f", meaning: "아름다움" }
+            ],
+            '5단계': [
+                { word: "orange", display: "_range", missing: "o", meaning: "오렌지" },
+                { word: "brown", display: "br_wn", missing: "o", meaning: "갈색" },
+                { word: "pink", display: "p_nk", missing: "i", meaning: "분홍색" },
+                { word: "gray", display: "gra_", missing: "y", meaning: "회색" },
+                { word: "purple", display: "pur_le", missing: "p", meaning: "보라색" },
+                { word: "horse", display: "hor_e", missing: "s", meaning: "말" },
+                { word: "cow", display: "_ow", missing: "c", meaning: "암소" },
+                { word: "pig", display: "pi_", missing: "g", meaning: "돼지" },
+                { word: "duck", display: "d_ck", missing: "u", meaning: "오리" },
+                { word: "bird", display: "_ird", missing: "b", meaning: "새" },
+                { word: "bear", display: "bea_", missing: "r", meaning: "곰" },
+                { word: "lion", display: "li_n", missing: "o", meaning: "사자" },
+                { word: "tiger", display: "_iger", missing: "t", meaning: "호랑이" },
+                { word: "elephant", display: "elepha_t", missing: "n", meaning: "코끼리" },
+                { word: "monkey", display: "mon_ey", missing: "k", meaning: "원숭이" },
+                { word: "rabbit", display: "rab_it", missing: "b", meaning: "토끼" },
+                { word: "mouse", display: "_ouse", missing: "m", meaning: "쥐, 마우스" },
+                { word: "bee", display: "b_e", missing: "e", meaning: "벌" },
+                { word: "fox", display: "fo_", missing: "x", meaning: "여우" },
+                { word: "chicken", display: "ch_cken", missing: "i", meaning: "치킨, 닭" },
+                { word: "cheese", display: "_heese", missing: "c", meaning: "치즈" },
+                { word: "butter", display: "but_er", missing: "t", meaning: "버터" },
+                { word: "meat", display: "m_at", missing: "e", meaning: "고기, 낚시하다" },
+                { word: "beef", display: "bee_", missing: "f", meaning: "소고기" },
+                { word: "soup", display: "_oup", missing: "s", meaning: "스프" },
+                { word: "rice", display: "ri_e", missing: "c", meaning: "쌀, 밥" },
+                { word: "banana", display: "ban_na", missing: "a", meaning: "바나나" },
+                { word: "grape", display: "gra_e", missing: "p", meaning: "포도" },
+                { word: "juice", display: "_uice", missing: "j", meaning: "주스" },
+                { word: "coffee", display: "cof_ee", missing: "f", meaning: "커피" },
+                { word: "tea", display: "t_a", missing: "e", meaning: "차" },
+                { word: "sugar", display: "sug_r", missing: "a", meaning: "설탕" },
+                { word: "salt", display: "_alt", missing: "s", meaning: "소금" },
+                { word: "sandwich", display: "sandwic_", missing: "h", meaning: "샌드위치" },
+                { word: "pizza", display: "piz_a", missing: "z", meaning: "피자" },
+                { word: "cookie", display: "_ookie", missing: "c", meaning: "쿠키" },
+                { word: "candy", display: "can_y", missing: "d", meaning: "사탕" },
+                { word: "ice", display: "i_e", missing: "c", meaning: "얼음" },
+                { word: "cream", display: "_ream", missing: "c", meaning: "크림" }
+            ],
+            '6단계': [
+                { word: "finger", display: "fing_r", missing: "e", meaning: "손가락" },
+                { word: "tooth", display: "_ooth", missing: "t", meaning: "이, 치아" },
+                { word: "neck", display: "ne_k", missing: "c", meaning: "목" },
+                { word: "back", display: "bac_", missing: "k", meaning: "뒤에" },
+                { word: "skin", display: "_kin", missing: "s", meaning: "피부" },
+                { word: "blood", display: "blo_d", missing: "o", meaning: "피" },
+                { word: "bone", display: "b_ne", missing: "o", meaning: "뼈" },
+                { word: "heart", display: "hear_", missing: "t", meaning: "마음" },
+                { word: "shirt", display: "sh_rt", missing: "i", meaning: "셔츠" },
+                { word: "pants", display: "_ants", missing: "p", meaning: "바지" },
+                { word: "dress", display: "dres_", missing: "s", meaning: "드레스, 옷을 입다" },
+                { word: "skirt", display: "sk_rt", missing: "i", meaning: "치마" },
+                { word: "coat", display: "_oat", missing: "c", meaning: "외투" },
+                { word: "jacket", display: "jack_t", missing: "e", meaning: "재킷" },
+                { word: "sock", display: "so_k", missing: "c", meaning: "양말" },
+                { word: "belt", display: "b_lt", missing: "e", meaning: "벨트, 허리띠" },
+                { word: "cap", display: "ca_", missing: "p", meaning: "모자" },
+                { word: "clothes", display: "_lothes", missing: "c", meaning: "옷" },
+                { word: "wear", display: "we_r", missing: "a", meaning: "옷을 입다" },
+                { word: "kitchen", display: "kitc_en", missing: "h", meaning: "부엌" },
+                { word: "bathroom", display: "bathroo_", missing: "m", meaning: "목욕" },
+                { word: "bedroom", display: "_edroom", missing: "b", meaning: "침실" },
+                { word: "window", display: "wind_w", missing: "o", meaning: "창문" },
+                { word: "wall", display: "wa_l", missing: "l", meaning: "벽" },
+                { word: "floor", display: "_loor", missing: "f", meaning: "마루" },
+                { word: "roof", display: "roo_", missing: "f", meaning: "지붕" },
+                { word: "garden", display: "gard_n", missing: "e", meaning: "정원" },
+                { word: "yard", display: "_ard", missing: "y", meaning: "마당" },
+                { word: "box", display: "bo_", missing: "x", meaning: "상자" },
+                { word: "bag", display: "b_g", missing: "a", meaning: "가방" },
+                { word: "bottle", display: "bot_le", missing: "t", meaning: "병" },
+                { word: "glass", display: "_lass", missing: "g", meaning: "유리, 잔" },
+                { word: "plate", display: "pla_e", missing: "t", meaning: "접시" },
+                { word: "bowl", display: "b_wl", missing: "o", meaning: "그릇" },
+                { word: "spoon", display: "_poon", missing: "s", meaning: "숟가락" },
+                { word: "fork", display: "for_", missing: "k", meaning: "포크" },
+                { word: "knife", display: "kni_e", missing: "f", meaning: "칼" },
+                { word: "key", display: "k_y", missing: "e", meaning: "열쇠" },
+                { word: "pen", display: "_en", missing: "p", meaning: "펜" }
+            ],
+            '7단계': [
+                { word: "pencil", display: "penc_l", missing: "i", meaning: "연필" },
+                { word: "paper", display: "_aper", missing: "p", meaning: "종이" },
+                { word: "desk", display: "des_", missing: "k", meaning: "책상" },
+                { word: "office", display: "of_ice", missing: "f", meaning: "사무실" },
+                { word: "library", display: "libr_ry", missing: "a", meaning: "도서관" },
+                { word: "hospital", display: "_ospital", missing: "h", meaning: "병원" },
+                { word: "bank", display: "ban_", missing: "k", meaning: "은행" },
+                { word: "store", display: "st_re", missing: "o", meaning: "가게" },
+                { word: "market", display: "_arket", missing: "m", meaning: "상점, 가게" },
+                { word: "restaurant", display: "restauran_", missing: "t", meaning: "레스토랑, 식당" },
+                { word: "hotel", display: "ho_el", missing: "t", meaning: "호텔" },
+                { word: "park", display: "par_", missing: "k", meaning: "공원" },
+                { word: "street", display: "_treet", missing: "s", meaning: "거리" },
+                { word: "road", display: "roa_", missing: "d", meaning: "길" },
+                { word: "city", display: "c_ty", missing: "i", meaning: "도시" },
+                { word: "town", display: "to_n", missing: "w", meaning: "도시" },
+                { word: "country", display: "countr_", missing: "y", meaning: "국가, 나라, 지역" },
+                { word: "bus", display: "_us", missing: "b", meaning: "버스" },
+                { word: "train", display: "trai_", missing: "n", meaning: "기차, 훈련시키다" },
+                { word: "plane", display: "pla_e", missing: "n", meaning: "비행기" },
+                { word: "bike", display: "_ike", missing: "b", meaning: "자전거" },
+                { word: "boat", display: "bo_t", missing: "a", meaning: "배" },
+                { word: "ship", display: "sh_p", missing: "i", meaning: "배" },
+                { word: "taxi", display: "tax_", missing: "i", meaning: "택시" },
+                { word: "truck", display: "_ruck", missing: "t", meaning: "트럭, 화물차" },
+                { word: "drive", display: "dri_e", missing: "v", meaning: "운전하다" },
+                { word: "fly", display: "_ly", missing: "f", meaning: "날다" },
+                { word: "travel", display: "trave_", missing: "l", meaning: "여행" },
+                { word: "trip", display: "tr_p", missing: "i", meaning: "여행" },
+                { word: "weather", display: "_eather", missing: "w", meaning: "날씨" },
+                { word: "rain", display: "rai_", missing: "n", meaning: "비" },
+                { word: "snow", display: "sn_w", missing: "o", meaning: "눈" },
+                { word: "wind", display: "_ind", missing: "w", meaning: "바람" },
+                { word: "cloud", display: "clou_", missing: "d", meaning: "구름" },
+                { word: "sky", display: "s_y", missing: "k", meaning: "하늘" },
+                { word: "moon", display: "moo_", missing: "n", meaning: "달" },
+                { word: "star", display: "_tar", missing: "s", meaning: "별" },
+                { word: "earth", display: "eart_", missing: "h", meaning: "지구" }
+            ],
+            '8단계': [
+                { word: "spring", display: "sprin_", missing: "g", meaning: "계절 봄, 용수철" },
+                { word: "summer", display: "_ummer", missing: "s", meaning: "계절 여름" },
+                { word: "autumn", display: "autu_n", missing: "m", meaning: "가을" },
+                { word: "winter", display: "wint_r", missing: "e", meaning: "계절 겨울" },
+                { word: "season", display: "_eason", missing: "s", meaning: "계절" },
+                { word: "warm", display: "war_", missing: "m", meaning: "따뜻한" },
+                { word: "cool", display: "_ool", missing: "c", meaning: "시원한" },
+                { word: "wet", display: "w_t", missing: "e", meaning: "젖은" },
+                { word: "dry", display: "_ry", missing: "d", meaning: "마른" },
+                { word: "hour", display: "hou_", missing: "r", meaning: "시간" },
+                { word: "minute", display: "_inute", missing: "m", meaning: "분" },
+                { word: "second", display: "sec_nd", missing: "o", meaning: "두 번째의" },
+                { word: "early", display: "ear_y", missing: "l", meaning: "일찍" },
+                { word: "late", display: "_ate", missing: "l", meaning: "늦은" },
+                { word: "now", display: "no_", missing: "w", meaning: "지금" },
+                { word: "soon", display: "s_on", missing: "o", meaning: "곧" },
+                { word: "before", display: "befor_", missing: "e", meaning: "~전에" },
+                { word: "after", display: "_fter", missing: "a", meaning: "~후에" },
+                { word: "during", display: "dur_ng", missing: "i", meaning: "~동안" },
+                { word: "north", display: "nor_h", missing: "t", meaning: "북쪽" },
+                { word: "south", display: "_outh", missing: "s", meaning: "남쪽" },
+                { word: "east", display: "ea_t", missing: "s", meaning: "동쪽" },
+                { word: "west", display: "wes_", missing: "t", meaning: "서쪽" },
+                { word: "left", display: "_eft", missing: "l", meaning: "왼쪽" },
+                { word: "right", display: "righ_", missing: "t", meaning: "오른쪽, 옳은" },
+                { word: "front", display: "fr_nt", missing: "o", meaning: "앞, 정면" },
+                { word: "center", display: "_enter", missing: "c", meaning: "중앙" },
+                { word: "middle", display: "midd_e", missing: "l", meaning: "한가운데, 중앙" },
+                { word: "top", display: "t_p", missing: "o", meaning: "꼭대기" },
+                { word: "bottom", display: "botto_", missing: "m", meaning: "맨 아래" },
+                { word: "inside", display: "_nside", missing: "i", meaning: "내부에" },
+                { word: "outside", display: "outsid_", missing: "e", meaning: "밖에" },
+                { word: "down", display: "dow_", missing: "n", meaning: "아래에" },
+                { word: "over", display: "_ver", missing: "o", meaning: "~위쪽에" },
+                { word: "under", display: "und_r", missing: "e", meaning: "~아래에" },
+                { word: "near", display: "nea_", missing: "r", meaning: "가까운" }
+            ],
+            '9단계': [
+                { word: "far", display: "_ar", missing: "f", meaning: "멀리 떨어진" },
+                { word: "there", display: "ther_", missing: "e", meaning: "그곳에" },
+                { word: "where", display: "_here", missing: "w", meaning: "어디" },
+                { word: "when", display: "whe_", missing: "n", meaning: "언제" },
+                { word: "why", display: "w_y", missing: "h", meaning: "왜" },
+                { word: "how", display: "ho_", missing: "w", meaning: "어떻게" },
+                { word: "what", display: "_hat", missing: "w", meaning: "무엇" },
+                { word: "who", display: "wh_", missing: "o", meaning: "누구" },
+                { word: "sad", display: "sa_", missing: "d", meaning: "슬픈" },
+                { word: "angry", display: "_ngry", missing: "a", meaning: "화난" },
+                { word: "glad", display: "gla_", missing: "d", meaning: "기쁜" },
+                { word: "sorry", display: "sor_y", missing: "r", meaning: "슬픈, 미안한" },
+                { word: "afraid", display: "afrai_", missing: "d", meaning: "두려워하는, 걱정하는" },
+                { word: "brave", display: "_rave", missing: "b", meaning: "용감한" },
+                { word: "shy", display: "sh_", missing: "y", meaning: "수줍어하는" },
+                { word: "kind", display: "k_nd", missing: "i", meaning: "친절한" },
+                { word: "friendly", display: "friend_y", missing: "l", meaning: "친근한" },
+                { word: "funny", display: "_unny", missing: "f", meaning: "재미있는" },
+                { word: "smart", display: "smar_", missing: "t", meaning: "똑똑한" },
+                { word: "clever", display: "clev_r", missing: "e", meaning: "영리한, 똑똑한" },
+                { word: "stupid", display: "_tupid", missing: "s", meaning: "바보 같은" },
+                { word: "lazy", display: "la_y", missing: "z", meaning: "게으른" },
+                { word: "busy", display: "bus_", missing: "y", meaning: "바쁜" },
+                { word: "tired", display: "_ired", missing: "t", meaning: "피곤한" },
+                { word: "sick", display: "sic_", missing: "k", meaning: "아픈" },
+                { word: "healthy", display: "healt_y", missing: "h", meaning: "건강한" },
+                { word: "strong", display: "_trong", missing: "s", meaning: "강한" },
+                { word: "weak", display: "wea_", missing: "k", meaning: "약한" },
+                { word: "fast", display: "fas_", missing: "t", meaning: "빠른" },
+                { word: "slow", display: "_low", missing: "s", meaning: "느린" },
+                { word: "easy", display: "eas_", missing: "y", meaning: "쉬운" },
+                { word: "difficult", display: "difficu_t", missing: "l", meaning: "어려운, 힘든" },
+                { word: "hard", display: "_ard", missing: "h", meaning: "어려운, 딱딱한" },
+                { word: "soft", display: "sof_", missing: "t", meaning: "부드러운" },
+                { word: "loud", display: "lou_", missing: "d", meaning: "큰 소리의" },
+                { word: "quiet", display: "_uiet", missing: "q", meaning: "조용한" },
+                { word: "clean", display: "clea_", missing: "n", meaning: "깨끗한" }
+            ],
+            '10단계': [
+                { word: "dirty", display: "_irty", missing: "d", meaning: "더러운" },
+                { word: "empty", display: "emp_y", missing: "t", meaning: "빈" },
+                { word: "full", display: "fu_l", missing: "l", meaning: "가득찬" },
+                { word: "heavy", display: "_eavy", missing: "h", meaning: "무거운" },
+                { word: "light", display: "ligh_", missing: "t", meaning: "빛" },
+                { word: "thick", display: "thic_", missing: "k", meaning: "두꺼운" },
+                { word: "thin", display: "_hin", missing: "t", meaning: "얇은" },
+                { word: "rich", display: "ric_", missing: "h", meaning: "부유한" },
+                { word: "poor", display: "_oor", missing: "p", meaning: "가난한" },
+                { word: "expensive", display: "expensiv_", missing: "e", meaning: "비싼" },
+                { word: "cheap", display: "chea_", missing: "p", meaning: "값싼" },
+                { word: "free", display: "_ree", missing: "f", meaning: "자유로운" },
+                { word: "buy", display: "bu_", missing: "y", meaning: "사다" },
+                { word: "sell", display: "sel_", missing: "l", meaning: "팔다" },
+                { word: "pay", display: "_ay", missing: "p", meaning: "지불하다" },
+                { word: "cost", display: "cos_", missing: "t", meaning: "값, 비용" },
+                { word: "price", display: "_rice", missing: "p", meaning: "가격" },
+                { word: "cook", display: "coo_", missing: "k", meaning: "요리하다" },
+                { word: "bake", display: "bak_", missing: "e", meaning: "굽다" },
+                { word: "wash", display: "_ash", missing: "w", meaning: "씻다" },
+                { word: "brush", display: "brus_", missing: "h", meaning: "솔" },
+                { word: "sing", display: "sin_", missing: "g", meaning: "노래하다" },
+                { word: "dance", display: "_ance", missing: "d", meaning: "춤추다" },
+                { word: "music", display: "musi_", missing: "c", meaning: "음악" },
+                { word: "song", display: "_ong", missing: "s", meaning: "노래" },
+                { word: "guitar", display: "guita_", missing: "r", meaning: "기타" },
+                { word: "piano", display: "_iano", missing: "p", meaning: "피아노" },
+                { word: "violin", display: "violi_", missing: "n", meaning: "바이올린" },
+                { word: "drum", display: "dru_", missing: "m", meaning: "드럼, 북" },
+                { word: "game", display: "_ame", missing: "g", meaning: "게임, 놀이" },
+                { word: "toy", display: "to_", missing: "y", meaning: "인형" },
+                { word: "doll", display: "_oll", missing: "d", meaning: "인형" },
+                { word: "sport", display: "spor_", missing: "t", meaning: "운동경기" },
+                { word: "football", display: "footbal_", missing: "l", meaning: "축구" },
+                { word: "soccer", display: "_occer", missing: "s", meaning: "축구" },
+                { word: "basketball", display: "basketba_l", missing: "l", meaning: "농구" },
+                { word: "baseball", display: "_aseball", missing: "b", meaning: "야구" },
+                { word: "tennis", display: "tenni_", missing: "s", meaning: "테니스" }
+            ],
+            '11단계': [
+                { word: "golf", display: "_olf", missing: "g", meaning: "골프" },
+                { word: "swim", display: "swi_", missing: "m", meaning: "수영하다" },
+                { word: "ski", display: "_ki", missing: "s", meaning: "스키" },
+                { word: "skate", display: "skat_", missing: "e", meaning: "스케이트" },
+                { word: "hike", display: "h_ke", missing: "i", meaning: "하이킹, 도보 여행" },
+                { word: "camp", display: "_amp", missing: "c", meaning: "캠프, 야영지" },
+                { word: "climb", display: "clim_", missing: "b", meaning: "오르다" },
+                { word: "jump", display: "_ump", missing: "j", meaning: "뛰어오르다" },
+                { word: "exercise", display: "exercis_", missing: "e", meaning: "연습, 운동" },
+                { word: "hobby", display: "hobb_", missing: "y", meaning: "취미" },
+                { word: "movie", display: "_ovie", missing: "m", meaning: "영화" },
+                { word: "film", display: "fil_", missing: "m", meaning: "필름" },
+                { word: "television", display: "televisio_", missing: "n", meaning: "텔레비전" },
+                { word: "radio", display: "_adio", missing: "r", meaning: "라디오" },
+                { word: "computer", display: "compute_", missing: "r", meaning: "컴퓨터" },
+                { word: "internet", display: "intern_t", missing: "e", meaning: "인터넷" },
+                { word: "website", display: "_ebsite", missing: "w", meaning: "웹사이트" },
+                { word: "phone", display: "phon_", missing: "e", meaning: "전화기" },
+                { word: "camera", display: "camer_", missing: "a", meaning: "카메라, 사진기" },
+                { word: "picture", display: "_icture", missing: "p", meaning: "그림" },
+                { word: "photo", display: "phot_", missing: "o", meaning: "사진" },
+                { word: "video", display: "vide_", missing: "o", meaning: "비디오" },
+                { word: "learn", display: "_earn", missing: "l", meaning: "배우다" },
+                { word: "teach", display: "teac_", missing: "h", meaning: "가르치다" },
+                { word: "study", display: "stud_", missing: "y", meaning: "공부하다" },
+                { word: "lesson", display: "lesso_", missing: "n", meaning: "수업, 교훈" },
+                { word: "homework", display: "_omework", missing: "h", meaning: "숙제, 과제" },
+                { word: "test", display: "tes_", missing: "t", meaning: "시험" },
+                { word: "exam", display: "_xam", missing: "e", meaning: "시험" },
+                { word: "quiz", display: "qui_", missing: "z", meaning: "퀴즈" },
+                { word: "answer", display: "answe_", missing: "r", meaning: "대답" },
+                { word: "question", display: "_uestion", missing: "q", meaning: "질문" },
+                { word: "ask", display: "as_", missing: "k", meaning: "묻다" },
+                { word: "tell", display: "_ell", missing: "t", meaning: "말하다" },
+                { word: "explain", display: "explai_", missing: "n", meaning: "설명하다" },
+                { word: "understand", display: "understan_", missing: "d", meaning: "이해하다" },
+                { word: "remember", display: "_emember", missing: "r", meaning: "기억하다" },
+                { word: "forget", display: "forge_", missing: "t", meaning: "잊다" }
+            ],
+            '12단계': [
+                { word: "doctor", display: "_octor", missing: "d", meaning: "의사" },
+                { word: "nurse", display: "nurs_", missing: "e", meaning: "간호사" },
+                { word: "teacher", display: "teache_", missing: "r", meaning: "선생님" },
+                { word: "student", display: "_tudent", missing: "s", meaning: "학생" },
+                { word: "worker", display: "worke_", missing: "r", meaning: "일하는 사람" },
+                { word: "farmer", display: "_armer", missing: "f", meaning: "농부" },
+                { word: "driver", display: "drive_", missing: "r", meaning: "운전사" },
+                { word: "pilot", display: "pilo_", missing: "t", meaning: "조종사" },
+                { word: "police", display: "_olice", missing: "p", meaning: "경찰" },
+                { word: "soldier", display: "soldie_", missing: "r", meaning: "군인" },
+                { word: "artist", display: "artis_", missing: "t", meaning: "예술가" },
+                { word: "writer", display: "_riter", missing: "w", meaning: "작가" },
+                { word: "singer", display: "singe_", missing: "r", meaning: "가수" },
+                { word: "actor", display: "_ctor", missing: "a", meaning: "배우" },
+                { word: "waiter", display: "waite_", missing: "r", meaning: "웨이터" },
+                { word: "manager", display: "_anager", missing: "m", meaning: "관리자" },
+                { word: "boss", display: "bos_", missing: "s", meaning: "상사" },
+                { word: "employee", display: "employe_", missing: "e", meaning: "직원" },
+                { word: "customer", display: "_ustomer", missing: "c", meaning: "손님, 고객" },
+                { word: "job", display: "jo_", missing: "b", meaning: "직업" },
+                { word: "business", display: "busines_", missing: "s", meaning: "사업, 장사" },
+                { word: "company", display: "_ompany", missing: "c", meaning: "회사, 단체" },
+                { word: "meeting", display: "meetin_", missing: "g", meaning: "회의" },
+                { word: "team", display: "_eam", missing: "t", meaning: "팀" },
+                { word: "group", display: "grou_", missing: "p", meaning: "단체" },
+                { word: "member", display: "membe_", missing: "r", meaning: "구성원, 회원" },
+                { word: "partner", display: "_artner", missing: "p", meaning: "파트너, 동반자" },
+                { word: "marry", display: "marr_", missing: "y", meaning: "결혼하다" },
+                { word: "wedding", display: "weddin_", missing: "g", meaning: "결혼" },
+                { word: "husband", display: "_usband", missing: "h", meaning: "남편" },
+                { word: "wife", display: "wif_", missing: "e", meaning: "아내" },
+                { word: "parent", display: "paren_", missing: "t", meaning: "부모" },
+                { word: "child", display: "_hild", missing: "c", meaning: "어린이" },
+                { word: "son", display: "so_", missing: "n", meaning: "아들" },
+                { word: "daughter", display: "daughte_", missing: "r", meaning: "딸" },
+                { word: "uncle", display: "_ncle", missing: "u", meaning: "삼촌" },
+                { word: "aunt", display: "aun_", missing: "t", meaning: "이모, 고모" }
+            ],
+            '13단계': [
+                { word: "cousin", display: "_ousin", missing: "c", meaning: "사촌" },
+                { word: "grandfather", display: "grandfathe_", missing: "r", meaning: "할아버지" },
+                { word: "grandmother", display: "_randmother", missing: "g", meaning: "할머니" },
+                { word: "neighbor", display: "neighbo_", missing: "r", meaning: "이웃" },
+                { word: "guest", display: "_uest", missing: "g", meaning: "손님" },
+                { word: "stranger", display: "strange_", missing: "r", meaning: "낯선 사람" },
+                { word: "people", display: "peopl_", missing: "e", meaning: "사람" },
+                { word: "person", display: "_erson", missing: "p", meaning: "사람" },
+                { word: "human", display: "huma_", missing: "n", meaning: "인간, 인간적인" },
+                { word: "life", display: "lif_", missing: "e", meaning: "삶, 생명" },
+                { word: "death", display: "_eath", missing: "d", meaning: "죽음" },
+                { word: "live", display: "liv_", missing: "e", meaning: "살다, 생생한" },
+                { word: "die", display: "_ie", missing: "d", meaning: "죽다" },
+                { word: "born", display: "bor_", missing: "n", meaning: "태어난" },
+                { word: "grow", display: "_row", missing: "g", meaning: "성장하다, 자라다" },
+                { word: "change", display: "chang_", missing: "e", meaning: "바꾸다" },
+                { word: "move", display: "_ove", missing: "m", meaning: "움직이다" },
+                { word: "stay", display: "sta_", missing: "y", meaning: "머물다" },
+                { word: "leave", display: "leav_", missing: "e", meaning: "떠나다" },
+                { word: "arrive", display: "_rrive", missing: "a", meaning: "도착하다" },
+                { word: "return", display: "retur_", missing: "n", meaning: "되돌아가다" },
+                { word: "visit", display: "_isit", missing: "v", meaning: "방문하다" },
+                { word: "meet", display: "mee_", missing: "t", meaning: "만나다" },
+                { word: "join", display: "joi_", missing: "n", meaning: "가입하다, 연결하다" },
+                { word: "follow", display: "_ollow", missing: "f", meaning: "따르다" },
+                { word: "lead", display: "lea_", missing: "d", meaning: "이끌다" },
+                { word: "win", display: "wi_", missing: "n", meaning: "이기다" },
+                { word: "lose", display: "_ose", missing: "l", meaning: "잃다" },
+                { word: "fight", display: "figh_", missing: "t", meaning: "싸움" },
+                { word: "peace", display: "peac_", missing: "e", meaning: "평화" },
+                { word: "war", display: "_ar", missing: "w", meaning: "전쟁" },
+                { word: "safe", display: "saf_", missing: "e", meaning: "안전한" },
+                { word: "danger", display: "_anger", missing: "d", meaning: "위험한" },
+                { word: "protect", display: "protec_", missing: "t", meaning: "보호하다" },
+                { word: "save", display: "_ave", missing: "s", meaning: "구하다" },
+                { word: "care", display: "car_", missing: "e", meaning: "돌봄, 조심" },
+                { word: "worry", display: "_orry", missing: "w", meaning: "걱정하다" },
+                { word: "hope", display: "hop_", missing: "e", meaning: "희망" },
+                { word: "dream", display: "_ream", missing: "d", meaning: "꿈" }
+            ],
+            '14단계': [
+                { word: "believe", display: "_elieve", missing: "b", meaning: "믿다" },
+                { word: "trust", display: "trus_", missing: "t", meaning: "신뢰하다" },
+                { word: "promise", display: "promis_", missing: "e", meaning: "약속하다" },
+                { word: "agree", display: "_gree", missing: "a", meaning: "동의하다, 찬성하다" },
+                { word: "disagree", display: "disagre_", missing: "e", meaning: "동의하지 않다" },
+                { word: "decide", display: "decid_", missing: "e", meaning: "결정하다" },
+                { word: "choose", display: "_hoose", missing: "c", meaning: "선택하다, 고르다" },
+                { word: "plan", display: "pla_", missing: "n", meaning: "계획" },
+                { word: "prepare", display: "prepar_", missing: "e", meaning: "준비하다" },
+                { word: "organize", display: "_rganize", missing: "o", meaning: "조직하다" },
+                { word: "control", display: "contro_", missing: "l", meaning: "지배, 통제하다" },
+                { word: "manage", display: "_anage", missing: "m", meaning: "관리하다" },
+                { word: "nature", display: "natur_", missing: "e", meaning: "자연" },
+                { word: "environment", display: "environmen_", missing: "t", meaning: "환경" },
+                { word: "animal", display: "_nimal", missing: "a", meaning: "동물" },
+                { word: "plant", display: "plan_", missing: "t", meaning: "식물" },
+                { word: "tree", display: "_ree", missing: "t", meaning: "나무" },
+                { word: "flower", display: "flowe_", missing: "r", meaning: "꽃" },
+                { word: "grass", display: "_rass", missing: "g", meaning: "풀, 잔디" },
+                { word: "leaf", display: "lea_", missing: "f", meaning: "잎" },
+                { word: "forest", display: "fores_", missing: "t", meaning: "숲, 삼림" },
+                { word: "mountain", display: "_ountain", missing: "m", meaning: "산" },
+                { word: "hill", display: "hil_", missing: "l", meaning: "언덕" },
+                { word: "river", display: "_iver", missing: "r", meaning: "강" },
+                { word: "lake", display: "lak_", missing: "e", meaning: "호수" },
+                { word: "ocean", display: "ocea_", missing: "n", meaning: "바다" },
+                { word: "sea", display: "_ea", missing: "s", meaning: "바다" },
+                { word: "beach", display: "beac_", missing: "h", meaning: "해변" },
+                { word: "island", display: "_sland", missing: "i", meaning: "섬" },
+                { word: "desert", display: "deser_", missing: "t", meaning: "사막" },
+                { word: "field", display: "_ield", missing: "f", meaning: "들판, 경기장" },
+                { word: "farm", display: "far_", missing: "m", meaning: "농장" },
+                { word: "science", display: "_cience", missing: "s", meaning: "과학" },
+                { word: "technology", display: "technolog_", missing: "y", meaning: "기술" },
+                { word: "medicine", display: "medicin_", missing: "e", meaning: "의학" },
+                { word: "health", display: "_ealth", missing: "h", meaning: "건강" },
+                { word: "energy", display: "energ_", missing: "y", meaning: "에너지, 힘" },
+                { word: "power", display: "_ower", missing: "p", meaning: "힘" },
+                { word: "electricity", display: "electricit_", missing: "y", meaning: "전기" }
+            ],
+            '15단계': [
+                { word: "fire", display: "_ire", missing: "f", meaning: "불타다" },
+                { word: "air", display: "ai_", missing: "r", meaning: "공기" },
+                { word: "space", display: "_pace", missing: "s", meaning: "공간, 우주" },
+                { word: "planet", display: "plane_", missing: "t", meaning: "행성" },
+                { word: "universe", display: "_niverse", missing: "u", meaning: "우주" },
+                { word: "world", display: "worl_", missing: "d", meaning: "세상" },
+                { word: "global", display: "_lobal", missing: "g", meaning: "전 세계의" },
+                { word: "international", display: "internationa_", missing: "l", meaning: "국제적인" },
+                { word: "national", display: "_ational", missing: "n", meaning: "국가의" },
+                { word: "local", display: "loca_", missing: "l", meaning: "지역의" },
+                { word: "public", display: "_ublic", missing: "p", meaning: "공공의" },
+                { word: "private", display: "privat_", missing: "e", meaning: "사적인" },
+                { word: "personal", display: "_ersonal", missing: "p", meaning: "개인적인" },
+                { word: "social", display: "socia_", missing: "l", meaning: "사회적인" },
+                { word: "political", display: "_olitical", missing: "p", meaning: "정치적인" },
+                { word: "economic", display: "economi_", missing: "c", meaning: "경제적인" },
+                { word: "cultural", display: "_ultural", missing: "c", meaning: "문화적인" },
+                { word: "traditional", display: "traditiona_", missing: "l", meaning: "전통적인" },
+                { word: "modern", display: "_odern", missing: "m", meaning: "현대의" },
+                { word: "ancient", display: "ancien_", missing: "t", meaning: "고대의" },
+                { word: "historical", display: "_istorical", missing: "h", meaning: "역사적인" },
+                { word: "future", display: "futur_", missing: "e", meaning: "미래" },
+                { word: "past", display: "_ast", missing: "p", meaning: "과거" },
+                { word: "present", display: "presen_", missing: "t", meaning: "현재, 선물" },
+                { word: "moment", display: "_oment", missing: "m", meaning: "순간" },
+                { word: "period", display: "perio_", missing: "d", meaning: "기간" },
+                { word: "century", display: "_entury", missing: "c", meaning: "세기" },
+                { word: "decade", display: "decad_", missing: "e", meaning: "10년" },
+                { word: "generation", display: "_eneration", missing: "g", meaning: "세대" },
+                { word: "age", display: "ag_", missing: "e", meaning: "시대" },
+                { word: "era", display: "_ra", missing: "e", meaning: "시대" },
+                { word: "history", display: "histor_", missing: "y", meaning: "역사" },
+                { word: "story", display: "_tory", missing: "s", meaning: "이야기" },
+                { word: "event", display: "even_", missing: "t", meaning: "사건" }
+            ],
+            '16단계': [
+                { word: "experience", display: "_xperience", missing: "e", meaning: "경험" },
+                { word: "memory", display: "memor_", missing: "y", meaning: "기억" },
+                { word: "knowledge", display: "_nowledge", missing: "k", meaning: "지식" },
+                { word: "information", display: "informatio_", missing: "n", meaning: "정보" },
+                { word: "idea", display: "_dea", missing: "i", meaning: "생각" },
+                { word: "thought", display: "though_", missing: "t", meaning: "생각" },
+                { word: "opinion", display: "_pinion", missing: "o", meaning: "의견" },
+                { word: "belief", display: "belie_", missing: "f", meaning: "믿음" },
+                { word: "attitude", display: "attitud_", missing: "e", meaning: "태도" },
+                { word: "behavior", display: "_ehavior", missing: "b", meaning: "행동" },
+                { word: "character", display: "characte_", missing: "r", meaning: "성격" },
+                { word: "personality", display: "_ersonality", missing: "p", meaning: "개성" },
+                { word: "quality", display: "qualit_", missing: "y", meaning: "질" },
+                { word: "quantity", display: "_uantity", missing: "q", meaning: "양" },
+                { word: "amount", display: "amoun_", missing: "t", meaning: "양" },
+                { word: "number", display: "_umber", missing: "n", meaning: "숫자" },
+                { word: "size", display: "siz_", missing: "e", meaning: "크기" },
+                { word: "weight", display: "_eight", missing: "w", meaning: "무게, 체중" },
+                { word: "height", display: "heigh_", missing: "t", meaning: "높이" },
+                { word: "length", display: "_ength", missing: "l", meaning: "길이" },
+                { word: "width", display: "widt_", missing: "h", meaning: "너비" },
+                { word: "depth", display: "_epth", missing: "d", meaning: "깊이" },
+                { word: "distance", display: "distanc_", missing: "e", meaning: "거리" },
+                { word: "speed", display: "_peed", missing: "s", meaning: "속도" },
+                { word: "direction", display: "directio_", missing: "n", meaning: "방향" },
+                { word: "position", display: "_osition", missing: "p", meaning: "위치" },
+                { word: "location", display: "locatio_", missing: "n", meaning: "위치" },
+                { word: "place", display: "_lace", missing: "p", meaning: "장소" },
+                { word: "area", display: "are_", missing: "a", meaning: "지역, 구역" },
+                { word: "region", display: "_egion", missing: "r", meaning: "지역" },
+                { word: "zone", display: "zon_", missing: "e", meaning: "구역" },
+                { word: "section", display: "_ection", missing: "s", meaning: "부분" },
+                { word: "part", display: "par_", missing: "t", meaning: "일부, 부분" },
+                { word: "piece", display: "_iece", missing: "p", meaning: "조각" },
+                { word: "element", display: "elemen_", missing: "t", meaning: "요소" },
+                { word: "factor", display: "_actor", missing: "f", meaning: "요인" },
+                { word: "aspect", display: "aspec_", missing: "t", meaning: "측면" },
+                { word: "feature", display: "_eature", missing: "f", meaning: "특징" },
+                { word: "characteristic", display: "characteristi_", missing: "c", meaning: "특성" },
+                { word: "property", display: "_roperty", missing: "p", meaning: "속성" }
+            ],
+            '17단계': [
+                { word: "function", display: "functio_", missing: "n", meaning: "기능" },
+                { word: "purpose", display: "_urpose", missing: "p", meaning: "목적" },
+                { word: "goal", display: "goa_", missing: "l", meaning: "골, 득점, 목표" },
+                { word: "aim", display: "_im", missing: "a", meaning: "목표" },
+                { word: "objective", display: "objectiv_", missing: "e", meaning: "목적" },
+                { word: "target", display: "_arget", missing: "t", meaning: "목표" },
+                { word: "result", display: "resul_", missing: "t", meaning: "결과" },
+                { word: "outcome", display: "_utcome", missing: "o", meaning: "결과" },
+                { word: "effect", display: "effec_", missing: "t", meaning: "효과" },
+                { word: "impact", display: "_mpact", missing: "i", meaning: "영향" },
+                { word: "influence", display: "influenc_", missing: "e", meaning: "영향" },
+                { word: "consequence", display: "_onsequence", missing: "c", meaning: "결과" },
+                { word: "cause", display: "caus_", missing: "e", meaning: "원인" },
+                { word: "reason", display: "_eason", missing: "r", meaning: "이유" },
+                { word: "explanation", display: "explanatio_", missing: "n", meaning: "설명" },
+                { word: "definition", display: "_efinition", missing: "d", meaning: "정의" },
+                { word: "meaning", display: "meanin_", missing: "g", meaning: "의미" },
+                { word: "significance", display: "_ignificance", missing: "s", meaning: "중요성" },
+                { word: "importance", display: "importanc_", missing: "e", meaning: "중요성" },
+                { word: "value", display: "_alue", missing: "v", meaning: "가치" },
+                { word: "worth", display: "wort_", missing: "h", meaning: "가치" },
+                { word: "benefit", display: "_enefit", missing: "b", meaning: "이익" },
+                { word: "advantage", display: "advantag_", missing: "e", meaning: "장점" },
+                { word: "disadvantage", display: "_isadvantage", missing: "d", meaning: "단점" },
+                { word: "problem", display: "proble_", missing: "m", meaning: "문제" },
+                { word: "issue", display: "_ssue", missing: "i", meaning: "주제, 문제" },
+                { word: "challenge", display: "challeng_", missing: "e", meaning: "도전" },
+                { word: "difficulty", display: "_ifficulty", missing: "d", meaning: "어려움" },
+                { word: "solution", display: "solutio_", missing: "n", meaning: "해결책" },
+                { word: "answer", display: "_nswer", missing: "a", meaning: "답" },
+                { word: "method", display: "metho_", missing: "d", meaning: "방법" },
+                { word: "way", display: "_ay", missing: "w", meaning: "길" },
+                { word: "approach", display: "approac_", missing: "h", meaning: "접근법" },
+                { word: "technique", display: "_echnique", missing: "t", meaning: "기술" },
+                { word: "skill", display: "skil_", missing: "l", meaning: "기술" },
+                { word: "ability", display: "_bility", missing: "a", meaning: "능력" },
+                { word: "talent", display: "talen_", missing: "t", meaning: "재능" },
+                { word: "capacity", display: "_apacity", missing: "c", meaning: "능력" },
+                { word: "potential", display: "potentia_", missing: "l", meaning: "잠재력" },
+                { word: "opportunity", display: "_pportunity", missing: "o", meaning: "기회" }
+            ],
+            '18단계': [
+                { word: "possibility", display: "possibilit_", missing: "y", meaning: "가능성" },
+                { word: "probability", display: "_robability", missing: "p", meaning: "확률" },
+                { word: "chance", display: "chanc_", missing: "e", meaning: "기회" },
+                { word: "risk", display: "_isk", missing: "r", meaning: "위험" },
+                { word: "safety", display: "safet_", missing: "y", meaning: "안전" },
+                { word: "security", display: "_ecurity", missing: "s", meaning: "보안" },
+                { word: "protection", display: "protectio_", missing: "n", meaning: "보호" },
+                { word: "defense", display: "_efense", missing: "d", meaning: "방어" },
+                { word: "attack", display: "attac_", missing: "k", meaning: "공격" },
+                { word: "competition", display: "_ompetition", missing: "c", meaning: "경쟁" },
+                { word: "cooperation", display: "cooperatio_", missing: "n", meaning: "협력" },
+                { word: "collaboration", display: "_ollaboration", missing: "c", meaning: "협력" },
+                { word: "partnership", display: "partnershi_", missing: "p", meaning: "파트너십" },
+                { word: "relationship", display: "_elationship", missing: "r", meaning: "관계" },
+                { word: "connection", display: "connectio_", missing: "n", meaning: "연결" },
+                { word: "communication", display: "_ommunication", missing: "c", meaning: "의사소통" },
+                { word: "conversation", display: "conversatio_", missing: "n", meaning: "대화" },
+                { word: "discussion", display: "_iscussion", missing: "d", meaning: "의논" },
+                { word: "debate", display: "debat_", missing: "e", meaning: "토론" },
+                { word: "argument", display: "_rgument", missing: "a", meaning: "논쟁" },
+                { word: "conflict", display: "conflic_", missing: "t", meaning: "갈등" },
+                { word: "agreement", display: "_greement", missing: "a", meaning: "합의" },
+                { word: "contract", display: "contrac_", missing: "t", meaning: "계약" },
+                { word: "deal", display: "_eal", missing: "d", meaning: "거래" },
+                { word: "transaction", display: "transactio_", missing: "n", meaning: "거래" },
+                { word: "exchange", display: "_xchange", missing: "e", meaning: "교환" },
+                { word: "trade", display: "trad_", missing: "e", meaning: "무역" },
+                { word: "industry", display: "_ndustry", missing: "i", meaning: "산업" },
+                { word: "economy", display: "econom_", missing: "y", meaning: "경제" },
+                { word: "market", display: "_arket", missing: "m", meaning: "시장" },
+                { word: "finance", display: "financ_", missing: "e", meaning: "금융" },
+                { word: "investment", display: "_nvestment", missing: "i", meaning: "투자" },
+                { word: "profit", display: "profi_", missing: "t", meaning: "이익" },
+                { word: "loss", display: "_oss", missing: "l", meaning: "손실" },
+                { word: "income", display: "incom_", missing: "e", meaning: "수입" },
+                { word: "expense", display: "_xpense", missing: "e", meaning: "비용" },
+                { word: "budget", display: "budge_", missing: "t", meaning: "예산" },
+                { word: "account", display: "_ccount", missing: "a", meaning: "계정" },
+                { word: "balance", display: "balanc_", missing: "e", meaning: "균형" }
+            ],
+            '19단계': [
+                { word: "structure", display: "_tructure", missing: "s", meaning: "구조" },
+                { word: "system", display: "syste_", missing: "m", meaning: "시스템" },
+                { word: "organization", display: "_rganization", missing: "o", meaning: "조직" },
+                { word: "institution", display: "institutio_", missing: "n", meaning: "기관" },
+                { word: "establishment", display: "_stablishment", missing: "e", meaning: "설립" },
+                { word: "foundation", display: "foundatio_", missing: "n", meaning: "기초" },
+                { word: "framework", display: "_ramework", missing: "f", meaning: "틀" },
+                { word: "pattern", display: "patter_", missing: "n", meaning: "패턴" },
+                { word: "model", display: "_odel", missing: "m", meaning: "모델" },
+                { word: "example", display: "exampl_", missing: "e", meaning: "예시, 사례" },
+                { word: "sample", display: "_ample", missing: "s", meaning: "샘플" },
+                { word: "instance", display: "instanc_", missing: "e", meaning: "사례" },
+                { word: "case", display: "_ase", missing: "c", meaning: "경우" },
+                { word: "situation", display: "situatio_", missing: "n", meaning: "상황" },
+                { word: "condition", display: "_ondition", missing: "c", meaning: "상태" },
+                { word: "circumstance", display: "circumstanc_", missing: "e", meaning: "상황" },
+                { word: "environment", display: "_nvironment", missing: "e", meaning: "환경" },
+                { word: "context", display: "contex_", missing: "t", meaning: "맥락" },
+                { word: "background", display: "_ackground", missing: "b", meaning: "배경" },
+                { word: "setting", display: "settin_", missing: "g", meaning: "설정" },
+                { word: "scene", display: "_cene", missing: "s", meaning: "장면" },
+                { word: "view", display: "vie_", missing: "w", meaning: "보기" },
+                { word: "perspective", display: "_erspective", missing: "p", meaning: "관점" },
+                { word: "angle", display: "angl_", missing: "e", meaning: "각도" },
+                { word: "dimension", display: "_imension", missing: "d", meaning: "차원" },
+                { word: "scale", display: "scal_", missing: "e", meaning: "규모" },
+                { word: "level", display: "_evel", missing: "l", meaning: "수준" },
+                { word: "degree", display: "degre_", missing: "e", meaning: "정도" },
+                { word: "extent", display: "_xtent", missing: "e", meaning: "정도" },
+                { word: "range", display: "rang_", missing: "e", meaning: "범위" },
+                { word: "scope", display: "_cope", missing: "s", meaning: "범위" },
+                { word: "limit", display: "limi_", missing: "t", meaning: "한계" },
+                { word: "boundary", display: "_oundary", missing: "b", meaning: "경계" },
+                { word: "border", display: "borde_", missing: "r", meaning: "경계" },
+                { word: "edge", display: "_dge", missing: "e", meaning: "가장자리" },
+                { word: "surface", display: "surfac_", missing: "e", meaning: "표면" },
+                { word: "layer", display: "_ayer", missing: "l", meaning: "층" },
+                { word: "basis", display: "basi_", missing: "s", meaning: "기초" }
+            ],
+            '20단계': [
+                { word: "principle", display: "_rinciple", missing: "p", meaning: "원칙" },
+                { word: "theory", display: "theor_", missing: "y", meaning: "이론" },
+                { word: "concept", display: "_oncept", missing: "c", meaning: "개념" },
+                { word: "philosophy", display: "philosoph_", missing: "y", meaning: "철학" },
+                { word: "psychology", display: "_sychology", missing: "p", meaning: "심리학" },
+                { word: "sociology", display: "sociolog_", missing: "y", meaning: "사회학" },
+                { word: "anthropology", display: "_nthropology", missing: "a", meaning: "인류학" },
+                { word: "archaeology", display: "archaeolog_", missing: "y", meaning: "고고학" },
+                { word: "astronomy", display: "_stronomy", missing: "a", meaning: "천문학" },
+                { word: "biology", display: "biolog_", missing: "y", meaning: "생물학" },
+                { word: "chemistry", display: "_hemistry", missing: "c", meaning: "화학" },
+                { word: "physics", display: "physic_", missing: "s", meaning: "물리학" },
+                { word: "mathematics", display: "_athematics", missing: "m", meaning: "수학" },
+                { word: "geometry", display: "geometr_", missing: "y", meaning: "기하학" },
+                { word: "algebra", display: "_lgebra", missing: "a", meaning: "대수학" },
+                { word: "statistics", display: "statistic_", missing: "s", meaning: "통계학" },
+                { word: "engineering", display: "_ngineering", missing: "e", meaning: "공학" },
+                { word: "architecture", display: "architectur_", missing: "e", meaning: "건축" },
+                { word: "surgery", display: "_urgery", missing: "s", meaning: "수술" },
+                { word: "therapy", display: "therap_", missing: "y", meaning: "치료" },
+                { word: "treatment", display: "_reatment", missing: "t", meaning: "치료" },
+                { word: "diagnosis", display: "diagnosi_", missing: "s", meaning: "진단" },
+                { word: "analysis", display: "_nalysis", missing: "a", meaning: "분석" },
+                { word: "research", display: "researc_", missing: "h", meaning: "연구" },
+                { word: "investigation", display: "_nvestigation", missing: "i", meaning: "조사" },
+                { word: "experiment", display: "experimen_", missing: "t", meaning: "실험" },
+                { word: "observation", display: "_bservation", missing: "o", meaning: "관찰" },
+                { word: "discovery", display: "discover_", missing: "y", meaning: "발견" },
+                { word: "invention", display: "_nvention", missing: "i", meaning: "발명" },
+                { word: "innovation", display: "innovatio_", missing: "n", meaning: "혁신" },
+                { word: "development", display: "_evelopment", missing: "d", meaning: "개발" },
+                { word: "progress", display: "progres_", missing: "s", meaning: "진보" },
+                { word: "advancement", display: "_dvancement", missing: "a", meaning: "발전" },
+                { word: "improvement", display: "improvemen_", missing: "t", meaning: "개선" },
+                { word: "achievement", display: "_chievement", missing: "a", meaning: "성취" },
+                { word: "accomplishment", display: "accomplishmen_", missing: "t", meaning: "성취" },
+                { word: "success", display: "_uccess", missing: "s", meaning: "성공" },
+                { word: "excellence", display: "excellenc_", missing: "e", meaning: "우수성" }
+            ]
+            };
 
-        // wordDatabase, currentWordData, completedWords 등 기존 변수는 유지
-        let wordDatabase = [];
-        let allWords = [];
-        let currentWordData = null;
+        // 현재 사용할 단어 배열(게임에서 사용)
+        let wordDatabase = wordSets['1단계'];
+
+        // 현재 단어 상태
+        let currentWordData = wordDatabase[0];
         let completedWords = 0;
-
-        // 메뉴 화면 요소
-        const menuScreen = document.getElementById('menuScreen');
-        const startBtn = document.getElementById('startBtn');
-        const wordSelect = document.getElementById('wordSelect');
-        const highScoreValue = document.getElementById('highScoreValue');
-
-        // words.json에서 단어 불러오기 및 메뉴 동적 생성
-        fetch('words.json')
-          .then(res => res.json())
-          .then(data => {
-            allWords = data;
-            // level별로 그룹화
-            const levelMap = {};
-            allWords.forEach(word => {
-              if (!levelMap[word.level]) levelMap[word.level] = [];
-              levelMap[word.level].push(word);
-            });
-            // 메뉴 select 옵션 생성
-            wordSelect.innerHTML = '';
-            Object.keys(levelMap).sort((a, b) => a - b).forEach(level => {
-              const opt = document.createElement('option');
-              opt.value = level;
-              opt.textContent = `${level}레벨 단어`;
-              wordSelect.appendChild(opt);
-            });
-            // 기본값: 첫 번째 레벨
-            const firstLevel = Object.keys(levelMap).sort((a, b) => a - b)[0];
-            wordDatabase = levelMap[firstLevel];
-            currentWordData = wordDatabase[0];
-          });
-
-        // 메뉴에서 레벨 선택 시 wordDatabase 변경
-        wordSelect.addEventListener('change', function() {
-          const selectedLevel = this.value;
-          // allWords에서 해당 level만 추출
-          wordDatabase = allWords.filter(w => String(w.level) === String(selectedLevel));
-          currentWordData = wordDatabase[0];
-        });
 
         // 파티클 시스템
         const particles = [];
@@ -596,43 +1368,38 @@
 
         // 단어 완성 결과 표시 함수
         function showWordResult(wordData) {
-            console.log('showWordResult called with:', wordData);
+            // console.log('showWordResult called with:', wordData);
             
             const wordCompleteElement = document.getElementById('wordCompleteText');
             const wordMeaningElement = document.getElementById('wordMeaningText');
             const wordPronunciationElement = document.getElementById('wordPronunciationText');
             const wordResultElement = document.getElementById('wordResult');
             
-            console.log('Found elements:', {
-                wordComplete: wordCompleteElement,
-                wordMeaning: wordMeaningElement,
-                wordPronunciation: wordPronunciationElement,
-                wordResult: wordResultElement
-            });
+            // console.log('Found elements:', {
+            //     wordComplete: wordCompleteElement,
+            //     wordMeaning: wordMeaningElement,
+            //     wordPronunciation: wordPronunciationElement,
+            //     wordResult: wordResultElement
+            // });
             
             if (wordCompleteElement && wordMeaningElement && wordPronunciationElement && wordResultElement) {
-                console.log('All elements found, showing result');
+                // console.log('All elements found, showing result');
                 
                 wordCompleteElement.textContent = `✨ ${wordData.word.toUpperCase()} ✨`;
                 wordMeaningElement.textContent = `뜻: ${wordData.meaning}`;
-                wordPronunciationElement.textContent = `발음: ${wordData.pronunciation}`;
+                // 발음 텍스트는 더 이상 표시하지 않음
+                wordPronunciationElement.textContent = '';
                 
                 wordResultElement.style.display = 'block';
                 
-                // 단어 음성 읽기
+                // 단어 음성 읽기(TTS)
                 if ('speechSynthesis' in window) {
                     speechSynthesis.cancel();
-                    
                     setTimeout(() => {
                         const utterance = new SpeechSynthesisUtterance(wordData.word);
                         utterance.lang = 'en-US';
                         utterance.rate = 0.8;
                         utterance.volume = 1.0;
-                        
-                        utterance.onstart = () => console.log('음성 시작:', wordData.word);
-                        utterance.onend = () => console.log('음성 종료');
-                        utterance.onerror = (event) => console.log('음성 오류:', event.error);
-                        
                         speechSynthesis.speak(utterance);
                     }, 200);
                 }
@@ -641,7 +1408,7 @@
                     wordResultElement.style.display = 'none';
                 }, 3000);
             } else {
-                console.log('Elements not found, using fallback');
+                // console.log('Elements not found, using fallback');
                 showFeedback(`${wordData.word} (${wordData.meaning})`, true);
             }
         }
@@ -1624,6 +2391,70 @@
         }
         loadHighScore();
 
+        // 단어 선택 콤보박스 채우기 (카테고리명)
+        wordSelect.innerHTML = '';
+        Object.keys(wordSets).forEach(setName => {
+            const opt = document.createElement('option');
+            opt.value = setName;
+            opt.textContent = setName;
+            wordSelect.appendChild(opt);
+        });
+
+        // 오디오 객체 선언
+        const hitSound = new Audio('assets/hit.mp3');
+        const deathSound = new Audio('assets/death.mp3');
+        const bgmCuriosity = new Audio('assets/bgm_curiosity.mp3');
+        const bgmTree = new Audio('assets/bgm_tree and birds.mp3');
+        const levelupSound = new Audio('assets/levelup.mp3');
+        levelupSound.volume = 0.8;
+
+        // 루프 설정 및 볼륨 조절
+        bgmCuriosity.loop = true;
+        bgmCuriosity.volume = 0.4;
+        bgmTree.loop = true;
+        bgmTree.volume = 0.5;
+        hitSound.volume = 0.7;
+        deathSound.volume = 0.8;
+
+        // 메뉴 진입 시 배경음 재생 함수
+        function playMenuBGM() {
+            bgmCuriosity.pause();
+            bgmCuriosity.currentTime = 0;
+            bgmTree.currentTime = 0;
+            bgmTree.play();
+        }
+        // 게임 시작 시 배경음 재생 함수(게임 중 브금 제거)
+        function playGameBGM() {
+            bgmTree.pause();
+            bgmTree.currentTime = 0;
+            // bgmCuriosity.pause();
+            // bgmCuriosity.currentTime = 0;
+            // bgmCuriosity.play(); // 게임 중 브금 재생하지 않음
+        }
+
+        // 시작 버튼 클릭 시 메뉴 숨기고 게임 시작
+        startBtn.onclick = () => {
+            menuScreen.style.display = 'none';
+            playGameBGM(); // 게임 BGM 재생
+            // 선택한 단어 모음(카테고리)로 wordDatabase 교체
+            const selectedSet = wordSelect.value;
+            if (selectedSet && wordSets[selectedSet]) {
+                wordDatabase = wordSets[selectedSet];
+            }
+            // 첫 단어 선택
+            currentWordData = wordDatabase[0];
+            selectNewWord();
+            if (!gameStarted) {
+                gameStarted = true;
+                gameLoop(); // 메뉴에서만 게임 루프 시작
+            }
+            // 게임 상태 초기화 등 필요시 추가
+        };
+
+        // 게재시작 함수
+        // selectNewWord(); // 게임 시작 시 첫 단어 설정은 메뉴에서 시작 버튼 클릭 시 처리
+        // gameLoop(); // 게임 루프는 메뉴에서 시작 버튼 클릭 시 실행
+
         // 별 그리기 함수 (원거리형 몬스터용)
         function drawStar(ctx, x, y, outerRadius, innerRadius, points) {
             ctx.save();
@@ -1702,19 +2533,6 @@
 
         let gameStarted = false; // 게임 시작 여부 플래그(전역)
         let prevPlayerX = player.worldX, prevPlayerY = player.worldY; // 이동 처리 직전 선언
-
-        // 시작 버튼 클릭 시 메뉴 숨기고 게임 시작
-        startBtn.onclick = () => {
-            menuScreen.style.display = 'none';
-            playGameBGM();
-            // 선택한 레벨의 단어로 wordDatabase 교체 (이미 위에서 처리됨)
-            // 첫 단어 선택
-            selectNewWord();
-            if (!gameStarted) {
-                gameStarted = true;
-                gameLoop();
-            }
-        };
     </script>
 </body>
 </html>
