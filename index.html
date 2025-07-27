@@ -10,23 +10,20 @@
             margin: 0;
             padding: 0;
             background: linear-gradient(135deg, #0c0c0c, #1a1a2e, #16213e);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
             font-family: 'Courier New', monospace;
+            overflow: hidden;
         }
         #gameContainer {
-            border: 3px solid #4a90e2;
-            border-radius: 10px;
-            position: relative;
-            box-shadow: 0 0 30px rgba(74, 144, 226, 0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
         }
         #gameCanvas {
             width: 100vw;
             height: 100vh;
             display: block;
-            border-radius: 7px;
             background: #1a1a2e;
         }
         #wordDisplay {
@@ -35,7 +32,7 @@
             left: 50%;
             transform: translateX(-50%);
             background: rgba(0,0,0,0.8);
-            padding: 15px 25px;
+            padding: 5px 10px;
             border-radius: 10px;
             border: 2px solid #ffd700;
             color: white;
@@ -286,10 +283,11 @@
         }
         .author {
             color: #b0b0ff;
-            margin-bottom: 2.2rem;
-            font-size: 1.2rem;
+            margin-top: 2.2rem;
+            font-size: 1.0rem;
             letter-spacing: 1px;
             text-shadow: 0 1px 8px #222;
+            line-height: 1.4;
         }
         .menu-row {
             display: flex; gap: 2rem; margin-bottom: 2.5rem;
@@ -370,7 +368,7 @@
 </head>
 <body>
     <div id="gameContainer">
-        <canvas id="gameCanvas" width="800" height="600"></canvas>
+        <canvas id="gameCanvas"></canvas>
         
         <div id="wordDisplay">
             <span id="currentWord">appl_</span>
@@ -419,12 +417,12 @@
 
     <div id="menuScreen">
         <h1>VamsurEnglish</h1>
-        <div class="author">제작자: Stevecoding</div>
         <div class="menu-row">
             <button id="startBtn">시작</button>
             <select id="wordSelect"></select>
         </div>
         <div class="highscore">최고 점수: <span id="highScoreValue">0</span></div>
+        <div class="author">Created by stevecoding<br>ssakspirit@gmail.com</div>
     </div>
 
     <script>
@@ -1263,16 +1261,20 @@
         const particles = [];
         const bloodParticles = [];
 
-        // 배경 별들
+        // 배경 별들 (동적 생성)
         const stars = [];
-        for (let i = 0; i < 100; i++) {
-            stars.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                size: Math.random() * 2 + 0.5,
-                twinkle: Math.random() * Math.PI * 2,
-                speed: Math.random() * 0.02 + 0.01
-            });
+        function generateStars() {
+            stars.length = 0; // 기존 별들 제거
+            const starCount = 100;
+            for (let i = 0; i < starCount; i++) {
+                stars.push({
+                    x: Math.random() * Math.max(canvas.width || 800, 800),
+                    y: Math.random() * Math.max(canvas.height || 600, 600),
+                    size: Math.random() * 2 + 0.5,
+                    twinkle: Math.random() * Math.PI * 2,
+                    speed: Math.random() * 0.02 + 0.01
+                });
+            }
         }
 
         // 게임 상태
@@ -1289,12 +1291,37 @@
         let cameraX = 0;
         let cameraY = 0;
 
+        // 플레이어 이미지 로드
+        const playerImages = [];
+        let imagesLoaded = 0;
+        let allImagesLoaded = false;
+        
+        for (let i = 1; i <= 15; i++) {
+            const img = new Image();
+            img.onload = function() {
+                imagesLoaded++;
+                if (imagesLoaded === 15) {
+                    allImagesLoaded = true;
+                    console.log('All player images loaded');
+                }
+            };
+            img.onerror = function() {
+                console.error(`Failed to load player image: alien100${i.toString().padStart(2, '0')}.png`);
+                imagesLoaded++;
+                if (imagesLoaded === 15) {
+                    allImagesLoaded = true;
+                }
+            };
+            img.src = `assets/player/alien100${i.toString().padStart(2, '0')}.png`;
+            playerImages.push(img);
+        }
+
         // 플레이어 객체에 월드 좌표 추가
         const player = {
             worldX: worldWidth / 2,
             worldY: worldHeight / 2,
-            width: 24,
-            height: 24,
+            width: 32,
+            height: 32,
             speed: 3,
             health: 100,
             maxHealth: 100,
@@ -1305,7 +1332,10 @@
             attackSpeed: 1000,
             lastAttack: 0,
             projectileSize: 6,
-            angle: 0
+            angle: 0,
+            animationFrame: 0,
+            animationSpeed: 0.2,
+            currentFrame: 0
         };
 
         // 입력 상태
@@ -1683,9 +1713,17 @@
 
             if (moving) {
                 player.angle += 0.2;
+                // 플레이어 애니메이션 업데이트
+                player.animationFrame += player.animationSpeed;
+                player.currentFrame = player.animationFrame % playerImages.length;
+                
                 if (Math.random() < 0.3) {
-                    createParticle(player.worldX + player.width/2, player.worldY + player.height, 'normal');
+                    createParticle(player.worldX, player.worldY, 'normal');
                 }
+            } else {
+                // 정지 상태일 때는 첫 번째 프레임 유지
+                player.currentFrame = 0;
+                player.animationFrame = 0;
             }
 
             // 별 깜빡임 업데이트
@@ -1805,7 +1843,7 @@
                     hitSound.play();
                     // 혈흔 파티클 생성
                     for (let j = 0; j < 8; j++) {
-                        createParticle(player.worldX + player.width/2, player.worldY + player.height/2, 'blood');
+                        createParticle(player.worldX, player.worldY, 'blood');
                     }
                     monsters.splice(i, 1);
                     
@@ -1881,7 +1919,7 @@
                             }
                             // 성공 파티클
                             for (let i = 0; i < 15; i++) {
-                                createParticle(player.worldX + player.width/2, player.worldY + player.height/2, 'correct');
+                                createParticle(player.worldX, player.worldY, 'correct');
                             }
                             // 경험치 보상 (레벨 × 10)
                             player.exp += player.level * 10;
@@ -1913,7 +1951,7 @@
                             
                             // 데미지 파티클
                             for (let i = 0; i < 8; i++) {
-                                createParticle(player.worldX + player.width/2, player.worldY + player.height/2, 'blood');
+                                createParticle(player.worldX, player.worldY, 'blood');
                             }
                             
                             if (player.health <= 0) {
@@ -2130,21 +2168,41 @@
                 ctx.restore();
             });
 
-            // 플레이어 그리기 (발광 효과)
-            ctx.save();
-            ctx.shadowColor = '#4499ff';
-            ctx.shadowBlur = 15;
-            ctx.fillStyle = '#4499ff';
-            ctx.translate(player.worldX - cameraX, player.worldY - cameraY); // worldX, worldY 기준
-            ctx.rotate(player.angle);
-            ctx.fillRect(-player.width/2, -player.height/2, player.width, player.height);
-            ctx.restore();
-
-            // 플레이어 중심점
-            ctx.fillStyle = '#88ccff';
-            ctx.beginPath();
-            ctx.arc(player.worldX - cameraX, player.worldY - cameraY, 3, 0, Math.PI * 2); // worldX, worldY 기준
-            ctx.fill();
+            // 플레이어 그리기 (스프라이트 애니메이션)
+            if (allImagesLoaded && playerImages.length > 0) {
+                ctx.save();
+                ctx.shadowColor = '#4499ff';
+                ctx.shadowBlur = 15;
+                ctx.translate(player.worldX - cameraX, player.worldY - cameraY);
+                ctx.rotate(player.angle);
+                
+                const frameIndex = Math.floor(player.currentFrame) % playerImages.length;
+                const currentImage = playerImages[frameIndex];
+                if (currentImage && currentImage.complete && !currentImage.src.includes('undefined')) {
+                    try {
+                        ctx.drawImage(currentImage, -player.width/2, -player.height/2, player.width, player.height);
+                    } catch (e) {
+                        // 이미지 그리기 실패 시 기본 사각형
+                        ctx.fillStyle = '#4499ff';
+                        ctx.fillRect(-player.width/2, -player.height/2, player.width, player.height);
+                    }
+                } else {
+                    // 특정 이미지가 로딩되지 않은 경우 기본 사각형
+                    ctx.fillStyle = '#4499ff';
+                    ctx.fillRect(-player.width/2, -player.height/2, player.width, player.height);
+                }
+                ctx.restore();
+            } else {
+                // 이미지 로딩 중일 때 기본 사각형 표시
+                ctx.save();
+                ctx.shadowColor = '#4499ff';
+                ctx.shadowBlur = 15;
+                ctx.fillStyle = '#4499ff';
+                ctx.translate(player.worldX - cameraX, player.worldY - cameraY);
+                ctx.rotate(player.angle);
+                ctx.fillRect(-player.width/2, -player.height/2, player.width, player.height);
+                ctx.restore();
+            }
 
             // 몬스터 그리기 (타입별 외형)
             monsters.forEach(monster => {
@@ -2296,29 +2354,29 @@
             ctx.fillStyle = healthGradient;
             ctx.fillRect(17, canvas.height - 38, healthBarWidth * healthPercentage, healthBarHeight);
 
-            // 경험치바 그리기
-            const expBarWidth = 200;
+            // 경험치바 그리기 (HP바 바로 아래)
+            const expBarWidth = 150;
             const expBarHeight = 8;
             const expPercentage = player.exp / player.expToNext;
             
             // XP 라벨
             ctx.fillStyle = 'white';
             ctx.font = 'bold 12px Arial';
-            ctx.textAlign = 'right';
-            ctx.fillText('XP', canvas.width - expBarWidth - 17, canvas.height - 30);
+            ctx.textAlign = 'left';
+            ctx.fillText('XP', 17, canvas.height - 20);
             
             ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-            ctx.fillRect(canvas.width - expBarWidth - 15, canvas.height - 25, expBarWidth + 4, expBarHeight + 4);
+            ctx.fillRect(15, canvas.height - 15, expBarWidth + 4, expBarHeight + 4);
             
             ctx.strokeStyle = '#666';
             ctx.lineWidth = 1;
-            ctx.strokeRect(canvas.width - expBarWidth - 15, canvas.height - 25, expBarWidth + 4, expBarHeight + 4);
+            ctx.strokeRect(15, canvas.height - 15, expBarWidth + 4, expBarHeight + 4);
             
-            const expGradient = ctx.createLinearGradient(canvas.width - expBarWidth - 13, 0, canvas.width - 13, 0);
+            const expGradient = ctx.createLinearGradient(17, 0, 17 + expBarWidth, 0);
             expGradient.addColorStop(0, '#4488ff');
             expGradient.addColorStop(1, '#2266cc');
             ctx.fillStyle = expGradient;
-            ctx.fillRect(canvas.width - expBarWidth - 13, canvas.height - 23, expBarWidth * expPercentage, expBarHeight);
+            ctx.fillRect(17, canvas.height - 13, expBarWidth * expPercentage, expBarHeight);
         }
 
         // UI 업데이트 함수
@@ -2340,7 +2398,7 @@
             
             // 레벨업 파티클 효과
             for (let i = 0; i < 20; i++) {
-                createParticle(player.worldX + player.width/2, player.worldY + player.height/2, 'correct');
+                createParticle(player.worldX, player.worldY, 'correct');
             }
             
             // 레벨업 효과음 재생
@@ -2378,7 +2436,7 @@
             
             // 게임 오버 파티클 효과
             for (let i = 0; i < 30; i++) {
-                createParticle(player.worldX + player.width/2, player.worldY + player.height/2, 'blood');
+                createParticle(player.worldX, player.worldY, 'blood');
             }
             
             document.getElementById('finalTime').textContent = gameState.timeElapsed;
@@ -2634,6 +2692,17 @@
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+            
+            // 별들 재생성
+            generateStars();
+            
+            // 캔버스 크기가 변경되면 카메라도 재조정
+            if (gameState.running) {
+                const targetCameraX = player.worldX - canvas.width / 2;
+                const targetCameraY = player.worldY - canvas.height / 2;
+                cameraX = Math.max(0, Math.min(targetCameraX, worldWidth - canvas.width));
+                cameraY = Math.max(0, Math.min(targetCameraY, worldHeight - canvas.height));
+            }
         }
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas(); // 게임 시작 시에도 호출
